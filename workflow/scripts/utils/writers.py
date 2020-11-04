@@ -18,7 +18,7 @@ env_configs = settings.env_configs
 THREADS = env_configs["threads"]
 
 graph_user = env_configs["graph_user"]
-graph_bolt_port= env_configs["graph_bolt"]
+graph_bolt_port = env_configs["graph_bolt"]
 graph_password = env_configs["graph_pass"]
 
 
@@ -243,7 +243,13 @@ def create_import(df=[], meta_id="", import_type="import"):
     # run pandas profiling
     com = f"sh workflow/scripts/utils/pandas-profiling.sh {outDir} {meta_id} {THREADS}"
     logger.debug(com)
-    subprocess.call(com, shell=True)
+    try:
+        subprocess.call(com, shell=True)
+    except:
+        logger.error(
+            "Pandas profiling didn't work, perhaps you haven't installed shuf, see README.md?"
+        )
+        exit()
 
     # backup
     backup_processed_data(outDir, meta_id, meta_data["d_type"])
