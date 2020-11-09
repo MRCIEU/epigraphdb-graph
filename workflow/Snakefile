@@ -33,15 +33,9 @@ configfile: DATA_CONFIG
 #validata config files
 rule check_configs:
     output: f"{SNAKEMAKELOGS}/check_configs.log"
-<<<<<<< HEAD
-    #input: 
-    #    DATA_CONFIG, 
-    #    DB_SCHEMA
-=======
     input: 
         DATA_CONFIG, 
         DB_SCHEMA
->>>>>>> 5fb5b2d9f3b2d97438ba76261e1f645b41b37a1e
     run:
         #open output file
         o = open(output[0], "w")
