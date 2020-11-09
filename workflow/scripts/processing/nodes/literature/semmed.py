@@ -28,7 +28,7 @@ def process():
     # load predicate data
     logger.info("loading predication data...")
     pred_df = pd.read_csv(
-        os.path.join(dataDir, FILE), sep=",", compression="gzip"
+        os.path.join(dataDir, PREDICATION_FILE), sep=",", compression="gzip"
     )
     pred_df["PMID"] = pred_df["PMID"].astype(str)
 

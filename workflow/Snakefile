@@ -32,10 +32,10 @@ configfile: DATA_CONFIG
 
 #validata config files
 rule check_configs:
-    log: f"{SNAKEMAKELOGS}/check_configs.log"
-    input: 
-        DATA_CONFIG, 
-        DB_SCHEMA
+    output: f"{SNAKEMAKELOGS}/check_configs.log"
+    #input: 
+    #    DATA_CONFIG, 
+    #    DB_SCHEMA
     run:
         #validata data integration config file
         if NODEDIR in config:
@@ -63,7 +63,9 @@ rule check_configs:
                     validate(rels[i], os.path.join(os.getcwd(),DB_SCHEMA_RELS_SCHEMA))
 
 rule all:
-    input: f"{SNAKEMAKELOGS}/import_report.log"    
+    input: 
+        f"{SNAKEMAKELOGS}/import_report.log",
+        f"{SNAKEMAKELOGS}/check_configs.log"
 
 #remove all intermediate files
 rule clean_all:
