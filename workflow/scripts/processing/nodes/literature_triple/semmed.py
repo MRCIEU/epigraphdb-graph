@@ -28,7 +28,7 @@ def process():
     # load predicate data
     logger.info("loading data...")
     df = pd.read_csv(
-        os.path.join(dataDir, FILE), sep=",", compression="gzip"
+        os.path.join(dataDir, PREDICATION_FILE), sep=",", compression="gzip"
     )
     logger.info(df.shape)
 
