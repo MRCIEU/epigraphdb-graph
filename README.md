@@ -32,8 +32,8 @@ sh Miniconda3-latest-Linux-x86_64.sh
 
 #### Docker and Docker Compose (only required if building a graph)
 
-Docker - https://docs.docker.com/get-docker/
-Docker Compose - https://docs.docker.com/compose/install/
+Docker (17.06.0-ce) - https://docs.docker.com/get-docker/
+Docker Compose (v1.27.4) - https://docs.docker.com/compose/install/
 
 #### shuf (or gshuf)
 
@@ -230,6 +230,40 @@ Due to issues with Neo4j 4.* and Docker, need to manually create Neo4j directori
 python -m workflow.scripts.graph_build.create_neo4j
 ```
 
+#### Port clashes
+
+If this error:
+
+```
+Bind for 0.0.0.0:xxx failed: port is already allocated
+```
+
+Then need to change ports in `.env` as they are already being used by another container
+
+```
+GRAPH_HTTP_PORT=17474
+GRAPH_BOLT_PORT=17687
+GRAPH_HTTPS_PORT=17473
+```
+
+#### Docker group
+
+When building the graph, if the user is not part of the docker group may see an error like this
+
+```
+Starting database...
+Creating Neo4j graph directories
+.....
+PermissionError: [Errno 13] Permission denied
+```
+
+To fix this, need to be added to docker group
+
+https://docs.docker.com/engine/install/linux-postinstall/
+
+```
+sudo usermod -aG docker $USER
+```
 
 ## Saving and restoring database 
 
@@ -305,3 +339,21 @@ git push origin nbp-$(date '+%Y-%m-%d')
 ```
 
 Then open a pull request
+
+## Visualise
+
+https://snakemake.readthedocs.io/en/v5.1.4/executable.html#visualization
+
+```
+snakemake --dag | dot -Tpdf > dag.pdf
+snakemake --rulegraph | dot -Tpdf > rulegraph.pdf
+```
+
+## Report
+
+https://snakemake.readthedocs.io/en/stable/snakefiles/reporting.html
+
+```
+Run this after the workflow has finished
+snakemake --report report.html
+```
