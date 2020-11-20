@@ -290,7 +290,7 @@ rels:
       1: trait-nlp/ieu-gwas-cosine-20200821.tsv.gz
     script: rels.gwas-nlp
     source: Vectology-2020-08-21  
-
+    
   ot-drug-disease:
     name: OPENTARGETS_DRUG_TO_DISEASE
     files:
@@ -376,6 +376,13 @@ rels:
       1: EFO/gwas-vec-efo-ids-01-09-20.tsv
     script: rels.efo-gwas-nlp
     source: EFO-2020-01-24
+    
+  gwas-efo-ebi:
+    name: GWAS_EFO_EBI
+    files:
+      1: ebigwas/ebi-gwas-efo-2020-11-20.tsv
+    script: rels.gwas-efo-ebi
+    source: gwas_catalog_v1.0.2-studies_r2020-11-03.tsv
 
   medrxiv-subject-term:
     name: MEDRXIV_SUB

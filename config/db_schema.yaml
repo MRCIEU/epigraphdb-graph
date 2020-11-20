@@ -255,7 +255,6 @@ meta_nodes:
     index: uniprot_id
     meta:
       _id: uniprot_id
-      _name: name
   Tissue:
     properties:
       id:
@@ -440,7 +439,16 @@ meta_rels:
         type: Protein
     required:
       - source
-      - target
+      - target     
+  GWAS_EFO_EBI:
+    properties:
+      source:
+        type: Gwas
+      target:
+        type: Efo
+    required:
+      - source
+      - target 
   GWAS_NLP:
     properties:
       source:

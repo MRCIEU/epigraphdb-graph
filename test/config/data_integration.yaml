@@ -41,13 +41,135 @@ nodes:
     script: nodes.protein.reactome
     source: Reactome-2020-10-13 
 
-  # drug-ot:
-  #   name: Drug
-  #   files:
-  #     1: opentargets/open_targets_2020-10-29.csv
-  #   script: nodes.drug.opentargets
-  #   source: Opentargets-2020-10-29
-  #   use : True
+  drug-ot:
+    name: Drug
+    files:
+      1: opentargets/open_targets_2020-10-19.csv
+    script: nodes.drug.opentargets
+    source: Opentargets-2020-10-19
+
+  variant-xqtl:
+    name: Variant
+    files: 
+      1: xqtl-processed/xqtl_single_snp.csv
+    script: nodes.variant.xqtl
+    source: xQTL
+
+  variant-mr-eve:
+    name: Variant
+    files: 
+      1: mr-eve/19_02_21/variants.csv.gz
+    script: nodes.variant.mr-eve
+    source: MR-EvE-2019-02-21  
+
+  disease-mondo:
+    name: Disease
+    files:
+      1: mondo/mondo.json
+    script: nodes.disease.mondo
+    source: Mondo-2020-02-10
+  
+  lit-triple-semmed:
+    name: LiteratureTriple
+    files:
+      1: semmeddb/semmedVER42_2020_R_PREDICATION.tsv.gz.filter
+    script: nodes.literature_triple.semmed
+    source: SemMedDB_VER42_2020_R
+
+  lit-term-semmed:
+    name: LiteratureTerm
+    files:
+      1: semmeddb/semmedVER42_2020_R_PREDICATION.tsv.gz.filter
+    script: nodes.literature_term.semmed
+    source: SemMedDB_VER42_2020_R
+
+  lit-semmed:
+    name: Literature
+    files:
+      1: semmeddb/semmedVER42_2020_R_PREDICATION.tsv.gz.filter
+      2: semmeddb/semmedVER42_2020_R_CITATIONS.tsv.gz
+    script: nodes.literature.semmed
+    source: SemMedDB_VER42_2020_R
+  
+  drug-cpic:
+    name: Drug
+    files:
+      1: CPIC/cpicPairs-12-06-20.csv
+    script: nodes.drug.cpic
+    source: CPIC-2020-06-12
+
+  tissue-gtex:
+    name: Tissue
+    files:
+      1: gtex/GTEx_Analysis_2016-01-15_v7_RNASeQCv1.1.8_gene_median_tpm.gct.gz
+    script: nodes.tissue.gtex
+    source: GTEx-2016-01-15_v7_RNASeQCv1.1.8
+
+  protein-string:
+    name: Protein
+    files:
+      1: string-db/9606.protein.links.v11.0.txt.gz
+      2: string-db/human.uniprot_2_string.2018.tsv.gz
+    script: nodes.protein.string
+    source: STRING-v11
+
+  gene-druggable:
+    name: Gene
+    files:
+      1: druggable_genes/druggable_genes.txt
+    script: nodes.gene.druggable
+    source: Finan_et_al
+
+  ontology-efo:
+    name: Efo
+    files:
+      1: EFO/efo_data.txt.gz
+    script: nodes.efo.efo
+    source: EFO-2020-01-24  
+  
+  literature-semrep-biorxiv:
+    name: Literature
+    files:
+      1: semrep/biorxiv_data.csv.gz
+      2: semrep/biorxiv_2020-10-06_semrep_filter.csv.gz
+    script: nodes.literature.semrep-biorxiv
+    source: bioRxiv-2020-10-06
+
+  literature-semrep-medrxiv:
+    name: Literature
+    files:
+      1: semrep/medrxiv_data.csv.gz
+      2: semrep/medrxiv_2020-10-06_semrep_filter.csv.gz
+    script: nodes.literature.semrep-medrxiv
+    source: medRxiv-2020-10-06   
+
+  literature-triple-semrep-biorxiv:
+    name: LiteratureTriple
+    files:
+      1: semrep/biorxiv_2020-10-06_semrep_filter.csv.gz
+    script: nodes.literature_triple.semrep-biorxiv
+    source: bioRxiv-2020-10-06
+
+  literature-triple-semrep-medrxiv:
+    name: LiteratureTriple
+    files:
+      1: semrep/medrxiv_2020-10-06_semrep_filter.csv.gz
+    script: nodes.literature_triple.semrep-medrxiv
+    source: medRxiv-2020-10-06
+
+  literature-term-semrep-biorxiv:
+    name: LiteratureTerm
+    files:
+      1: semrep/biorxiv_2020-10-06_semrep_filter.csv.gz
+    script: nodes.literature_term.semrep-biorxiv
+    source: bioRxiv-2020-10-06
+
+  literature-term-semrep-medrxiv:
+    name: LiteratureTerm
+    files:
+      1: semrep/medrxiv_2020-10-06_semrep_filter.csv.gz
+    script: nodes.literature_term.semrep-medrxiv
+    source: medRxiv-2020-10-06  
     
 rels:
   opengwas-gwas-variant:
@@ -67,7 +189,7 @@ rels:
   vep-variant-gene:
     name: VARIANT_TO_GENE
     files:
-      1: vep/vep-2020-10-14.txt
+      1: vep/variants-24-08-20.txt
     script: rels.variant_to_gene
     source: Ensembl-VEP-v37
 
@@ -85,14 +207,249 @@ rels:
     script: rels.reactome_pathway_pathway
     source: Reactome-2020-10-13
 
-  # ot-drug-target:
-  #   name: OPENTARGETS_DRUG_TO_TARGET
-  #   files:
-  #     1: opentargets/open_targets_2020-10-29.csv
-  #   script: rels.opentargets_drug_target
-  #   source: Opentargets-2020-10-29
-  #   use: True
+  ot-drug-target:
+    name: OPENTARGETS_DRUG_TO_TARGET
+    files:
+      1: opentargets/open_targets_2020-10-19.csv
+    script: rels.opentargets_drug_target
+    source: Opentargets-2020-10-19
 
+  obs-cor:
+    name: OBS_COR
+    files:
+      1: ukb_phenotype_correlation_ben/ukb_pheno_cor_0.1_lower.tsv.gz
+    script: rels.obs_cor
+    source: MRC-IEU UK Biobank - https://www.ukbiobank.ac.uk/tag/15825/
 
+  mr-eve-mr:
+    name: MR_EVE_MR
+    files:
+      1: mr-eve/19_02_21/mrmoe1.csv.gz
+      2: mr-eve/19_02_21/mrmoe2.csv.gz
+      3: mr-eve/19_02_21/mrmoe3.csv.gz
+      4: mr-eve/19_02_21/mrmoe4.csv.gz
+      5: mr-eve/19_02_21/mrmoe5.csv.gz
+      6: mr-eve/19_02_21/mrmoe6.csv.gz
+      7: mr-eve/19_02_21/mrmoe7.csv.gz
+      8: mr-eve/19_02_21/mrmoe8.csv.gz
+    script: rels.mr_eve_mr
+    source: MR-EvE-2019-02-21
+  
+  mr-eve-gwas-variant:
+    name: GWAS_TO_VARIANT
+    files:
+      1: mr-eve/19_02_21/instruments.csv.gz
+    script: rels.gwas_to_variant
+    source: MR-EvE-2019-02-21
 
+  semmed-subject-term:
+    name: SEMMEDDB_SUB
+    files:
+      1: semmeddb/semmedVER42_2020_R_PREDICATION.tsv.gz.filter
+    script: rels.semmed_subject_to_term
+    source: SemMedDB_VER42_2020_R
+
+  semmed-object-term:
+    name: SEMMEDDB_OBJ
+    files:
+      1: semmeddb/semmedVER42_2020_R_PREDICATION.tsv.gz.filter
+    script: rels.semmed_object_to_term
+    source: SemMedDB_VER42_2020_R
+
+  semmed-literature:
+    name: SEMMEDDB_TO_LIT
+    files:
+      1: semmeddb/semmedVER42_2020_R_PREDICATION.tsv.gz.filter
+    script: rels.semmed_to_literature
+    source: SemMedDB_VER42_2020_R
+
+  semmed-predicate:
+    name: SEMMEDDB_PREDICATE
+    files:
+      1: semmeddb/semmedVER42_2020_R_PREDICATION.tsv.gz.filter
+    script: rels.semmed_predicate
+    source: SemMedDB_VER42_2020_R    
+
+  melodi-triple:
+    name: GWAS_TO_LITERATURE_TRIPLE
+    files:
+      1: melodi/gwas-melodi-enrich-20-08-20.tsv.gz
+    script: rels.melodi-triple
+    source: MELODI-Presto-2020-08-20  
+
+  melodi-lit:
+    name: GWAS_TO_LITERATURE
+    files:
+      1: melodi/gwas-melodi-enrich-20-08-20.tsv.gz
+    script: rels.melodi-lit
+    source: MELODI-Presto-2020-08-20
+
+  gwas-nlp:
+    name: GWAS_NLP
+    files:
+      1: trait-nlp/ieu-gwas-cosine-20200821.tsv.gz
+    script: rels.gwas-nlp
+    source: Vectology-2020-08-21  
     
+  ot-drug-disease:
+    name: OPENTARGETS_DRUG_TO_DISEASE
+    files:
+      1: opentargets/open_targets_2020-10-19.csv
+    script: rels.opentargets_drug_disease
+    source: Opentargets-2020-08-24
+
+  cpic-drug-gene:
+    name: CPIC
+    files:
+      1: CPIC/cpicPairs-12-06-20.csv
+    script: rels.cpic_gene_drug
+    source: CPIC-2020-06-12
+
+  tissue-gene-gtex:
+    name: EXPRESSED_IN
+    files:
+      1: gtex/GTEx_Analysis_2016-01-15_v7_RNASeQCv1.1.8_gene_median_tpm.gct.gz
+    script: rels.tissue-gene-gtex
+    source: GTEx-2016-01-15_v7_RNASeQCv1.1.8
+
+  protein-protein-string:
+    name: STRING_INTERACT_WITH
+    files:
+      1: string-db/9606.protein.links.v11.0.txt.gz
+      2: string-db/human.uniprot_2_string.2018.tsv.gz
+    script: rels.protein_protein_string
+    source: STRING-v11
+
+  bn-gwas-gencor:
+    name: GEN_COR
+    files:
+      1: ben-neale/genetic_correlation_matrices/geno_correlation.r2.gz
+    script: rels.gwas-gencor
+    source: http://www.nealelab.is/blog/2019/10/10/genetic-correlation-results-for-heritable-phenotypes-in-the-uk-biobank
+
+  gwas-umls-metamap-lite:
+    name: METAMAP_LITE
+    files:
+      1: metamap/metamap-data.tsv
+    script: rels.gwas-metamap
+    source: MetaMapLite-2018AA
+
+  gwas-prs:
+    name: PRS
+    files:
+      1: tom-richardson-prs-atlas/5e05.txt
+      2: tom-richardson-prs-atlas/gwas-ids.txt
+    script: rels.gwas-prs
+    source: PRS-ATLAS
+
+  xqtl-single-snp-mr-snp-gene:
+    name: XQTL_SINGLE_SNP_MR_SNP_GENE
+    files:
+      1: xqtl-processed/XQTL_SINGLE_SNP_MR_SNP_GENE.csv
+    script: rels.xqtl-single-snp-mr-snp-gene
+    source: xQTL
+
+  xqtl-single-snp-mr-gene-gwas:
+    name: XQTL_SINGLE_SNP_MR_GENE_GWAS
+    files:
+      1: xqtl-processed/XQTL_SINGLE_SNP_MR_GENE_GWAS.csv
+    script: rels.xqtl-single-snp-mr-gene-gwas
+    source: xQTL
+
+  xqtl-multi-snp-mr:
+    name: XQTL_MULTI_SNP_MR
+    files:
+      1: xqtl-processed/XQTL_MULTI_SNP_MR.csv
+    script: rels.xqtl-multi-snp-mr
+    source: xQTL
+
+  efo-parent-child:
+    name: EFO_CHILD_OF
+    files:
+      1: EFO/efo_data.txt.gz
+    script: rels.efo-parent-child
+    source: EFO-2020-01-24
+
+  efo-gwas-nlp:
+    name: GWAS_NLP_EFO
+    files:
+      1: EFO/gwas-vec-efo-ids-01-09-20.tsv
+    script: rels.efo-gwas-nlp
+    source: EFO-2020-01-24
+    
+  gwas-efo-ebi:
+    name: GWAS_EFO_EBI
+    files:
+      1: ebigwas/ebi-gwas-efo-2020-11-20.tsv
+    script: rels.gwas-efo-ebi
+    source: gwas_catalog_v1.0.2-studies_r2020-11-03.tsv
+
+  medrxiv-subject-term:
+    name: MEDRXIV_SUB
+    files:
+      1: semrep/medrxiv_2020-10-06_semrep_filter.csv.gz
+    script: rels.medrxiv_subject_to_term
+    source: medRxiv-2020-10-06
+
+  medrxiv-object-term:
+    name: MEDRXIV_OBJ
+    files:
+      1: semrep/medrxiv_2020-10-06_semrep_filter.csv.gz
+    script: rels.medrxiv_object_to_term
+    source: medRxiv-2020-10-06
+
+  medrxiv-literature:
+    name: MEDRXIV_TO_LIT
+    files:
+      1: semrep/medrxiv_2020-10-06_semrep_filter.csv.gz
+    script: rels.medrxiv_to_literature
+    source: medRxiv-2020-10-06
+
+  medrxiv-predicate:
+    name: MEDRXIV_PREDICATE
+    files:
+      1: semrep/medrxiv_2020-10-06_semrep_filter.csv.gz
+    script: rels.medrxiv_predicate
+    source: medRxiv-2020-10-06
+
+  biorxiv-subject-term:
+    name: BIORXIV_SUB
+    files:
+      1: semrep/biorxiv_2020-10-06_semrep_filter.csv.gz
+    script: rels.biorxiv_subject_to_term
+    source: bioRxiv-2020-10-06
+
+  biorxiv-object-term:
+    name: BIORXIV_OBJ
+    files:
+      1: semrep/biorxiv_2020-10-06_semrep_filter.csv.gz
+    script: rels.biorxiv_object_to_term
+    source: bioRxiv-2020-10-06
+
+  biorxiv-literature:
+    name: BIORXIV_TO_LIT
+    files:
+      1: semrep/biorxiv_2020-10-06_semrep_filter.csv.gz
+    script: rels.biorxiv_to_literature
+    source: bioRxiv-2020-10-06
+
+  biorxiv-predicate:
+    name: BIORXIV_PREDICATE
+    files:
+      1: semrep/biorxiv_2020-10-06_semrep_filter.csv.gz
+    script: rels.biorxiv_predicate
+    source: bioRxiv-2020-10-06
+
+  reactome-protein-pathway:
+    name: PROTEIN_IN_PATHWAY
+    files:
+      1: reactome/UniProt2Reactome_All_Levels_human.csv
+    script: rels.reactome_protein_pathway
+    source: Reactome-2020-09-10
+  
+  reactome-pathway-pathway:
+    name: PATHWAY_CHILD_OF
+    files:
+      1: reactome/ReactomePathwaysRelation_human.csv
+    script: rels.reactome_pathway_pathway
+    source: Reactome-2020-09-10
