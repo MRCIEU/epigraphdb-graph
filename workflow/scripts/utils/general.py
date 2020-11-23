@@ -252,4 +252,22 @@ def create_df(data_dir, name, nrows=None):
     return df
 
 
-# get_meta_data('all')
+def write_source_data(dirname,filename):
+    d = os.path.join(env_configs["data_dir"],dirname)
+    # make sure graph directory exists
+    server = env_configs["server_name"]
+
+    if server == None:
+        com = f"mkdir -p {d}"
+    else:
+        com = f"ssh {server} mkdir -p {d}"
+    logger.info(com)
+    subprocess.call(com, shell=True)
+
+    #logger.info("Syncing {}", p_file)
+    #if server == None:
+    #    com = f"rsync -avz {p_file}/{meta_id}* {metadir}"
+    #else:
+    #    com = f"rsync -avz {p_file}/{meta_id}* {server}:{metadir}"
+    #logger.info(com)
+    #subprocess.call(com, shell=True)
