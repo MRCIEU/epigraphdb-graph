@@ -7,19 +7,19 @@ import datetime
 import requests
 import pandas as pd
 from workflow.scripts.utils import settings
+from workflow.scripts.utils.general import copy_source_data
 
 env_configs = settings.env_configs
-data_dir = os.path.join(env_configs["data_dir"], "ebigwas")
-#os.makedirs(data_dir, exist_ok=True)
+data_name = "ebigwas"
 
 today = datetime.date.today()
 
 # define file names: can't be csv (commas in vars)
-ebi_gwas_data_file = os.path.join(data_dir, f"ebi-gwas-efo-{today}_full.tsv")
-ebi_gwas_efo_mapping = os.path.join(data_dir, f"ebi-gwas-efo-{today}.tsv")
+ebi_gwas_data_file = f"/tmp/ebi-gwas-efo-{today}_full.tsv"
+ebi_gwas_efo_mapping = f"/tmp/ebi-gwas-efo-{today}.tsv"
 
 # file that will be used in the local mode
-local_file = os.path.join(data_dir, "gwas_catalog_v1.0.2-studies_r2020-11-03.tsv")
+local_file = f"/tmp/gwas_catalog_v1.0.2-studies_r2020-11-03.tsv"
 
 def get_ebi_gwas_data():
     # retrieve EBI GWAS data data
@@ -29,6 +29,7 @@ def get_ebi_gwas_data():
     # save the full dataset
     with open(ebi_gwas_data_file, 'wb') as tsvfile:
         tsvfile.write(ebi_gwas.content)
+    copy_source_data(data_name=data_name,filename=ebi_gwas_data_file)
 
 def get_ebi_gwas_data_local():
     # use the local file when can't use API to get the data
@@ -47,6 +48,7 @@ def select_ebi_gwas_efo_mapping():
     df = subset_to_available_gwas(df)
     print(df.shape)
     df.to_csv(ebi_gwas_efo_mapping, sep="\t", index=False)
+    copy_source_data(data_name=data_name,filename=ebi_gwas_efo_mapping)
 
 def subset_to_available_gwas(ebi_data):
     # retrieve OpenGWAS datasets

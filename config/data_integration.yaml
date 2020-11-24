@@ -380,8 +380,8 @@ rels:
   gwas-efo-ebi:
     name: GWAS_EFO_EBI
     files:
-      1: ebigwas/ebi-gwas-efo-2020-11-20.tsv
-    script: rels.gwas-efo-ebi
+      1: ebigwas/ebi-gwas-efo-2020-11-24.tsv
+    script: rels.ebi_gwas_efo
     source: gwas_catalog_v1.0.2-studies_r2020-11-03.tsv
 
   medrxiv-subject-term:
