@@ -255,7 +255,6 @@ def create_df(data_dir, name, nrows=None):
     )
     return df
 
-
 def copy_source_data(data_name,filename):
     # make sure graph directory exists
     server = env_configs["server_name"]

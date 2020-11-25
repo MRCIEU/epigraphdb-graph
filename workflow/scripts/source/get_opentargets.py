@@ -11,11 +11,11 @@ import requests
 import pandas as pd
 
 from workflow.scripts.utils import settings
+from workflow.scripts.utils.general import copy_source_data
 
 env_configs = settings.env_configs
 
-data_dir = os.path.join(env_configs["data_dir"], "opentargets")
-os.makedirs(data_dir,exist_ok=True)
+data_name = "opentargets"
 
 today = datetime.date.today()
 
@@ -30,8 +30,8 @@ OUTPUT_FILE = OPENTARGETS_DIR / "opentargets.csv"
 
 
 def get_ensembl_id() -> List[str]:
-    logger.info('get_ensembl_id')
-    file_path_gz = Path("/tmp/19.11_target_list.csv.gz")
+    logger.info("get_ensembl_id")
+    file_path_gz = Path(f"/tmp/19.11_target_list_{today}.csv.gz")
     with requests.get(OPENTARGETS_TARGETS_URL, stream=True) as r:
         r.raise_for_status()
         with open(file_path_gz, "wb") as f:
@@ -124,7 +124,8 @@ def main(oFile) -> None:
 
     OPENTARGETS_DIR.mkdir(parents=True, exist_ok=True)
     ot_df.to_csv(oFile, index=False)
+    copy_source_data(data_name=data_name,filename=oFile)
 
 
 if __name__ == "__main__":
-    main(oFile=os.path.join(data_dir, f"open_targets_{today}.csv"))
+    main(oFile=f"/tmp/open_targets_{today}.csv")

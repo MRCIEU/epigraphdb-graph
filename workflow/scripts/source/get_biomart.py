@@ -11,9 +11,10 @@ from workflow.scripts.utils.general import copy_source_data
 
 env_configs = settings.env_configs
 
-data_name  = "biomart"
+data_name = "biomart"
 
 today = datetime.date.today()
+
 
 def biomart_to_file(atts, filename, type):
     logger.info("attributes: {} filename: {}", atts, filename)
@@ -67,8 +68,9 @@ def biomart_to_file(atts, filename, type):
                 else:
                     o.write(l + b"\n")
         c += 1
-    #copy to data directory
-    copy_source_data(data_name,filename)
+    # copy to data directory
+    copy_source_data(data_name, filename)
+
 
 def create_clean_protein(protein_data):
     filename = f"/tmp/protein-only-{today}.txt"
@@ -81,7 +83,7 @@ def create_clean_protein(protein_data):
                 o.write(uni)
                 pCheck[uni] = ""
     o.close()
-    copy_source_data(data_name,filename)
+    copy_source_data(data_name, filename)
 
 
 def get_biomart_data():
