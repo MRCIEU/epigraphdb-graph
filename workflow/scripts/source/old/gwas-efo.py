@@ -2,6 +2,13 @@ import gzip
 import json
 from SPARQLWrapper import SPARQLWrapper, JSON
 
+#### PROBLEM
+#Unfortunately the RDF Platform has no funding currently and as such support of this service is sporadic at best. 
+# If you are depending on the RDF Platform in your organization, or you are willing to consider funding the RDF platform, 
+# please contact us at rdf-req@ebi.ac.uk with details regarding your project.
+###
+
+
 def get_efo():
     efo_json='efo.json'
     # https://io.datascience-paris-saclay.fr/exampleView.php?iri=https://io.datascience-paris-saclay.fr/query/EFO_Query
@@ -18,6 +25,7 @@ def get_efo():
         }
     """
     )
+    print(sparql)
     # LIMIT 100""")
     sparql.setReturnFormat(JSON)
     results = sparql.query().convert()
