@@ -2,7 +2,8 @@
 
 ##### OpenGWAS
 
-For the main node data, just download using the API
+- Fetches metadata for GWAS nodes
+- Fetches tophits for each GWAS
 
 ```
 python -m workflow.scripts.source.get_opengwas
@@ -78,4 +79,20 @@ wget -O efo-v3.24.0.json https://github.com/EBISPOT/efo/releases/download/v3.24.
 
 ```
 python -m workflow.scripts.source.get_gwas_nlp
+```
+
+##### GTeX
+
+Direct download from website
+
+```
+wget https://storage.googleapis.com/gtex_analysis_v7/rna_seq_data/GTEx_Analysis_2016-01-15_v7_RNASeQCv1.1.8_gene_median_tpm.gct.gz
+```
+
+##### GWAS MELODI
+
+Get literature enrichment annotations for each GWAS trait using MELODI-Presto
+
+```
+python -m workflow.scripts.source.get_gwas_melodi
 ```

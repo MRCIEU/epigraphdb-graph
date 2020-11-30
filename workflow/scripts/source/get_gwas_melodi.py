@@ -111,7 +111,7 @@ def melodi_gwas():
     # create test set
     gwasInfoTest = {k: gwasInfo[k] for k in list(gwasInfo)[:10]}
     logger.info(len(gwasInfoTest))
-    gwasInfo = gwasInfoTest 
+    #gwasInfo = gwasInfoTest 
 
     # enrich in parallel
     gwasChunks = chunks(gwasInfo,10)
@@ -127,9 +127,6 @@ def melodi_gwas():
 
     # takes 34 minutes for 11k GWAS and 4.5k output
     # takes 167 minutes for 31k GWAS and 2.1GB output
-
-    # create single file
-    # for i in melodi/*; do tail -n +2 $i; done | gzip > gwas-melodi-enrich.tsv.gz
 
 if __name__ == "__main__":
     melodi_gwas()
