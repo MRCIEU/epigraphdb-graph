@@ -108,3 +108,21 @@ python -m workflow.scripts.source.get_metamap create
 find ./data/metamap/sep-traits/ -name "*.txt" | parallel -j 20 /data/software/metamap-lite/public_mm_lite/metamaplite.sh  --segment_lines {}
 python -m workflow.scripts.source.get_metamap process
 ```
+
+### Mondo
+
+### MR-EvE
+
+### SemMedDB
+
+### SemRep Arxiv
+
+### StringDB
+
+### PRS Atlas
+
+### UKB Phenotype Correlation
+
+### VEP
+
+### xQTL

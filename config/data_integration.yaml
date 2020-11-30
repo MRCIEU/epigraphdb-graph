@@ -273,23 +273,23 @@ rels:
   melodi-triple:
     name: GWAS_TO_LITERATURE_TRIPLE
     files:
-      1: melodi/gwas-melodi-enrich-20-08-20.tsv.gz
+      1: melodi/gwas-melodi-enrich-2020-11-30.tsv.gz
     script: rels.melodi-triple
-    source: MELODI-Presto-2020-08-20  
+    source: MELODI-Presto-2020-11-30  
 
   melodi-lit:
     name: GWAS_TO_LITERATURE
     files:
-      1: melodi/gwas-melodi-enrich-20-08-20.tsv.gz
+      1: melodi/gwas-melodi-enrich-2020-11-30.tsv.gz
     script: rels.melodi-lit
-    source: MELODI-Presto-2020-08-20
+    source: MELODI-Presto-2020-11-30
 
   gwas-nlp:
     name: GWAS_NLP
     files:
-      1: trait-nlp/ieu-gwas-cosine-20200821.tsv.gz
+      1: trait-nlp/ieu-gwas-cosine-20201130-0.5.tsv.gz
     script: rels.gwas-nlp
-    source: Vectology-2020-08-21  
+    source: Vectology-2020-11-30  
     
   ot-drug-disease:
     name: OPENTARGETS_DRUG_TO_DISEASE
@@ -330,7 +330,7 @@ rels:
   gwas-umls-metamap-lite:
     name: METAMAP_LITE
     files:
-      1: metamap/metamap-data.tsv
+      1: metamap/metamap-data-2020-11-30.tsv
     script: rels.gwas-metamap
     source: MetaMapLite-2018AA
 
