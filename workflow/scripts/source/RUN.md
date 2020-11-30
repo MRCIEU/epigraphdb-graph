@@ -4,6 +4,7 @@
 
 - Fetches metadata for GWAS nodes via OpenGWAS API
 - Fetches tophits for each GWAS via OpenGWAS API
+- http://gwasapi.mrcieu.ac.uk/
 
 ```
 python -m workflow.scripts.source.get_opengwas
@@ -13,6 +14,8 @@ python -m workflow.scripts.source.get_opengwas
 
 Uses OpenTargets API
 
+- https://api.opentargets.io/v3
+
 ```
 python -m workflow.scripts.source.get_opentargets
 ```
@@ -20,6 +23,7 @@ python -m workflow.scripts.source.get_opentargets
 ### Reactome
 
 Downloads files from Reactome and filters for human
+- https://reactome.org/download-data
 
 ```
 python -m workflow.scripts.source.get_reactome
@@ -43,7 +47,8 @@ python -m workflow.scripts.source.get_biomart
 
 ### CPIC
 
-Download from website https://api.cpicpgx.org/data/
+Download from websit
+- https://api.cpicpgx.org/data/
 
 ```
 wget -O cpicPairs-`date +"%d-%m-%y"`.csv https://api.cpicpgx.org/data/cpicPairs.csv
@@ -58,6 +63,7 @@ Download from supplementarty material
 ### EBI GWAS
 
 Get the EBI GWAS Catalog EFO annotations and filter by those GWAS in OpenGWAS
+- https://www.ebi.ac.uk/gwas/api/search/downloads/studies_alternative
 
 ```
 python -m workflow.scripts.source.get_ebigwas
@@ -94,6 +100,7 @@ wget https://storage.googleapis.com/gtex_analysis_v8/rna_seq_data/GTEx_Analysis_
 ### GWAS MELODI
 
 Get literature enrichment annotations for each GWAS trait using MELODI-Presto
+- https://melodi-presto.mrcieu.ac.uk/api/
 
 ```
 python -m workflow.scripts.source.get_gwas_melodi
@@ -134,6 +141,7 @@ Todo
 ### StringDB
 
 Download directly from StringDB
+- https://stringdb-static.org/download/
 
 ```
 wget https://stringdb-static.org/download/protein.links.v11.0/9606.protein.links.v11.0.txt.gz
