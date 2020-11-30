@@ -1,33 +1,81 @@
 ### Creating the raw/pre-processed source data
 
+##### OpenGWAS
+
+For the main node data, just download using the API
+
 ```
-#opengwas
 python -m workflow.scripts.source.get_opengwas
+```
 
-#opentargets
+##### OpenTargets
+
+```
 python -m workflow.scripts.source.get_opentargets
+```
 
-#reactome
+##### Reactome
+
+Downloads files from Reactome and filters for human
+
+```
 python -m workflow.scripts.source.get_reactome
+```
 
-#Genetic Correlation
+##### Genetic Correlation
+
+Ben Neale genetic correlation data
+
+```
 wget https://www.dropbox.com/sh/qvuil7op8bw68fm/AADgKY_MaVlwt6P7USmOk4oWa/geno_correlation.r2.gz
+```
 
-#biomart
+##### Biomart
+
+Uses the biomart python package to download gene and protein data
+
+```
 python -m workflow.scripts.source.get_biomart
+```
 
-#CPIC
+##### CPIC
+
+Download from website https://api.cpicpgx.org/data/
+
+```
 wget -O cpicPairs-`date +"%d-%m-%y"`.csv https://api.cpicpgx.org/data/cpicPairs.csv
+```
 
-#Druggable Genes
-https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6321762/bin/NIHMS80906-supplement-Table_S1.xlsx
+##### Druggable Genes
 
-#EBI GWAS
+Download from supplementarty material
+- https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6321762/
+- https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6321762/bin/NIHMS80906-supplement-Table_S1.xlsx
+
+##### EBI GWAS
+
+Get the EBI GWAS Catalog EFO annotations and filter by those GWAS in OpenGWAS
+
+```
 python -m workflow.scripts.source.get_ebigwas
+```
 
-#EFO
+##### EFO
+
+Todo:
+- Easy enough to get EFO data but harder to find parent/child relationships
+
+```
 wget -O efo-v3.24.0.json https://github.com/EBISPOT/efo/releases/download/v3.24.0/efo.json
+```
 
-#GWAS NLP
+##### GWAS NLP
+
+- Get all GWAS trait names from OpenGWAS
+- Filter using Vectology filtering rules
+- Create embeddings for each using Vectology
+- Create all-against-all cosine distances
+
+```
 python -m workflow.scripts.source.get_gwas_nlp
 ```
