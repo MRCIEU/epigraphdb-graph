@@ -96,3 +96,15 @@ Get literature enrichment annotations for each GWAS trait using MELODI-Presto
 ```
 python -m workflow.scripts.source.get_gwas_melodi
 ```
+
+### MetaMap
+
+Used to create link between GWAS trait names and UMLS Literature Terms
+
+- Need to be run on machine with metamap installed
+
+```
+python -m workflow.scripts.source.get_metamap create
+find ./data/metamap/sep-traits/ -name "*.txt" | parallel -j 20 /data/software/metamap-lite/public_mm_lite/metamaplite.sh  --segment_lines {}
+python -m workflow.scripts.source.get_metamap process
+```

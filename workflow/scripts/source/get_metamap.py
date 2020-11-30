@@ -1,4 +1,5 @@
 import requests
+import datetime
 import pandas as pd
 import time
 import os
@@ -7,11 +8,16 @@ import json
 import glob
 import sys
 
-# run this script
+from workflow.scripts.utils.general import copy_source_data
+data_name = "metamap"
+today = datetime.date.today()
+
+# create the files
+# python -m workflow.scripts.source.get_metamap create
 # run metamap in parallel (on SSD machine)
 # find ./data/metamap/sep-traits/ -name "*.txt" | parallel -j 20 /data/software/metamap-lite/public_mm_lite/metamaplite.sh  --segment_lines {}
 # tidy up the files
-# create_metamap_data()
+# python -m workflow.scripts.source.get_metamap process
 
 # create output directory
 meta_dir = "data/metamap/sep-traits/"
@@ -83,7 +89,8 @@ def create_data_set(gwas_df):
 
 
 def create_metamap_data(dir):
-    o2 = open(os.path.join(dir, "metamap-data.tsv"), "w")
+    filename = os.path.join(dir, f"metamap-data-{today}.tsv")
+    o2 = open(filename, "w")
     # os.chdir(dir)
     for file in glob.glob(os.path.join(dir,"sep-traits", "*.mmi")):
         trait_id = file.split(".")[0]
@@ -111,6 +118,7 @@ def create_metamap_data(dir):
                         + "\n"
                     )
     o2.close()
+    copy_source_data(data_name=data_name,filename=filename)
 
 
 if __name__ == "__main__":
