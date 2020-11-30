@@ -2,14 +2,16 @@
 
 ### OpenGWAS
 
-- Fetches metadata for GWAS nodes
-- Fetches tophits for each GWAS
+- Fetches metadata for GWAS nodes via OpenGWAS API
+- Fetches tophits for each GWAS via OpenGWAS API
 
 ```
 python -m workflow.scripts.source.get_opengwas
 ```
 
 ### OpenTargets
+
+Uses OpenTargets API
 
 ```
 python -m workflow.scripts.source.get_opentargets
@@ -111,18 +113,45 @@ python -m workflow.scripts.source.get_metamap process
 
 ### Mondo
 
+Download directly from Mondo 
+
+```
+wget http://purl.obolibrary.org/obo/mondo.json
+```
+
 ### MR-EvE
+
+https://www.biorxiv.org/content/10.1101/173682v2
 
 ### SemMedDB
 
+Todo
+
 ### SemRep Arxiv
+
+Todo
 
 ### StringDB
 
+Download directly from StringDB
+
+```
+wget https://stringdb-static.org/download/protein.links.v11.0/9606.protein.links.v11.0.txt.gz
+wget https://stringdb-static.org/download/mapping_files/uniprot/human.uniprot_2_string.2018.tsv.gz
+```
+
 ### PRS Atlas
+
+To do
 
 ### UKB Phenotype Correlation
 
+To do
+
 ### VEP
 
+To do
+
 ### xQTL
+
+To do
