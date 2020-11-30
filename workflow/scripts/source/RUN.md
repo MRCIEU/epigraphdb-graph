@@ -27,4 +27,7 @@ python -m workflow.scripts.source.get_ebigwas
 
 #EFO
 wget -O efo-v3.24.0.json https://github.com/EBISPOT/efo/releases/download/v3.24.0/efo.json
+
+#GWAS NLP
+python -m workflow.scripts.source.get_gwas_nlp
 ```

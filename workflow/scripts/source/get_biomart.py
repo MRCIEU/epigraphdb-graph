@@ -6,15 +6,11 @@ import biomart
 from biomart import BiomartServer
 from loguru import logger
 
-from workflow.scripts.utils import settings
 from workflow.scripts.utils.general import copy_source_data
-
-env_configs = settings.env_configs
 
 data_name = "biomart"
 
 today = datetime.date.today()
-
 
 def biomart_to_file(atts, filename, type):
     logger.info("attributes: {} filename: {}", atts, filename)
