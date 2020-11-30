@@ -1,6 +1,6 @@
-### Creating the raw/pre-processed source data
+# Creating the raw/pre-processed source data
 
-##### OpenGWAS
+### OpenGWAS
 
 - Fetches metadata for GWAS nodes
 - Fetches tophits for each GWAS
@@ -9,13 +9,13 @@
 python -m workflow.scripts.source.get_opengwas
 ```
 
-##### OpenTargets
+### OpenTargets
 
 ```
 python -m workflow.scripts.source.get_opentargets
 ```
 
-##### Reactome
+### Reactome
 
 Downloads files from Reactome and filters for human
 
@@ -23,7 +23,7 @@ Downloads files from Reactome and filters for human
 python -m workflow.scripts.source.get_reactome
 ```
 
-##### Genetic Correlation
+### Genetic Correlation
 
 Ben Neale genetic correlation data
 
@@ -31,7 +31,7 @@ Ben Neale genetic correlation data
 wget https://www.dropbox.com/sh/qvuil7op8bw68fm/AADgKY_MaVlwt6P7USmOk4oWa/geno_correlation.r2.gz
 ```
 
-##### Biomart
+### Biomart
 
 Uses the biomart python package to download gene and protein data
 
@@ -39,7 +39,7 @@ Uses the biomart python package to download gene and protein data
 python -m workflow.scripts.source.get_biomart
 ```
 
-##### CPIC
+### CPIC
 
 Download from website https://api.cpicpgx.org/data/
 
@@ -47,13 +47,13 @@ Download from website https://api.cpicpgx.org/data/
 wget -O cpicPairs-`date +"%d-%m-%y"`.csv https://api.cpicpgx.org/data/cpicPairs.csv
 ```
 
-##### Druggable Genes
+### Druggable Genes
 
 Download from supplementarty material
 - https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6321762/
 - https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6321762/bin/NIHMS80906-supplement-Table_S1.xlsx
 
-##### EBI GWAS
+### EBI GWAS
 
 Get the EBI GWAS Catalog EFO annotations and filter by those GWAS in OpenGWAS
 
@@ -61,7 +61,7 @@ Get the EBI GWAS Catalog EFO annotations and filter by those GWAS in OpenGWAS
 python -m workflow.scripts.source.get_ebigwas
 ```
 
-##### EFO
+### EFO
 
 Todo:
 - Easy enough to get EFO data but harder to find parent/child relationships
@@ -70,7 +70,7 @@ Todo:
 wget -O efo-v3.24.0.json https://github.com/EBISPOT/efo/releases/download/v3.24.0/efo.json
 ```
 
-##### GWAS NLP
+### GWAS NLP
 
 - Get all GWAS trait names from OpenGWAS
 - Filter using Vectology filtering rules
@@ -81,15 +81,15 @@ wget -O efo-v3.24.0.json https://github.com/EBISPOT/efo/releases/download/v3.24.
 python -m workflow.scripts.source.get_gwas_nlp
 ```
 
-##### GTeX
+### GTeX
 
 Direct download from website
 
 ```
-wget https://storage.googleapis.com/gtex_analysis_v7/rna_seq_data/GTEx_Analysis_2016-01-15_v7_RNASeQCv1.1.8_gene_median_tpm.gct.gz
+wget https://storage.googleapis.com/gtex_analysis_v8/rna_seq_data/GTEx_Analysis_2017-06-05_v8_RNASeQCv1.1.9_gene_median_tpm.gct.gz
 ```
 
-##### GWAS MELODI
+### GWAS MELODI
 
 Get literature enrichment annotations for each GWAS trait using MELODI-Presto
 

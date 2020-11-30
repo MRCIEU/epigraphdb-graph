@@ -101,7 +101,7 @@ nodes:
   tissue-gtex:
     name: Tissue
     files:
-      1: gtex/GTEx_Analysis_2016-01-15_v7_RNASeQCv1.1.8_gene_median_tpm.gct.gz
+      1: gtex/GTEx_Analysis_2017-06-05_v8_RNASeQCv1.1.9_gene_median_tpm.gct.gz
     script: nodes.tissue.gtex
     source: GTEx-2016-01-15_v7_RNASeQCv1.1.8
 
