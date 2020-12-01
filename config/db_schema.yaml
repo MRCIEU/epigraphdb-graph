@@ -255,6 +255,7 @@ meta_nodes:
     index: uniprot_id
     meta:
       _id: uniprot_id
+      _name: uniprot_id
   Tissue:
     properties:
       id:

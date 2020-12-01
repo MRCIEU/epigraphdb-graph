@@ -179,4 +179,9 @@ To do
 
 ### xQTL
 
-To do
+Raw data from ?
+
+```
+python workflow/scripts/source/xqtl.py
+
+```
