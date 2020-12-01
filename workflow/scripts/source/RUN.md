@@ -1,5 +1,7 @@
 # Creating the raw/pre-processed source data
 
+Much of this is covered in detail in the [EpiGraphDB supplementary material](https://oup.silverchair-cdn.com/oup/backfile/Content_public/Journal/bioinformatics/PAP/10.1093_bioinformatics_btaa961/2/btaa961_supplementary_data.docx?Expires=1609325340&Signature=HT4ZnYuWeYU46U~5qynSEc1Z0eAjPZc0e7z3VStcWtDN3C7U~oM9NB84EFhnqF8DW8IY-Czfwd4jbw6ErmhbAJ-wQOJyhJCA6cH6BoxPdlM2qoHFRtFj07rC3uMv2XovxzZiDP4yHsW23U7JqJYfnmpXqCkVL7YNAPVTGDfRcS4YTvA-~3C7gC-zBjoRXYla~RdzYkb~s6iWvdbIHfIBycMk7MCazMxTWE5VK6p-z2DxvtpLIwF5zKf6NdHI8R0sCB9oPL154h~D14~9l50BpvWCimelZyH3jEGzJVou1jppoPzxQbBB~6UG89ZAbxViAR2LN5nDmMMR4bcYpk~T9A__&Key-Pair-Id=APKAIE5G5CRDK6RD3PGA) 
+
 ### OpenGWAS
 
 - Fetches metadata for GWAS nodes via OpenGWAS API
@@ -167,11 +169,19 @@ wget https://stringdb-static.org/download/mapping_files/uniprot/human.uniprot_2_
 
 ### PRS Atlas
 
-To do
+Data downloaded from here
+- https://datadryad.org/stash/dataset/doi:10.5061/dryad.h18c66b
 
 ### UKB Phenotype Correlation
 
-To do
+We used PHESANT (Millard et al., 2018) to create a modified version of variables from the UK Biobank https://www.ukbiobank.ac.uk/. Using a basic spearman rank correlation, we produced pairwise correlation coefficients for all UK Biobank phenotypes for which we also have GWAS results from OpenGWAS (https://gwas.mrcieu.ac.uk/datasets/). These pairwise correlation coefficients create observational correlation relationships between the Gwas nodes.
+
+- first impute the data to deal with missingness
+- then correlate using spearman rank
+
+```
+Rscript correlate_ukb_obs_separate_files.R
+```
 
 ### VEP
 
@@ -179,7 +189,7 @@ To do
 
 ### xQTL
 
-Raw data from ?
+Zheng J. et al. (2019) Systematic Mendelian Randomization and Colocalization Analyses of the Plasma Proteome and Blood Transcriptome to Prioritize Drug Targets for Complex Disease.
 
 ```
 python workflow/scripts/source/xqtl.py

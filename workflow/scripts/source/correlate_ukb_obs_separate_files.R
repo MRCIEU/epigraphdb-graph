@@ -7,12 +7,7 @@ library(caret)
 #library(Hmisc)
 library(WGCNA);
 
-#epif
-#phesantDir='/projects/MRC-IEU/research/data/ukbiobank/phenotypic/applications/15825/dev/release_candidate/data/derived/phesant_mod/'
-#outDir='/projects/MRC-IEU/users/be15516/phesant/sep_files/out/'
-
-#local testing
-phesantDir='/Users/be15516/projects/ukb-ml/data/sep_phesant_files/'
+phesantDir='/path/to/sep_phesant_files/'
 outDir=phesantDir
 
 impute <- function(){
@@ -80,47 +75,5 @@ correlate <- function(){
   }
 }
 
-feature_selection <- function(){
-  #files <- list.files(path=outDir, pattern="*.cor.gz$", full.names=T, recursive=FALSE)
-  files <- list.files(path=outDir, pattern="data-cont-29-40.txt.imputed.gz_data-cont-29-40.txt.imputed.gz.corr.test.cor.gz$", full.names=T, recursive=FALSE)
-  for (i in 1:length(files)){
-    print(files[i])
-    corData=as.matrix(read.csv(files[i],row.names = 1))
-    row.names(corData)=paste0("X",row.names(corData))
-    print(row.names(corData))
-    print(corData)
-    corrplot(corData, type = 'lower')
-    toRemove <- findCorrelation(corData, cutoff = 0.9)
-    print(toRemove)
-    corrplot(corData[,-toRemove], type = 'lower')
-    print(corData[,-toRemove])
-    
-  }
-}
-
-wgcna <- function(){
-  options(stringsAsFactors = FALSE);
-  enableWGCNAThreads()
-  files <- list.files(path=outDir, pattern="data-cont-29-40.txt.imputed.gz$", full.names=T, recursive=FALSE)
-  for (i in 1:length(files)){
-    print(files[i])
-    df=fread(paste('gunzip -c ',files[i]),sep=' ',header=T)
-    bwnet = blockwiseModules(df, maxBlockSize = 45000, corType = "bicor",
-                             power = 15, networkType = "signed", 
-                             #TOMType = "signed", 
-                             minModuleSize = 3, deepSplit = 2, maxPOutliers = 0.05,
-                             pamStage = TRUE, pamRespectsDendro = FALSE,
-                             reassignThreshold = 0, mergeCutHeight = 0.25, 
-                             numericLabels = TRUE,
-                             saveTOMs = TRUE,
-                             saveTOMFileBase = "wgcna_test",
-                             verbose = 3)
-    bwLabels = bwnet$colors
-    bwModuleColors = labels2colors(bwLabels)
-  }
-}
-
-#impute()
-#correlate()
-#feature_selection()
-wgcna()
+impute()
+correlate()
