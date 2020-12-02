@@ -323,7 +323,7 @@ rels:
   bn-gwas-gencor:
     name: GEN_COR
     files:
-      1: ben-neale/genetic_correlation_matrices/geno_correlation.r2.gz
+      1: ben-neale/genetic_correlation_matrices/data-2020-12-02.csv
     script: rels.gwas-gencor
     source: http://www.nealelab.is/blog/2019/10/10/genetic-correlation-results-for-heritable-phenotypes-in-the-uk-biobank
 
