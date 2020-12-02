@@ -340,39 +340,33 @@ meta_rels:
         type: Gwas
       target: 
         type: Gwas
-      gcov_int:
+      h2:
         type: float
-      gcov_int_se:
+      h2 SE:
         type: float
-      h2_int:
+      h2 intercept:
         type: float
-      h2_int_se:
+      h2 intercept SE:
         type: float
-      h2_obs:
-        type: float
-      h2_obs_se:
-        type: float
-      p:
+      rpheno:
         type: float
       rg:
         type: float
-      se:
+      rg SE:
         type: float
-      z:
+      Z:
+        type: float
+      p:
+        type: float
+      rg intercept:
+        type: float
+      rg intercept SE:
         type: float
     required:
       - source
       - target
       - rg
-      - se
-      - z
       - p
-      - h2_obs
-      - h2_obs_se
-      - h2_int
-      - h2_int_se
-      - gcov_int
-      - gcov_int_se
   CPIC:
     properties:
       source:
