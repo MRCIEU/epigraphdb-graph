@@ -74,6 +74,9 @@ def process(gwas_df):
     logger.info(merge_df.shape)
 
     merge_df = merge_df.rename(columns={"phenotype_1_id": "source", "phenotype_2_id": "target"})
+
+    #replace spaces in column names with underscores
+    merge_df.columns = merge_df.columns.str.replace(' ', '_')
     create_import(df=merge_df, meta_id=meta_id)
 
 if __name__ == "__main__":

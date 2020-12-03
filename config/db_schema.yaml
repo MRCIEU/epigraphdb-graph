@@ -342,25 +342,25 @@ meta_rels:
         type: Gwas
       h2:
         type: float
-      h2 SE:
+      h2_SE:
         type: float
-      h2 intercept:
+      h2_intercept:
         type: float
-      h2 intercept SE:
+      h2_intercept_SE:
         type: float
       rpheno:
         type: float
       rg:
         type: float
-      rg SE:
+      rg_SE:
         type: float
       Z:
         type: float
       p:
         type: float
-      rg intercept:
+      rg_intercept:
         type: float
-      rg intercept SE:
+      rg_intercept_SE:
         type: float
     required:
       - source

@@ -95,7 +95,7 @@ def create_distances(gwas_df):
         ids.append(i)
 
     timestr = time.strftime("%Y%m%d")
-    score_cutoff = 0.5
+    score_cutoff = 0
     filename = f'/tmp/ieu-gwas-cosine-{timestr}-{score_cutoff}.tsv.gz'
     o = gzip.open(filename, "wt")
 
