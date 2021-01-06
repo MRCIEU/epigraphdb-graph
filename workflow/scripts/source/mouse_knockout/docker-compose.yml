@@ -1,0 +1,21 @@
+version: '3.3'
+services:
+  db:
+    image: postgres:12-alpine
+    restart: unless-stopped
+    environment:
+      - POSTGRES_USER=mouse
+      - POSTGRES_PASSWORD=mouse
+    volumes:
+      - ./dump:/dump
+      - mouse-data:/var/lib/postgresql/data/
+    ports:
+      - 5432:5432
+  pgweb:
+    image: sosedoff/pgweb:0.11.7
+    restart: unless-stopped
+    ports:
+      - 5433:8081
+volumes:
+  mouse-data:
+    driver: local
