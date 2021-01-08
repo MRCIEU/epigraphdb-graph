@@ -93,6 +93,11 @@ rels:
   #   source: Opentargets-2020-10-29
   #   use: True
 
-
+  gene-clinvar-disease-mondo:
+    name: GENE_TO_DISEASE
+    files:
+      1: clinvar/clinvar_gene_condition_source_id-2021-01-08_tidy_subset_MONDO.tsv
+    script: rels.gene_to_disease
+    source: Clinvar-2021-01-08
 
     
