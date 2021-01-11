@@ -1,9 +1,50 @@
-from typing import Dict
+import argparse
+import math
+from pathlib import Path
+from typing import Callable, Dict, List
 
 import requests
 import pandas as pd
+from loguru import logger
+from tqdm.contrib.concurrent import process_map
 
 API = "https://www.alliancegenome.org"
+DISEASE_DATA = Path("data") / "disease_df.csv"
+GENE_OUTPUT = Path("data") / "diseases_to_genes.csv"
+ALLELE_OUTPUT = Path("data") / "diseases_to_alleles.csv"
+MODEL_OUTPUT = Path("data") / "diseases_to_models.csv"
+NUM_TRIALS = 50
+NUM_WORKERS = 4
+
+
+def create_parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        "-n",
+        "--dry-run",
+        action="store_true",
+        help="Run the script but no output to write to.",
+    )
+    parser.add_argument(
+        "--trial",
+        action="store_true",
+        help="A trial run",
+    )
+    parser.add_argument(
+        "-j",
+        "--num-workers",
+        default=NUM_WORKERS,
+        type=int,
+        help="Num multi proc workers",
+    )
+    return parser
+
+
+def extract(func: Callable, doid_list: List[str], num_workers: int = NUM_WORKERS):
+    chunksize = math.floor(len(doid_list) / num_workers)
+    map_res = process_map(func, doid_list, max_workers=num_workers)
+    df = pd.concat(map_res)
+    return df
 
 
 def animal_disease_to_genes(doid: str) -> pd.DataFrame:
@@ -106,3 +147,39 @@ def animal_disease_to_models(doid: str) -> pd.DataFrame:
     results = r.json()["results"]
     df = pd.json_normalize([_extract(_) for _ in results])
     return df
+
+
+def main():
+    parser = create_parser()
+    args = parser.parse_args()
+    print(args)
+
+    assert DISEASE_DATA.exists()
+    disease_df = pd.read_csv(DISEASE_DATA)
+    if args.trial:
+        disease_df = disease_df[:NUM_TRIALS]
+
+    if args.dry_run:
+        exit()
+
+    # genes
+    doid_list = disease_df["DOID"].tolist()
+    funcs = [
+        animal_disease_to_genes,
+        animal_disease_to_alleles,
+        animal_disease_to_models,
+    ]
+    outputs = [GENE_OUTPUT, ALLELE_OUTPUT, MODEL_OUTPUT]
+    for func, output in zip(funcs, outputs):
+        logger.info(f"Processing on {func}")
+        df = extract(func=func, doid_list=doid_list, num_workers=args.num_workers)
+        logger.info(df.head())
+        logger.info(f"Write to {output}")
+        df.to_csv(output, index=False)
+
+    # NOTE: columns `evidence` and `publication` are lists
+    # and when reading need to convert using ast.literal_eval.
+
+
+if __name__ == "__main__":
+    main()
