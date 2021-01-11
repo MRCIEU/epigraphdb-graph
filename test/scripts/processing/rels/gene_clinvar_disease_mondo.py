@@ -20,11 +20,10 @@ FILE = get_source(meta_id, 1)
 
 
 def process():
-    df = pd.read_csv(os.path.join(dataDir, FILE), sep="\t")
+    df = pd.read_csv(os.path.join(dataDir, FILE), sep="\t").drop_duplicates()
     print(df.head())
     print(df.shape)
-    df = df[['ensembl_id', 'source_id']]
-    df.columns = ["source", "target"]#, "gene_relationship_type", "last_updated"]
+    df.columns = ["source", "target", "gene_relationship_type", "last_updated"]
     logger.info(df.shape)
     logger.info("\n {}", df.head())
     create_import(df=df, meta_id=meta_id)
