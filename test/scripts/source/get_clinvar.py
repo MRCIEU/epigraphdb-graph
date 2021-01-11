@@ -7,6 +7,7 @@ import os
 import wget  ## wget-3.2 may need to add to conda env
 import pandas as pd
 from workflow.scripts.utils import settings
+from workflow.scripts.utils.general import copy_source_data
 from biomart import BiomartServer
 
 data_name = "clinvar"
@@ -34,6 +35,7 @@ local_file = os.path.join(data_dir, "gene_condition_source_id.tsv")
 def download_data():
     link = 'https://ftp.ncbi.nlm.nih.gov/pub/clinvar/gene_condition_source_id'
     wget.download(link, clinvar_data_file)
+    copy_source_data(data_name=data_name, filename=clinvar_data_file)
 
 
 def load_data(file):
@@ -112,6 +114,8 @@ def make_tidy_clinvar_output(df):
                   "source_name", "source_id", "disease_MIM",
                   "last_updated"]
     df.to_csv(clinvar_gene_condition_mapping, sep="\t", index=False)
+    copy_source_data(data_name=data_name, filename=clinvar_gene_condition_mapping)
+
 
 
 def make_gene_to_mondo_map():
@@ -120,6 +124,8 @@ def make_gene_to_mondo_map():
     df = df[df["source_name"] == "MONDO"]
     df = df[['ensembl_id', 'source_id', 'clinvar_gene_type', 'last_updated']]
     df.to_csv(clinvar_gene_condition_mapping_mondo, sep="\t", index=False)
+    copy_source_data(data_name=data_name, filename=clinvar_gene_condition_mapping_mondo)
+
 
 def make_gene_to_umls_map():
     # subset to records with umls id and select only required columns
@@ -127,6 +133,8 @@ def make_gene_to_umls_map():
     df = df[df["umls_id"].notna()]
     df = df[['ensembl_id', 'umls_id', 'clinvar_gene_type', 'last_updated']]
     df.to_csv(clinvar_gene_condition_mapping_umls, sep="\t", index=False)
+    copy_source_data(data_name=data_name, filename=clinvar_gene_condition_mapping_umls)
+
 
 
 
