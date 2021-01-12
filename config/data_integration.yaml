@@ -65,9 +65,9 @@ nodes:
   disease-mondo:
     name: Disease
     files:
-      1: mondo/mondo.json
+      1: mondo/mondo-12-01-21.json
     script: nodes.disease.mondo
-    source: Mondo-2020-02-10
+    source: Mondo-2021-01-12
   
   lit-triple-semmed:
     name: LiteratureTriple
