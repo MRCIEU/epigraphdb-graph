@@ -8,6 +8,7 @@ import wget
 import pandas as pd
 from workflow.scripts.utils import settings
 from workflow.scripts.utils.general import copy_source_data
+from workflow.scripts.utils.general import neo4j_connect
 from biomart import BiomartServer
 
 data_name = "clinvar"
@@ -26,7 +27,7 @@ clinvar_gene_condition_mapping = os.path.join(data_dir, f"clinvar_gene_condition
 clinvar_gene_condition_mapping_mondo = os.path.join(data_dir,
                                                     f"clinvar_gene_condition_source_id-{today}_tidy_subset_MONDO.tsv")
 clinvar_gene_condition_mapping_umls = os.path.join(data_dir,
-                                                    f"clinvar_gene_condition_source_id-{today}_tidy_subset_UMLS.tsv")
+                                                    f"clinvar_gene_condition_source_id-{today}_tidy_subset_MONDO_via_UMLS.tsv")
 
 # file that will be used in the local mode
 local_file = os.path.join(data_dir, "gene_condition_source_id.tsv")
@@ -117,7 +118,6 @@ def make_tidy_clinvar_output(df):
     #copy_source_data(data_name=data_name, filename=clinvar_gene_condition_mapping)
 
 
-
 def make_gene_to_mondo_map():
     # subset to records with mondo id and select only required columns
     df = pd.read_csv(clinvar_gene_condition_mapping, sep='\t')
@@ -127,15 +127,41 @@ def make_gene_to_mondo_map():
     #copy_source_data(data_name=data_name, filename=clinvar_gene_condition_mapping_mondo)
 
 
-def make_gene_to_umls_map():
-    # subset to records with umls id and select only required columns
+def query_graph(query):
+    # collect to epigraph
+    driver = neo4j_connect()
+    session = driver.session()
+    # query
+    query_data = session.run(query).data()
+    df = pd.json_normalize(query_data)
+    return df
+
+
+def make_gene_to_umls_to_mondo_map():
     df = pd.read_csv(clinvar_gene_condition_mapping, sep='\t')
     df = df[df["umls_id"].notna()]
     df = df[['ensembl_id', 'umls_id', 'clinvar_gene_type', 'last_updated']]
-    df.to_csv(clinvar_gene_condition_mapping_umls, sep="\t", index=False)
-    #copy_source_data(data_name=data_name, filename=clinvar_gene_condition_mapping_umls)
 
+    # query epigraph by umls to get mondo ids and disease labels
+    ulms = list(set(df["umls_id"]))
+    query = """
+        match (d:Disease)
+        where any(umls in {} WHERE umls IN d.umls)
+        return d.label, d.umls, d.id
+        """.format(ulms)
 
+    query_df = query_graph(query)
+    query_df.columns = ["disease_label", "umls_id", "mondo_id"]
+
+    # unfold umls lists into separate rows
+    query_df = query_df.explode("umls_id")
+
+    # join clinvar table with query output to map UMLS to mondo id and labels
+    df_joined = df.merge(query_df, on='umls_id', how='inner')
+    df_joined = df_joined[['ensembl_id', 'mondo_id', 'disease_label', 'umls_id', 'clinvar_gene_type', 'last_updated']]
+
+    df_joined.to_csv(clinvar_gene_condition_mapping_umls, sep="\t", index=False)
+    # copy_source_data(data_name=data_name, filename=clinvar_gene_condition_mapping_umls)
 
 
 if __name__ == "__main__":
@@ -148,4 +174,4 @@ if __name__ == "__main__":
     make_tidy_clinvar_output(data_subset)
 
     make_gene_to_mondo_map()
-    make_gene_to_umls_map()
+    make_gene_to_umls_to_mondo_map()
