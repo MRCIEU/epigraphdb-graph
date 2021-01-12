@@ -453,3 +453,10 @@ rels:
       1: reactome/ReactomePathwaysRelation_human.csv
     script: rels.reactome_pathway_pathway
     source: Reactome-2020-09-10
+
+  gene-clinvar-disease-mondo:
+    name: GENE_TO_DISEASE
+    files:
+      1: clinvar/clinvar_gene_condition_source_id-2021-01-11_tidy_subset_MONDO.tsv
+    script: rels.gene_clinvar_disease_mondo
+    source: Clinvar-2021-01-11
