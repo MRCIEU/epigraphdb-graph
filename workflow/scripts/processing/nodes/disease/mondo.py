@@ -70,7 +70,7 @@ def process():
             ontoDic = create_ontoDic()
             if "meta" in d:
                 if "definition" in d["meta"]:
-                    definition = d["meta"]["definition"]["val"].replace('"', "")
+                    definition = d["meta"]["definition"]["val"].replace('"', "").replace('\n',' ')
                 if "xrefs" in d["meta"]:
                     for x in d["meta"]["xrefs"]:
                         xrefs.append(x["val"])
