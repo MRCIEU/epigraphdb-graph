@@ -115,12 +115,13 @@ def make_gene_to_mondo_map(df):
 
     # make tidy mondo ids
     for ind in df.index:
-        mondo_id = str(df['source_name'][ind].split(":")[1])
+        mondo_id = str(df['source_id'][ind].split(":")[1])
         mondo_url = "http://purl.obolibrary.org/obo/MONDO_" + mondo_id
         df['source_id'][ind] = mondo_url
 
     #  and select only required columns
     df = df[['ensembl_id', 'source_id', 'clinvar_gene_type', 'last_updated']]
+    df.columns = ['ensembl_id', 'mondo_id', 'clinvar_gene_type', 'last_updated']
     return df
 
 
