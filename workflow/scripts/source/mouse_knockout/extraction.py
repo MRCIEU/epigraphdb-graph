@@ -42,7 +42,7 @@ def create_parser() -> argparse.ArgumentParser:
 
 def extract(func: Callable, doid_list: List[str], num_workers: int = NUM_WORKERS):
     chunksize = math.floor(len(doid_list) / num_workers)
-    map_res = process_map(func, doid_list, max_workers=num_workers)
+    map_res = process_map(func, doid_list, max_workers=num_workers, chunksize=chunksize)
     df = pd.concat(map_res)
     return df
 
