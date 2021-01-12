@@ -3,6 +3,7 @@ import sys
 import csv
 import json
 import pandas as pd
+from loguru import logger
 
 #################### leave me heare please :) ########################
 
@@ -59,6 +60,9 @@ def process():
                 if "deprecated" in d["meta"]:
                     if d["meta"]["deprecated"] == True:
                         continue
+            #logger.debug(d)
+            if "lbl" not in d:
+                continue
             mondo_id = d["id"]
             mondo_label = d["lbl"]
             definition = "NA"

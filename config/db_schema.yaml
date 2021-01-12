@@ -35,7 +35,7 @@ meta_nodes:
       - id
       - label
       - definition
-    index: label
+    index: id
     meta:
       _id: id
       _name: label  
