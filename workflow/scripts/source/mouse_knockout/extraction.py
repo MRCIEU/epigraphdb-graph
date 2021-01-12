@@ -1,3 +1,6 @@
+"""
+Extraction of mouse-things, and other animal-things. Yes-yes!
+"""
 import argparse
 import math
 from pathlib import Path
@@ -162,7 +165,7 @@ def main():
     if args.dry_run:
         exit()
 
-    # genes
+    # Test things done, real things now. Yes-yes!
     doid_list = disease_df["DOID"].tolist()
     funcs = [
         animal_disease_to_genes,
