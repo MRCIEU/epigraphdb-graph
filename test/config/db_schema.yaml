@@ -294,3 +294,19 @@ meta_rels:
       - codons
       - existing_variation
       - extra
+
+  GENE_TO_DISEASE:
+    properties:
+      source:
+        type: Gene
+      target:
+        type: Disease
+      gene_relationship_type:
+         type: string
+      last_updated:
+         type: string # this is a date
+    required:
+      - source
+      - target
+      - gene_relationship_type
+
