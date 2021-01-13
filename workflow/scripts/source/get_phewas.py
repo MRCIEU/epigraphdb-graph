@@ -33,24 +33,31 @@ def get_variants_from_graph():
     copy_source_data(data_name=data_name,filename=variant_data)
     return df
 
-def get_top_hits():
+def get_phewas():
     df = pd.read_csv(variant_data)
     variant_ids = list(df.id)
-    split_val = 50
+    split_val = 20
+    pval = 1e-5
+    all_res = []
     for i in range(0,len(variant_ids),split_val):
         print(i)
         variants = variant_ids[i:i+split_val]
         gwas_api_url = "http://gwasapi.mrcieu.ac.uk/phewas"
-        payload = {"variant": variants, "pval": 0.0001}
+        payload = {"variant": variants, "pval": pval}
         #logger.info(payload)
         response = requests.post(gwas_api_url, json=payload)
         res = response.json()
-        th_df = pd.json_normalize(res)
-        logger.info(th_df)
-    #th_df.to_csv(gwas_tophits, index=False)
-    #copy_source_data(data_name=data_name,filename=gwas_tophits)
+        logger.info(len(res))
+        if len(res)==1:
+            logger.info('Failed')
+            exit()
+        all_res.extend(res)
+    df = pd.json_normalize(all_res)
+    logger.info(df)
+    df.to_csv(phewas_data_file, index=False)
+    copy_source_data(data_name=data_name,filename=phewas_data_file)
 
 
 if __name__ == "__main__":
     get_variants_from_graph()
-    get_top_hits()
+    get_phewas()
