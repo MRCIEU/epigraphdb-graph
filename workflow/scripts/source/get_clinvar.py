@@ -14,10 +14,10 @@ from biomart import BiomartServer
 data_name = "clinvar"
 
 env_configs = settings.env_configs
-data_dir = os.path.join(env_configs["data_dir"], "clinvar")
+#data_dir = os.path.join(env_configs["data_dir"], "clinvar")
 
-# data_dir = os.path.join("data_folder", "clinvar")  # local test
-# os.makedirs(data_dir, exist_ok=True)
+data_dir = os.path.join("/tmp", "clinvar")  # local test
+os.makedirs(data_dir, exist_ok=True)
 
 today = datetime.date.today()
 
@@ -34,7 +34,7 @@ local_file = os.path.join(data_dir, "gene_condition_source_id.tsv")
 def download_data():
     link = 'https://ftp.ncbi.nlm.nih.gov/pub/clinvar/gene_condition_source_id'
     wget.download(link, clinvar_data_file)
-    #copy_source_data(data_name=data_name, filename=clinvar_data_file)
+    copy_source_data(data_name=data_name, filename=clinvar_data_file)
 
 
 def load_data(file):
@@ -106,7 +106,7 @@ def make_tidy_clinvar_output(df):
                   "source_name", "source_id", "disease_MIM",
                   "last_updated"]
     df.to_csv(clinvar_gene_condition_mapping, sep="\t", index=False)
-    #copy_source_data(data_name=data_name, filename=clinvar_gene_condition_mapping)
+    copy_source_data(data_name=data_name, filename=clinvar_gene_condition_mapping)
 
 
 def make_gene_to_mondo_map(df):
@@ -174,7 +174,7 @@ def map_genes_to_diseases():
     df_total = df_joined.append(df_mondo).drop_duplicates()
 
     df_total.to_csv(clinvar_gene_condition_mapping_mondo, sep="\t", index=False)
-    # copy_source_data(data_name=data_name, filename=clinvar_gene_condition_mapping_mondo)
+    copy_source_data(data_name=data_name, filename=clinvar_gene_condition_mapping_mondo)
 
 
 if __name__ == "__main__":

@@ -137,6 +137,22 @@ def link():
         """
     )
 
+    #umls using text
+    load_text.append(
+        f"""
+        MATCH 
+            (l:LiteratureTerm) 
+        MATCH
+            (d:Disease) 
+        WHERE 
+            toLower(l.name) = toLower(d.label) 
+        MERGE 
+            (l)<-[:MONDO_MAP_UMLS]-(d)
+        RETURN
+            count(d);
+        """
+    )
+
     load_text = [t.replace("\n", " ").replace("\t", " ") for t in load_text]
     # load_text = " ".join(load_text.split())
 
