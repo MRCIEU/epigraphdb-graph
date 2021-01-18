@@ -52,7 +52,7 @@ meta_nodes:
       - id
     index: label
     meta:
-      _id: id
+      _id: label
       _name: label  
   Efo:
     properties:
