@@ -196,7 +196,9 @@ meta_nodes:
       name:
         type: string
       type:
-        type: string[]
+        items:
+          type: string
+        type: array
     required:
       - name
       - id
@@ -1081,14 +1083,4 @@ meta_rels:
       - target
       - gene_relationship_type
 
-
-  DEMO_REL:
-    properties:
-      source:
-        type: Gene
-      target:
-        type: Variant
-    required:
-      - source
-      - target
          
