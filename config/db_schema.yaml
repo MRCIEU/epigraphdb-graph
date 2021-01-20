@@ -396,15 +396,6 @@ meta_rels:
     required:
       - source
       - target
-  EVENT_IN_PATHWAY:
-    properties:
-      source:
-        type: Pathway
-      target:
-        type: Event
-    required:
-      - source
-      - target
   EXPRESSED_IN:
     properties:
       source:
@@ -826,24 +817,6 @@ meta_rels:
         type: Pathway
       target:
         type: Literature
-    required:
-      - source
-      - target 
-  PRECEDING_EVENT:
-    properties: 
-      source:
-        type: Event
-      target:
-        type: Event
-    required:
-      - source
-      - target 
-  PROTEIN_IN_EVENT:
-    properties: 
-      source:
-        type: Event
-      target:
-        type: Event
     required:
       - source
       - target 
