@@ -33,7 +33,6 @@ def process():
     df.columns = ["label"]
     # set label to uppercase
     df["label"] = df["label"].str.upper()
-    df["id"] = ""
     logger.info(df.shape)
     logger.info("\n {}", df.head())
     create_import(df=df, meta_id=meta_id)

@@ -41,7 +41,7 @@ meta_nodes:
       _name: label  
   Drug:
     properties:
-      id:
+      chembl_uri:
         type: string
       label:
         type: string
@@ -49,7 +49,6 @@ meta_nodes:
         type: string
     required:
       - label
-      - id
     index: label
     meta:
       _id: label

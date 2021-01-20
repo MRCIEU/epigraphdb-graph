@@ -29,7 +29,7 @@ def process():
     logger.info("\n {}", df.head())
     keep_cols = ["molecule_name", "molecule_type", "chembl_uri"]
     df = df[keep_cols]
-    col_names = ["label", "molecule_type", "id"]
+    col_names = ["label", "molecule_type"]
     df.columns = col_names
     df.drop_duplicates(inplace=True)
     # set label to uppercase
