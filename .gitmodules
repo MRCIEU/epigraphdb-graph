@@ -1,0 +1,3 @@
+[submodule "epigraphdb_common_utils"]
+	path = epigraphdb_common_utils
+	url = git@github.com:MRCIEU/epigraphdb_common_utils.git
