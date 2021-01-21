@@ -8,7 +8,7 @@ from loguru import logger
 
 #################### leave me heare please :) ########################
 
-from workflow.scripts.utils.general import setup, get_source
+from workflow.scripts.utils.general import setup, get_source, neo4j_connect
 
 from workflow.scripts.utils.writers import (
     create_constraints,
@@ -27,8 +27,6 @@ meta_id = args.name
 FILE = get_source(meta_id,1)
 
 def check():
-    from utils.functions import neo4j_connect
-
     driver = neo4j_connect()
     session = driver.session()
     # read data
