@@ -38,7 +38,7 @@ meta_nodes:
     index: id
     meta:
       _id: id
-      _name: label  
+      _name: label
   Drug:
     properties:
       chembl_uri:
@@ -52,7 +52,7 @@ meta_nodes:
     index: label
     meta:
       _id: label
-      _name: label  
+      _name: label
   Efo:
     properties:
       id:
@@ -68,7 +68,7 @@ meta_nodes:
     index: id
     meta:
       _id: id
-      _name: value  
+      _name: value
   Gene:
     properties:
       adme_gene:
@@ -103,7 +103,7 @@ meta_nodes:
     index: ensembl_id
     meta:
       _id: ensembl_id
-      _name: name  
+      _name: name
   Gwas:
     properties:
       author:
@@ -165,7 +165,7 @@ meta_nodes:
     index: id
     meta:
       _id: id
-      _name: trait 
+      _name: trait
   Literature:
     properties:
       doi:
@@ -188,7 +188,7 @@ meta_nodes:
     index: id
     meta:
       _id: id
-      _name: title 
+      _name: title
   LiteratureTerm:
     properties:
       id:
@@ -206,7 +206,7 @@ meta_nodes:
     index: id
     meta:
       _id: id
-      _name: name 
+      _name: name
   LiteratureTriple:
     properties:
       id:
@@ -228,7 +228,7 @@ meta_nodes:
     index: id
     meta:
       _id: id
-      _name: name 
+      _name: name
   Pathway:
     properties:
       url:
@@ -243,7 +243,7 @@ meta_nodes:
     index: id
     meta:
       _id: id
-      _name: name 
+      _name: name
   Protein:
     properties:
       uniprot_id:
@@ -284,7 +284,7 @@ meta_nodes:
       alt:
         type: string
       build:
-        type: string    
+        type: string
     required:
       - name
     index: name
@@ -301,7 +301,7 @@ meta_rels:
         type: LiteratureTerm
     required:
       - source
-      - target 
+      - target
   BIORXIV_PREDICATE:
     properties:
       source:
@@ -314,7 +314,7 @@ meta_rels:
         type: string
     required:
       - source
-      - target 
+      - target
       - predicate
       - count
   BIORXIV_SUB:
@@ -325,7 +325,7 @@ meta_rels:
         type: LiteratureTerm
     required:
       - source
-      - target 
+      - target
   BIORXIV_TO_LIT:
     properties:
       source:
@@ -334,12 +334,12 @@ meta_rels:
         type: Literature
     required:
       - source
-      - target 
+      - target
   GEN_COR:
     properties:
-      source: 
+      source:
         type: Gwas
-      target: 
+      target:
         type: Gwas
       h2:
         type: float
@@ -393,7 +393,7 @@ meta_rels:
       source:
         type: Efo
       target:
-        type: Efo  
+        type: Efo
     required:
       - source
       - target
@@ -426,7 +426,7 @@ meta_rels:
         type: Protein
     required:
       - source
-      - target     
+      - target
   GWAS_EFO_EBI:
     properties:
       source:
@@ -435,7 +435,7 @@ meta_rels:
         type: Efo
     required:
       - source
-      - target 
+      - target
   GWAS_NLP:
     properties:
       source:
@@ -644,7 +644,7 @@ meta_rels:
         type: array
     required:
       - source
-      - target  
+      - target
       - intact_confidence_score
       - intact_detection_method
       - intact_type
@@ -658,7 +658,7 @@ meta_rels:
         type: LiteratureTerm
     required:
       - source
-      - target 
+      - target
   MEDRXIV_PREDICATE:
     properties:
       source:
@@ -671,7 +671,7 @@ meta_rels:
         type: string
     required:
       - source
-      - target 
+      - target
       - predicate
       - count
   MEDRXIV_SUB:
@@ -682,7 +682,7 @@ meta_rels:
         type: LiteratureTerm
     required:
       - source
-      - target 
+      - target
   MEDRXIV_TO_LIT:
     properties:
       source:
@@ -691,7 +691,7 @@ meta_rels:
         type: Literature
     required:
       - source
-      - target 
+      - target
   METAMAP_LITE:
     properties:
       source:
@@ -704,7 +704,7 @@ meta_rels:
         type: float
     required:
       - source
-      - target 
+      - target
       - mmi_score
   MONDO_MAP_EFO:
     properties:
@@ -714,16 +714,16 @@ meta_rels:
         type: Efo
     required:
       - source
-      - target 
+      - target
   MONDO_MAP_UMLS:
     properties:
-      source: 
+      source:
         type: Disease
       target:
         type: Efo
     required:
       - source
-      - target 
+      - target
   MR_EVE_MR:
     properties:
       source:
@@ -752,7 +752,7 @@ meta_rels:
         type: string
     required:
       - source
-      - target 
+      - target
       - method
       - nsnp
       - b
@@ -768,7 +768,7 @@ meta_rels:
         type: float
     required:
       - source
-      - target 
+      - target
       - cor
   OPENTARGETS_DRUG_TO_DISEASE:
     properties:
@@ -778,7 +778,7 @@ meta_rels:
         type: Disease
     required:
       - source
-      - target 
+      - target
   OPENTARGETS_DRUG_TO_TARGET:
     properties:
       source:
@@ -791,7 +791,7 @@ meta_rels:
         type: string
     required:
       - source
-      - target 
+      - target
       - phase
       - action_type
   PATHWAY_CHILD_OF:
@@ -802,7 +802,7 @@ meta_rels:
         type: Pathway
     required:
       - source
-      - target 
+      - target
   PATHWAY_TO_DISEASE:
     properties:
       source:
@@ -811,7 +811,7 @@ meta_rels:
         type: Disease
     required:
       - source
-      - target 
+      - target
   PATHWAY_TO_LITERATURE:
     properties:
       source:
@@ -820,34 +820,34 @@ meta_rels:
         type: Literature
     required:
       - source
-      - target 
+      - target
   PROTEIN_IN_PATHWAY:
-    properties: 
+    properties:
       source:
         type: Protein
       target:
         type: Pathway
     required:
       - source
-      - target 
+      - target
   PROTEIN_TO_DISEASE:
-    properties: 
+    properties:
       source:
         type: Protein
       target:
         type: Disease
     required:
       - source
-      - target 
+      - target
   PROTEIN_TO_LITERATURE:
-    properties: 
+    properties:
       source:
         type: Protein
       target:
         type: Literature
     required:
       - source
-      - target 
+      - target
   PRS:
     properties:
       source:
@@ -870,7 +870,7 @@ meta_rels:
         type: float
     required:
       - source
-      - target 
+      - target
       - nsnps
       - model
       - beta
@@ -895,7 +895,7 @@ meta_rels:
         type: Gene
     required:
       - source
-      - target 
+      - target
   SEMMEDDB_OBJ:
     properties:
       source:
@@ -904,7 +904,7 @@ meta_rels:
         type: LiteratureTerm
     required:
       - source
-      - target 
+      - target
   SEMMEDDB_PREDICATE:
     properties:
       source:
@@ -917,7 +917,7 @@ meta_rels:
         type: string
     required:
       - source
-      - target 
+      - target
       - predicate
       - count
   SEMMEDDB_SUB:
@@ -928,7 +928,7 @@ meta_rels:
         type: LiteratureTerm
     required:
       - source
-      - target 
+      - target
   SEMMEDDB_TO_LIT:
     properties:
       source:
@@ -937,7 +937,7 @@ meta_rels:
         type: Literature
     required:
       - source
-      - target 
+      - target
   STRING_INTERACT_WITH:
     properties:
       source:
@@ -948,7 +948,7 @@ meta_rels:
         type: float
     required:
       - source
-      - target 
+      - target
       - score
   OPENGWAS_TOPHITS:
     properties:
@@ -962,7 +962,7 @@ meta_rels:
         type: float
     required:
       - source
-      - target 
+      - target
       - beta
       - pval
   VARIANT_TO_GENE:
@@ -997,7 +997,7 @@ meta_rels:
         type: string
     required:
       - source
-      - target 
+      - target
       - location
       - allele
       - feature
@@ -1028,7 +1028,7 @@ meta_rels:
         type: float
     required:
       - source
-      - target 
+      - target
       - beta
       - se
       - p
@@ -1052,7 +1052,7 @@ meta_rels:
         type: float
     required:
       - source
-      - target 
+      - target
       - beta
       - se
       - p
@@ -1066,7 +1066,7 @@ meta_rels:
         type: Gene
     required:
       - source
-      - target   
+      - target
 
   GENE_TO_DISEASE:
     properties:
@@ -1082,5 +1082,3 @@ meta_rels:
       - source
       - target
       - gene_relationship_type
-
-         
