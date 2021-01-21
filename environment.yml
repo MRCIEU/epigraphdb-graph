@@ -11,6 +11,7 @@ dependencies:
   - scipy
   - pandas-profiling
   - pytest
+  - pydantic
   - pyyaml
   - pip
   - pip:
