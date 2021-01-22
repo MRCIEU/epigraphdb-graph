@@ -673,15 +673,6 @@ meta_rels:
     required:
       - source
       - target
-  PROTEIN_TO_LITERATURE:
-    properties:
-      source:
-        type: Protein
-      target:
-        type: Literature
-    required:
-      - source
-      - target
   PRS:
     properties:
       source:
