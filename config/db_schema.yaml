@@ -511,38 +511,6 @@ meta_rels:
       - beta
       - pval
       - samplesize
-  INTACT_INTERACTS_WITH_GENE_PROTEIN:
-    source:
-      type: Gene
-    target:
-      type: Protein
-    properties:
-      intact_confidence_score:
-        type: float
-      intact_detection_method:
-        items:
-          type: string
-        type: array
-      intact_identifier:
-        items:
-          type: string
-        type: array
-      intact_source:
-        items:
-          type: string
-        type: array
-      intact_type:
-        items:
-          type: string
-        type: array
-    required:
-      - source
-      - target
-      - intact_confidence_score
-      - intact_detection_method
-      - intact_type
-      - intact_source
-      - intact_identifier
   INTACT_INTERACTS_WITH_PROTEIN_PROTEIN:
     source:
       type: Protein
