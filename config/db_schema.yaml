@@ -367,25 +367,6 @@ meta_rels:
       - target
       - rg
       - p
-  CPIC:
-    properties:
-      source:
-        type: Drug
-      target:
-        type: Gene
-      cpic_level:
-        type: string
-      guideline:
-        type: string
-      pgx_on_fda_label:
-        type: string
-      pharmgkb_level_of_evidence:
-        type: string
-    required:
-      - pharmgkb_level_of_evidence
-      - cpic_level
-      - guideline
-      - pgx_on_fda_label
   EFO_CHILD_OF:
     properties:
       source:
