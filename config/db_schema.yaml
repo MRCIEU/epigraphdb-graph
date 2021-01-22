@@ -266,7 +266,6 @@ meta_nodes:
     required:
       - id
       - name
-    type: object
     index: name
     meta:
       _id: id
@@ -387,7 +386,6 @@ meta_rels:
       - cpic_level
       - guideline
       - pgx_on_fda_label
-    type: object
   EFO_CHILD_OF:
     properties:
       source:
