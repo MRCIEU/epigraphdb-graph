@@ -712,15 +712,6 @@ meta_rels:
       - p
       - r2
       - n
-  REACTOME_DRUG_TO_DISEASE:
-    properties:
-      source:
-        type: Drug
-      target:
-        type: Disease
-    required:
-      - source
-      - target
   TERM_TO_GENE:
     properties:
       source:
