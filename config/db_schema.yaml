@@ -664,24 +664,6 @@ meta_rels:
     required:
       - source
       - target
-  PATHWAY_TO_DISEASE:
-    properties:
-      source:
-        type: Pathway
-      target:
-        type: Disease
-    required:
-      - source
-      - target
-  PATHWAY_TO_LITERATURE:
-    properties:
-      source:
-        type: Pathway
-      target:
-        type: Literature
-    required:
-      - source
-      - target
   PROTEIN_IN_PATHWAY:
     properties:
       source:
