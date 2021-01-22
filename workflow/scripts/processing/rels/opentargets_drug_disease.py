@@ -52,10 +52,10 @@ def process():
     ]
     df = df[keep_cols]
 
-    mondo_match = pd.merge(df,disease_df,left_on='efo_id',right_on='disease_id')[['molecule_name','efo_id']]
+    mondo_match = pd.merge(df,disease_df,left_on='efo_id',right_on='disease_id')[['molecule_name','disease_id']]
     #logger.info(mondo_match)
 
-    efo_match = pd.merge(df,disease_df,left_on='efo_id',right_on='mondo_efo_id')[['molecule_name','efo_id']]
+    efo_match = pd.merge(df,disease_df,left_on='efo_id',right_on='mondo_efo_id')[['molecule_name','disease_id']]
     #logger.info(efo_match)
 
     cat_df = pd.concat([mondo_match,efo_match])
@@ -70,5 +70,17 @@ def process():
 
     create_import(df=cat_df, meta_id=meta_id)
 
+def test():
+    driver = neo4j_connect()
+    session = driver.session()
+    query="""
+        match (source:Gene)-[r:GENE_TO_DISEASE]-(target:Disease) return properties(source),target._name limit 2
+    """
+    query_data = session.run(query).data()
+    logger.info(query_data)
+    df = pd.json_normalize(query_data)
+    #logger.info(df)
+
 if __name__ == "__main__":
-    process()
+    #process()
+    test()
