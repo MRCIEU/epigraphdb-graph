@@ -407,15 +407,6 @@ meta_rels:
       - source
       - target
       - tpm
-  GENE_TO_LITERATURE:
-    properties:
-      source:
-        type: Gene
-      target:
-        type: Literature
-    required:
-        - source
-        - target
   GENE_TO_PROTEIN:
     properties:
       source:
