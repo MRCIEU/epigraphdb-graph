@@ -17,7 +17,7 @@ Can be done locally in notebooks
 ​
 * Do data checks against the graph, e.g. in jupyter notebook
 * Create and test the source script locally (should work without the graph, unless required)
-* Use IDE to manage source and process scripts within the repo codebase (in `workflow/scripts`) and modify ymls (in `config/`) to check that everything syncs
+* Manage source and process scripts within the repo codebase (in `workflow/scripts`) and modify ymls (in `config/`) to check that everything syncs
 	
 ### Creating the scripts/ymls
 ​
