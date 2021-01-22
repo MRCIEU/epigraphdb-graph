@@ -673,15 +673,6 @@ meta_rels:
     required:
       - source
       - target
-  PROTEIN_TO_DISEASE:
-    properties:
-      source:
-        type: Protein
-      target:
-        type: Disease
-    required:
-      - source
-      - target
   PROTEIN_TO_LITERATURE:
     properties:
       source:
