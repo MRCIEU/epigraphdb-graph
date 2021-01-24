@@ -4,7 +4,7 @@ from loguru import logger
 
 from workflow.scripts.utils.general import neo4j_connect
 
-from .load_schema import meta_node_names, meta_rel_names
+from .utils.load_schema import meta_node_names, meta_rel_names
 
 
 def test_connect():

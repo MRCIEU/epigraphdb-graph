@@ -1,8 +1,13 @@
 import pytest
 
-from .models import MetaNode, MetaRel
+from .utils.models import MetaNode, MetaRel
 
-from .load_schema import meta_node_dict, meta_rel_dict, meta_node_names, meta_rel_names
+from .utils.load_schema import (
+    meta_node_dict,
+    meta_rel_dict,
+    meta_node_names,
+    meta_rel_names,
+)
 
 
 @pytest.mark.parametrize("meta_node_name", meta_node_names)
