@@ -368,7 +368,7 @@ meta_nodes:
     index: id
     meta:
       _id: id
-      _name: id 
+      _name: name
   LiteratureTriple:
     doc: >-
       Semantic triplet (subject - predicate - object)

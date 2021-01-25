@@ -21,6 +21,7 @@ source_data = get_meta_data(meta_id="all")
 d = os.path.join(neo4j_import_dir, "nodes", "merged")
 for filename in os.listdir(d):
     if filename.endswith("constraint.txt"):
+        print(filename)
         with open(os.path.join(d, filename)) as f:
             for line in f:
                 if not line.startswith("#"):
