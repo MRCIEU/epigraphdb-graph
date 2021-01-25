@@ -1,8 +1,8 @@
 import pytest
 
-from .utils.models import MetaNode, MetaRel
+from tests.utils.models import MetaNode, MetaRel
 
-from .utils.load_schema import (
+from tests.utils.load_schema import (
     meta_node_dict,
     meta_rel_dict,
     meta_node_names,

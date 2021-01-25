@@ -3,8 +3,8 @@ import pandas as pd
 from loguru import logger
 
 from workflow.scripts.utils.general import neo4j_connect
-from .utils import group_props_by_type, schema_type_mapping
-from .utils.load_schema import meta_node_names, meta_node_dict
+from tests.utils import group_props_by_type, schema_type_mapping
+from tests.utils.load_schema import meta_node_names, meta_node_dict
 
 META_NODE_QUERY_TEMPLATE = """
     MATCH (n:{meta_node})
