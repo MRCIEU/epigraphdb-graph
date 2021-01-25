@@ -1,33 +1,56 @@
 meta_nodes:
   Disease:
+    doc: >-
+      Disease data from
+      [Mondo Disease Ontology](https://mondo.monarchinitiative.org/).
     properties:
       definition:
+        doc: >-
+          Expanded text description of disease.
         type: string
       doid:
+        doc: >-
+          Disease ontology identifier (https://disease-ontology.org).
         items:
           type: string
         type: array
       efo:
+        doc: >-
+          Experimental factor ontology identifier
+          (https://www.ebi.ac.uk/efo/).
         items:
           type: string
         type: array
       icd10:
+        doc: >-
+          International classification of diseases ICD10 code.
         items:
           type: string
         type: array
       icd9:
+        doc: >-
+          International classification of diseases ICD9 code.
         items:
           type: string
         type: array
       id:
+        doc: >-
+          IRI for this Mondo entry (incorporates Mondo ID).
         type: string
       label:
+        doc: >-
+          Text label of disease.
         type: string
       mesh:
+        doc: >-
+          Medical Subject Headings (MeSH) identifier.
         items:
           type: string
         type: array
       umls:
+        doc: >-
+          Unified Medical Language System identifier
+          (https://www.nlm.nih.gov/research/umls/).
         items:
           type: string
         type: array
@@ -40,12 +63,23 @@ meta_nodes:
       _id: id
       _name: label
   Drug:
+    doc: >-
+      Drug data from the following sources:
+
+      - [Open Targets](https://www.opentargets.org/).
+      - [CPIC](https://cpicpgx.org/genes-drugs/).
     properties:
       chembl_uri:
+        doc: >-
+          Label of the drug
         type: string
       label:
+        doc: >-
+          Type of the molecule, e.g. Antibody, Protein, Enzyme, etc.
         type: string
       molecule_type:
+        doc: >-
+          Type of the molecule, e.g. Antibody, Protein, Enzyme, etc.
         type: string
     required:
       - label
@@ -54,12 +88,20 @@ meta_nodes:
       _id: label
       _name: label
   Efo:
+    doc: >-
+      Experimental Factor Ontology ([EFO](https://www.ebi.ac.uk/efo/p)).
     properties:
       id:
+        doc: >-
+          EFO URL and identifier.
         type: string
       type:
+        doc: >-
+          EFO type.
         type: string
       value:
+        doc: >-
+          Text description (EFO term).
         type: string
     required:
       - id
@@ -70,32 +112,76 @@ meta_nodes:
       _id: id
       _name: value
   Gene:
+    doc: >-
+      Gene data from [BioMart (build 37)](http://www.biomart.org/).
+
+      Gene druggability data comes from
+      [Finan et al (2017)](https://stm.sciencemag.org/content/9/383/eaag1166).
     properties:
       adme_gene:
+        doc: >-
+          Is the protein product of the gene involved in
+          absorption, distribution, metabolism, and excretion
+          (ADME) of a compound.
+
+          Evidence from Finan et al.(2017).
         type: string
       biomart_source:
+        doc: >-
+          TODO Ben
         type: string
       bio_druggable:
+        doc: >-
+          Is the protein product of the `(Gene)` targeted,
+          or predicted to be targeted, by a biotherapeutic.
+
+          Evidence from Finan et al.(2017).
         type: string
       chr:
+        doc: >-
+          Chromosome.
         type: string
       description:
+        doc: >-
+          End position on chromosome.
         type: string
       druggability_tier:
+        doc: >-
+          The priority tier for the druggable `(Gene)`,
+          e.g. "Tier 1", "Tier 2", "Tier 3A", "Tier 3B".
+
+          Evidence from Finan et al.(2017).
         type: string
       end:
+        doc: >-
+          End position on chromosome.
         type: integer
       ensembl_id:
+        doc: >-
+          Ensembl identifier of the gene.
         type: string
       name:
+        doc: >-
+          HGNC name of the gene.
         type: string
       reactome_id:
+        doc: >-
+          Identifier for gene in Reactome database.
         type: string
       small_mol_druggable:
+        doc: >-
+          Is the protein product of the `(Gene)` targeted,
+          or predicted to be targeted, by a small molecule.
+
+          Evidence from Finan et al.(2017).
         type: string
       start:
+        doc: >-
+          Start position on chromosome.
         type: integer
       type:
+        doc: >-
+          Gene type, e.g. protein_coding, pseudogene.
         type: string
     required:
       - ensembl_id
@@ -105,58 +191,115 @@ meta_nodes:
       _id: ensembl_id
       _name: name
   Gwas:
+    doc: >-
+      Genome Wide Association Studies metadata from
+      [IEU OpenGWAS Database](https://gwas.mrcieu.ac.uk).
     properties:
       author:
+        doc: >-
+          First author of GWAS.
         type: string
       build:
+        doc: >-
+          TODO Ben
         type: string
       category:
+        doc: >-
+          Binary disease phenotype or a non-disease phenotype.
         type: string
       consortium:
+        doc: >-
+          GWAS consortium name, if applicable.
         type: string
       covariates:
+        doc: >-
+          TODO Ben
         type: string
       doi:
+        doc: >-
+          TODO Ben
         type: string
       group_name:
+        doc: >-
+          TODO Ben
         type: string
       id:
+        doc: >-
+          IEU OpenGWAS identifier.
         type: string
       imputation_panel:
+        doc: >-
+          TODO Ben
         type: string
       mr:
+        doc: >-
+          Suitability of GWAS for Mendelian randomization.
         type: string
       name:
+        doc: >-
+          TODO Ben
+          ???
         type: string
       ncase:
+        doc: >-
+          Number of cases.
         type: string
       ncontrol:
+        doc: >-
+          Number of controls.
         type: string
       note:
+        doc: >-
+          Extra information.
         type: string
       nsnp:
+        doc: >-
+          Number of variants in results file.
         type: string
       ontology:
+        doc: >-
+          TODO Ben
         type: string
       pmid:
+        doc: >-
+          PubMed identifier, where available.
         type: string
       population:
+        doc: >-
+          Geographical origins of the samples included in the study.
         type: string
       sample_size:
+        doc: >-
+          Sample size of GWAS.
         type: string
       sd:
+        doc: >-
+          Standard deviation of the phenotype analysed.
         type: string
       sex:
+        doc: >-
+          Males/Females.
         type: string
       study_design:
+        doc: >-
+          TODO Ben
         type: string
       subcategory:
+        doc: >-
+          Further categorisation.
         type: string
       trait:
+        doc: >-
+          Description of measured trait.
         type: string
       unit:
+        doc: >-
+          How to interpret a 1-unit change in the phenotype,
+          e.g. log odds ratio, mmol/L, SD units.
         type: string
       year:
+        doc: >-
+          Year of publication/creation.
         type: string
     required:
       - nsnp
@@ -167,20 +310,36 @@ meta_nodes:
       _id: id
       _name: trait
   Literature:
+    doc: >-
+      PubMed literature data as available from SemMedDB.
     properties:
       doi:
+        doc: >-
+          TODO Ben
         type: string
       dp:
+        doc: >-
+          Date published.
         type: string
       edat:
+        doc: >-
+          Entrez Date is the date the citation was added to PubMed.
         type: string
       issn:
+        doc: >-
+          ISSN code of journal.
         type: string
       id:
+        doc: >-
+          TODO Ben
         type: string
       title:
+        doc: >-
+          TODO Ben
         type: string
       year:
+        doc: >-
+          Year published.
         type: integer
     required:
       - id
@@ -190,12 +349,21 @@ meta_nodes:
       _id: id
       _name: title
   LiteratureTerm:
+    doc: >-
+      Biomedical term from [SemMedDB](https://skr3.nlm.nih.gov/SemMedDB/).
     properties:
       id:
+        doc: >-
+          The Concept Unique Identifier (CUI) of the term.
         type: string
       name:
+        doc: >-
+          The preferred name of semantic term.
         type: string
       type:
+        doc: >-
+          The semantic type of term
+          (see https://mmtx.nlm.nih.gov/MMTx/semanticTypes.shtml).
         items:
           type: string
         type: array
@@ -208,16 +376,29 @@ meta_nodes:
       _id: id
       _name: name
   LiteratureTriple:
+    doc: >-
+      Semantic triplet (subject - predicate - object)
+      from [SemMedDB](https://skr3.nlm.nih.gov/SemMedDB/).
     properties:
       id:
+        doc: >-
+          The complete semantic triplet `{subject}:{PREDICATE}:{object}`.
         type: string
       name:
+        doc: >-
+          TODO Ben
         type: string
       object_id:
+        doc: >-
+          TODO Ben
         type: string
       predicate:
+        doc: >-
+          The string representation of each predicate (for example TREATS, PROCESS_OF).
         type: string
       subject_id:
+        doc: >-
+          TODO Ben
         type: string
     required:
       - id
@@ -230,12 +411,20 @@ meta_nodes:
       _id: id
       _name: name
   Pathway:
+    doc: >-
+      Biological pathway data from Reactome.
     properties:
       url:
+        doc: >-
+          TODO Ben
         type: string
       name:
+        doc: >-
+          Name of the pathway.
         type: string
       id:
+        doc: >-
+          TODO Ben
         type: string
     required:
       - name
@@ -245,10 +434,16 @@ meta_nodes:
       _id: id
       _name: name
   Protein:
+    doc: >-
+      Protein data from [BioMart (build 37)](http://www.biomart.org/).
     properties:
       uniprot_id:
+        doc: >-
+          UniProt Identifier.
         type: string
       name:
+        doc: >-
+          TODO Ben
         type: string
     required:
       - uniprot_id
@@ -258,10 +453,16 @@ meta_nodes:
       _id: uniprot_id
       _name: uniprot_id
   Tissue:
+    doc: >-
+      Tissue specific gene expression from [GTEx](https://gtexportal.org/home/).
     properties:
       id:
+        doc: >-
+          TODO Ben
         type: string
       name:
+        doc: >-
+          TODO Ben
         type: string
     required:
       - id
@@ -271,18 +472,32 @@ meta_nodes:
       _id: id
       _name: name
   Variant:
+    doc: >-
+      Genetic variant, e.g. SNPs.
     properties:
       name:
+        doc: >-
+          rsID of the SNP.
         type: string
       pos:
+        doc: >-
+          TODO Ben
         type: integer
       chr:
+        doc: >-
+          TODO Ben
         type: string
       ref:
+        doc: >-
+          TODO Ben
         type: string
       alt:
+        doc: >-
+          TODO Ben
         type: string
       build:
+        doc: >-
+          TODO Ben
         type: string
     required:
       - name
