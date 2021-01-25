@@ -184,11 +184,10 @@ meta_nodes:
         type: integer
     required:
       - id
-      - title
     index: id
     meta:
       _id: id
-      _name: title 
+      _name: id 
   LiteratureTerm:
     properties:
       id:
@@ -266,6 +265,7 @@ meta_nodes:
     required:
       - id
       - name
+    type: object
     index: name
     meta:
       _id: id
@@ -386,6 +386,7 @@ meta_rels:
       - cpic_level
       - guideline
       - pgx_on_fda_label
+    type: object
   EFO_CHILD_OF:
     properties:
       source:
