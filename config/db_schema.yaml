@@ -508,23 +508,35 @@ meta_nodes:
 
 meta_rels:
   BIORXIV_OBJ:
+    doc: >-
+      TODO Ben
     properties:
       source:
+        doc: ''
         type: LiteratureTriple
       target:
+        doc: ''
         type: LiteratureTerm
     required:
       - source
       - target
   BIORXIV_PREDICATE:
+    doc: >-
+      TODO Ben
     properties:
       source:
+        doc: ''
         type: LiteratureTerm
       target:
+        doc: ''
         type: LiteratureTerm
       count:
+        doc: >-
+          TODO Ben
         type: integer
       predicate:
+        doc: >-
+          TODO Ben
         type: string
     required:
       - source
@@ -532,50 +544,86 @@ meta_rels:
       - predicate
       - count
   BIORXIV_SUB:
+    doc: >-
+      TODO Ben
     properties:
       source:
+        doc: ''
         type: LiteratureTriple
       target:
+        doc: ''
         type: LiteratureTerm
     required:
       - source
       - target
   BIORXIV_TO_LIT:
+    doc: >-
+      TODO Ben
     properties:
       source:
+        doc: ''
         type: LiteratureTriple
       target:
+        doc: ''
         type: Literature
     required:
       - source
       - target
   GEN_COR:
+    doc: >-
+      Study results from the
+      ["UKBB Genetic Correlation"](https://ukbb-rg.hail.is/)
+      project by Neale Lab.
     properties:
       source:
+        doc: ''
         type: Gwas
       target:
+        doc: ''
         type: Gwas
       h2:
+        doc: >-
+          TODO Ben
         type: float
       h2_SE:
+        doc: >-
+          TODO Ben
         type: float
       h2_intercept:
+        doc: >-
+          LD score regression intercept for single trait.
         type: float
       h2_intercept_SE:
+        doc: >-
+          Standard error of h2_int.
         type: float
       rpheno:
+        doc: >-
+          TODO Ben
         type: float
       rg:
+        doc: >-
+          Genetic correlation (r_g).
         type: float
       rg_SE:
+        doc: >-
+          TODO Ben
         type: float
       Z:
+        doc: >-
+          z statistic for test of null hypothesis rg = 0.
         type: float
       p:
+        doc: >-
+          Genetic correlation (r_g).
         type: float
       rg_intercept:
+        doc: >-
+          TODO Ben
         type: float
       rg_intercept_SE:
+        doc: >-
+          TODO Ben
         type: float
     required:
       - source
@@ -583,18 +631,31 @@ meta_rels:
       - rg
       - p
   CPIC:
+    doc: >-
+      Evidence of drug to target gene by CPIC.
     properties:
       source:
+        doc: ''
         type: Drug
       target:
+        doc: ''
         type: Gene
       cpic_level:
+        doc: >-
+          CPIC level of evidence (https://cpicpgx.org/prioritization/).
         type: string
       guideline:
+        doc: >-
+          CPIC guideline for clinicians (cpicpgx.org/guidelines/).
         type: string
       pgx_on_fda_label:
+        doc: >-
+          PharmGKB PGx level based on drug label
+          (www.pharmgkb.org/page/drugLabelLegend).
         type: string
       pharmgkb_level_of_evidence:
+        doc: >-
+          PharmGKB level of evidence (https://www.pharmgkb.org/page/clinAnnLevels).
         type: string
     required:
       - pharmgkb_level_of_evidence
@@ -602,85 +663,138 @@ meta_rels:
       - guideline
       - pgx_on_fda_label
   EFO_CHILD_OF:
+    doc: >-
+      The source `(Efo)` term is a child node of the
+      parent target `(Efo)` term.
     properties:
       source:
+        doc: ''
         type: Efo
       target:
+        doc: ''
         type: Efo
     required:
       - source
       - target
   EXPRESSED_IN:
+    doc: >-
+      The source Gene is expressed in the target Tissue in GTEx (https://gtexportal.org).
     properties:
       source:
+        doc: ''
         type: Gene
       target:
+        doc: ''
         type: Tissue
       tpm:
+        doc: >-
+          Gene expression level in transcripts per million (TPM).
         type: float
     required:
       - source
       - target
       - tpm
   GENE_TO_PROTEIN:
+    doc: >-
+      Mapping between `(Gene)` and `(Protein)`.
     properties:
       source:
+        doc: ''
         type: Gene
       target:
+        doc: ''
         type: Protein
     required:
       - source
       - target
   GWAS_EFO_EBI:
+    doc: >-
+      TODO Ben
     properties:
       source:
+        doc: ''
         type: Gwas
       target:
+        doc: ''
         type: Efo
     required:
       - source
       - target
   GWAS_NLP:
+    doc: >-
+      Pairwise semantic similarities of `(Gwas)` traits.
+
+      Precomputed results from
+      [Vectology](http://vectology.mrcieu.ac.uk) (BioSentVec model).
     properties:
       source:
+        doc: ''
         type: Gwas
       target:
+        doc: ''
         type: Gwas
       score:
+        doc: >-
+          Similarity score (cosine similarity).
         type: float
     required:
       - source
       - target
       - score
   GWAS_NLP_EFO:
+    doc: >-
+      Semantic similarity mapping of `(Gwas)` trait to `(Efo)` term.
+
+      Precomputed results from
+      [Vectology](http://vectology.mrcieu.ac.uk) (BioSentVec model).
     properties:
       source:
+        doc: ''
         type: Gwas
       target:
+        doc: ''
         type: Efo
       score:
+        doc: >-
+          Similarity score (cosine similarity).
         type: float
     required:
       - source
       - target
       - score
   GWAS_TO_LITERATURE_TRIPLE:
+    doc: >-
+      Mapping between `(Gwas)` and `(LiteratureTriple)`.
     properties:
       source:
+        doc: ''
         type: Gwas
       target:
+        doc: ''
         type: LiteratureTriple
       globalCount:
+        doc: >-
+          Count of given triple in database.
         type: integer
       globalTotal:
+        doc: >-
+          Count of all triples in database.
         type: integer
       localCount:
+        doc: >-
+          Count of given triple for given search term.
         type: integer
       localTotal:
+        doc: >-
+          Count of all triples for given search term.
         type: integer
       odds:
+        doc: >-
+          Odds ration from Fisher's Exact Test.
         type: float
       pval:
+        doc: >-
+          P-value from Fisher's Exact Test.
         type: float
     required:
       - source
@@ -692,33 +806,58 @@ meta_rels:
       - odds
       - pval
   GWAS_TO_LITERATURE:
+    doc: >-
+      Association of the `(Gwas)` phenotype to
+      a `(Literature)` PubMed article.
     properties:
       source:
+        doc: ''
         type: Gwas
       target:
+        doc: ''
         type: Literature
     required:
       - source
       - target
   GWAS_TO_VARIANT:
+    doc: >-
+      Association of the `(Gwas)` phenotype to a `(Variant)`.
+
+      Instrument data from MR-EvE ([Hemani et al., 2017](https://www.biorxiv.org/content/10.1101/173682v2)).
     properties:
       source:
+        doc: ''
         type: Gwas
       target:
+        doc: ''
         type: Variant
       beta:
+        doc: >-
+          Effect size.
         type: float
       eaf:
+        doc: >-
+          Effect allele frequency.
         type: float
       ncase:
+        doc: >-
+          Number of cases.
         type: integer
       ncontrol:
+        doc: >-
+          Number of controls.
         type: integer
       pval:
+        doc: >-
+          P-value.
         type: float
       samplesize:
+        doc: >-
+          Sample size.
         type: integer
       se:
+        doc: >-
+          Standard error.
         type: float
     required:
       - source
@@ -727,23 +866,35 @@ meta_rels:
       - pval
       - samplesize
   MEDRXIV_OBJ:
+    doc: >-
+      TODO Ben
     properties:
       source:
+        doc: ''
         type: LiteratureTriple
       target:
+        doc: ''
         type: LiteratureTerm
     required:
       - source
       - target
   MEDRXIV_PREDICATE:
+    doc: >-
+      TODO Ben
     properties:
       source:
+        doc: ''
         type: LiteratureTerm
       target:
+        doc: ''
         type: LiteratureTerm
       count:
+        doc: >-
+          TODO Ben
         type: integer
       predicate:
+        doc: >-
+          TODO Ben
         type: string
     required:
       - source
@@ -751,80 +902,134 @@ meta_rels:
       - predicate
       - count
   MEDRXIV_SUB:
+    doc: >-
+      TODO Ben
     properties:
       source:
+        doc: ''
         type: LiteratureTriple
       target:
+        doc: ''
         type: LiteratureTerm
     required:
       - source
       - target
   MEDRXIV_TO_LIT:
+    doc: >-
+      TODO Ben
     properties:
       source:
+        doc: ''
         type: LiteratureTriple
       target:
+        doc: ''
         type: Literature
     required:
       - source
       - target
   METAMAP_LITE:
+    doc: >-
+      Mapping between Gwas and SemmedTerm via MetaMap Lite.
     properties:
       source:
+        doc: ''
         type: Gwas
       target:
+        doc: ''
         type: LiteratureTerm
       mesh:
+        doc: >-
+          TODO Ben
         type: string
       mmi_score:
+        doc: >-
+          MetaMap Indexing (MMI) score with a maximum score of 1000.00.
+          The higher the score, the greater the relevance of the UMLS
+          concept according to the MMI algorithm.
         type: float
     required:
       - source
       - target
       - mmi_score
   MONDO_MAP_EFO:
+    doc: >-
+      Mapping between a `(Disease)` term and an `(Efo)` ontology term,
+      based on [Mondo](https://mondo.monarchinitiative.org/).
     properties:
       source:
+        doc: ''
         type: Disease
       target:
+        doc: ''
         type: Efo
     required:
       - source
       - target
   MONDO_MAP_UMLS:
+    doc: >-
+      Mapping between a `(Disease)` term and an `(LiteratureTerm)` term,
+      based on [Mondo](https://mondo.monarchinitiative.org/).
     properties:
       source:
+        doc: ''
         type: Disease
       target:
+        doc: ''
         type: Efo
     required:
       - source
       - target
   MR_EVE_MR:
+    doc: >-
+      Pairwise Mendelian randomization evidence between phenotypic traits.
+
+      Results from MR-EvE ([Hemani et al., 2017](https://www.biorxiv.org/content/10.1101/173682v2)).
     properties:
       source:
+        doc: ''
         type: Gwas
       target:
+        doc: ''
         type: Gwas
       b:
+        doc: >-
+          Effect size.
         type: float
       ci_low:
+        doc: >-
+          Lower bound of the confidence interval.
         type: float
       ci_upp:
+        doc: >-
+          Upper bound of the confidence interval.
         type: float
       log10pval:
+        doc: >-
+          log10 transformed P-Value.
         type: float
       method:
+        doc: >-
+          MR method, e.g. FE IVW etc.
         type: string
       moescore:
+        doc: >-
+          Mix of Experts score.
         type: string
       nsnp:
+        doc: >-
+          Number of SNPs.
         type: integer
       pval:
+        doc: >-
+          P-value.
         type: float
       se:
+        doc: >-
+          Standard error.
         type: float
       selection:
+        doc: >-
+          TODO Ben
         type: string
     required:
       - source
@@ -835,35 +1040,57 @@ meta_rels:
       - selection
       - moescore
   OBS_COR:
+    doc: >-
+      Pairwise Spearman rank correlation for UK Biobank `(Gwas)` (ukb-b).
+
+      Results in-house by Benjamin Elsworth.
     properties:
       source:
+        doc: ''
         type: Gwas
       target:
+        doc: ''
         type: Gwas
       cor:
+        doc: >-
+          Correlation coefficient.
         type: float
     required:
       - source
       - target
       - cor
   OPENTARGETS_DRUG_TO_DISEASE:
+    doc: >-
+      The association evidence of a `(Drug)` in the treatment of
+      a `(Disease)` from Open Targets.
     properties:
       source:
+        doc: ''
         type: Drug
       target:
+        doc: ''
         type: Disease
     required:
       - source
       - target
   OPENTARGETS_DRUG_TO_TARGET:
+    doc: >-
+      The association evidence of a `(Drug)` in the treatment of
+      a target `(Gene)` from Open Targets.
     properties:
       source:
+        doc: ''
         type: Drug
       target:
+        doc: ''
         type: Gene
       action_type:
+        doc: >-
+          Type of the mechanism, e.g. inhibitor, etc.
         type: string
       phase:
+        doc: >-
+          Phase of the target drug.
         type: string
     required:
       - source
@@ -871,42 +1098,72 @@ meta_rels:
       - phase
       - action_type
   PATHWAY_CHILD_OF:
+    doc: >-
+      TODO Ben
     properties:
       source:
+        doc: ''
         type: Pathway
       target:
+        doc: ''
         type: Pathway
     required:
       - source
       - target
   PROTEIN_IN_PATHWAY:
+    doc: >-
+      A protein is part of the pathway annotation in the lowest level pathway hierarchy.
     properties:
       source:
+        doc: ''
         type: Protein
       target:
+        doc: ''
         type: Pathway
     required:
       - source
       - target
   PRS:
+    doc: >-
+      Pairwise polygenic risk scores between GWAS.
+
+      Results from PRS Atlas (
+      [Richardson et al., 2019](https://elifesciences.org/articles/43657)
+      ).
     properties:
       source:
+        doc: ''
         type: Gwas
       target:
+        doc: ''
         type: Gwas
       beta:
+        doc: >-
+          Effect size.
         type: float
       model:
+        doc: >-
+          Name of the model used, e.g. lm, glm, etc.
         type: string
       n:
+        doc: >-
+          Sample size.
         type: integer
       nsnps:
+        doc: >-
+          Number of SNPs.
         type: integer
       p:
+        doc: >-
+          P-value.
         type: float
       r2:
+        doc: >-
+          R<sup>2</sup> metric.
         type: float
       se:
+        doc: >-
+          Standard error.
         type: float
     required:
       - source
@@ -919,32 +1176,48 @@ meta_rels:
       - r2
       - n
   TERM_TO_GENE:
+    doc: >-
+      Connection from semantic term `(LiteratureTerm)` to `(Gene)` nodes where terms are genes.
     properties:
       source:
+        doc: ''
         type: LiteratureTerm
       target:
+        doc: ''
         type: Gene
     required:
       - source
       - target
   SEMMEDDB_OBJ:
+    doc: >-
+      Link between `(LiteratureTriple)` subject and `(LiteratureTerm)`.
     properties:
       source:
+        doc: ''
         type: LiteratureTriple
       target:
+        doc: ''
         type: LiteratureTerm
     required:
       - source
       - target
   SEMMEDDB_PREDICATE:
+    doc: >-
+      Predicate relationship between two `(LiteratureTerm)` nodes.
     properties:
       source:
+        doc: ''
         type: LiteratureTerm
       target:
+        doc: ''
         type: LiteratureTerm
       count:
+        doc: >-
+          The total predicate count.
         type: integer
       predicate:
+        doc: >-
+          The string representation of each predicate (for example TREATS, PROCESS_OF).
         type: string
     required:
       - source
@@ -952,44 +1225,66 @@ meta_rels:
       - predicate
       - count
   SEMMEDDB_SUB:
+    doc: >-
+      Link between `(LiteratureTriple)` object and `(LiteratureTerm)`.
     properties:
       source:
+        doc: ''
         type: LiteratureTriple
       target:
+        doc: ''
         type: LiteratureTerm
     required:
       - source
       - target
   SEMMEDDB_TO_LIT:
+    doc: >-
+      Relationship between the `(LiteratureTriple)` and `(Literature)` nodes.
     properties:
       source:
+        doc: ''
         type: LiteratureTriple
       target:
+        doc: ''
         type: Literature
     required:
       - source
       - target
   STRING_INTERACT_WITH:
+    doc: >-
+      `(Protein)`-`(Protein)` interactions from STRING (https://string-db.org).
     properties:
       source:
+        doc: ''
         type: Protein
       target:
+        doc: ''
         type: Protein
       score:
+        doc: >-
+          A value from 0 (low) to 1 (high) that indicates the confidence in the interaction to be true, as annotated by STRING.
         type: float
     required:
       - source
       - target
       - score
   OPENGWAS_TOPHITS:
+    doc: >-
+      The default tophits for each GWAS, obtained from the MRC IEU OpenGWAS platform (https://gwas.mrcieu.ac.uk/).
     properties:
       source:
+        doc: ''
         type: Gwas
       target:
+        doc: ''
         type: Variant
       beta:
+        doc: >-
+          Effect size.
         type: float
       pval:
+        doc: >-
+          P-Value.
         type: float
     required:
       - source
@@ -997,34 +1292,62 @@ meta_rels:
       - beta
       - pval
   VARIANT_TO_GENE:
+    doc: >-
+      Relationships between `(Variant)` and `(Gene)`, obtained via Ensembl VEP v37.
     properties:
       source:
+        doc: ''
         type: Variant
       target:
+        doc: ''
         type: Gene
       allele:
+        doc: >-
+          The variant allele used to calculate the consequence.
         type: string
       amino_acids:
+        doc: >-
+          Only given if the variant affects the protein-coding sequence.
         type: string
       cdna_position:
+        doc: >-
+          Relative position of base pair in cDNA sequence.
         type: string
       cds_position:
+        doc: >-
+          Relative position of base pair in coding sequence.
         type: string
       codons:
+        doc: >-
+          The alternative codons with the variant base in upper case.
         type: string
       consequence:
+        doc: >-
+          Consequence type of this variant (see https://www.ensembl.org/info/genome/variation/prediction/predicted_data.html#consequences).
         type: string
       existing_variation:
+        doc: >-
+          Known identifier of existing variant.
         type: string
       extra:
+        doc: >-
+          This column contains extra information as key=value pairs separated by ";" (see https://www.ensembl.org/info/docs/tools/vep/vep_formats.html#other_fields).
         type: string
       feature:
+        doc: >-
+          Ensembl stable ID of feature.
         type: string
       feature_type:
+        doc: >-
+          Type of feature. Currently one of Transcript, RegulatoryFeature, MotifFeature.
         type: string
       location:
+        doc: >-
+          In standard coordinate format (chr:start or chr:start-end).
         type: string
       protein_position:
+        doc: >-
+          Relative position of amino acid in protein.
         type: string
     required:
       - source
@@ -1042,20 +1365,36 @@ meta_rels:
       - existing_variation
       - extra
   XQTL_MULTI_SNP_MR:
+    doc: >-
+      Association of exposure gene and outcome phenotype of xQTL
+      ([Zheng et al. 2020](http://docs.epigraphdb.org/research-studies/xqtl/)),
+      multi SNP MR methods.
     properties:
       source:
+        doc: ''
         type: Gene
       target:
+        doc: ''
         type: Gwas
       beta:
+        doc: >-
+          Effect size.
         type: float
       mr_method:
+        doc: >-
+          underlying Mendelian randomization method, e.g. IVW, Egger, etc.
         type: string
       p:
+        doc: >-
+          P-Value.
         type: float
       qtl_type:
+        doc: >-
+          pQTL, or eQTL.
         type: string
       se:
+        doc: >-
+          Standard error.
         type: float
     required:
       - source
@@ -1066,20 +1405,36 @@ meta_rels:
       - qtl_type
       - mr_method
   XQTL_SINGLE_SNP_MR_GENE_GWAS:
+    doc: >-
+      Association of exposure gene and outcome phenotype of xQTL
+      ([Zheng et al. 2020](http://docs.epigraphdb.org/research-studies/xqtl/)),
+      single SNP MR methods.
     properties:
       source:
+        doc: ''
         type: Gene
       target:
+        doc: ''
         type: Gwas
       beta:
+        doc: >-
+          Effect size.
         type: float
       p:
+        doc: >-
+          P-Value.
         type: float
       qtl_type:
+        doc: >-
+          pQTL, or eQTL.
         type: string
       rsid:
+        doc: >-
+          SNP rsID.
         type: string
       se:
+        doc: >-
+          Standard error.
         type: float
     required:
       - source
@@ -1090,25 +1445,39 @@ meta_rels:
       - rsid
       - qtl_type
   XQTL_SINGLE_SNP_MR_SNP_GENE:
+    doc: >-
+      Association of SNP and exposure gene of xQTL
+      ([Zheng et al. 2020](http://docs.epigraphdb.org/research-studies/xqtl/)),
+      single SNP MR methods.
     properties:
       source:
+        doc: ''
         type: Variant
       target:
+        doc: ''
         type: Gene
     required:
       - source
       - target
 
   GENE_TO_DISEASE:
+    doc: >-
+      TODO Ben
     properties:
       source:
+        doc: ''
         type: Gene
       target:
+        doc: ''
         type: Disease
       gene_relationship_type:
-         type: string
+        doc: >-
+          TODO Ben
+        type: string
       last_updated:
-         type: string # this is a date
+        doc: >-
+          TODO Ben
+        type: string # this is a date
     required:
       - source
       - target
