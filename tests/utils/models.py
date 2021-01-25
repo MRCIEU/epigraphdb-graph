@@ -3,10 +3,12 @@ from typing import Dict, List, Union
 from pydantic import BaseModel, ValidationError, validator
 
 class PropertyScalar(BaseModel):
+    doc: str
     type: str
 
 
 class PropertyArray(BaseModel):
+    doc: str
     items: PropertyScalar
     type: str = "array"
 
@@ -19,6 +21,7 @@ class MetaNodeMetaField(BaseModel):
 
 
 class MetaNode(BaseModel):
+    doc: str
     properties: Dict[str, Union[PropertyScalar, PropertyArray]]
     required: List[str]
     index: str
@@ -26,6 +29,7 @@ class MetaNode(BaseModel):
 
 
 class MetaRel(BaseModel):
+    doc: str
     properties: Dict[str, Union[PropertyScalar, PropertyArray]]
     required: List[str]
 
