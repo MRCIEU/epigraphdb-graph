@@ -45,7 +45,6 @@ def process():
     df_merge.drop("PMID", inplace=True, axis=1)
     # make unique
     df_merge.drop_duplicates(inplace=True)
-    df_merge['title']=''
     logger.info(df_merge.shape)
 
     logger.info(df_merge.shape)

@@ -4,11 +4,11 @@ import pandas as pd
 from loguru import logger
 #################### leave me heare please :) ########################
 
-from workflow.scripts.utils.general import setup, get_source
+from workflow.scripts.utils.general import setup, get_source, neo4j_connect
 
 from workflow.scripts.utils.writers import (
     create_constraints,
-    create_import,
+    create_import
 )
 
 # setup
@@ -22,48 +22,65 @@ meta_id = args.name
 
 FILE = get_source(meta_id,1)
 
+def get_disease_data():    
+    driver = neo4j_connect()
+    session = driver.session()
+    query = """
+        match (d:Disease) unwind(d.efo) as mondo_efo_id return d.id as disease_id, mondo_efo_id;
+    """
+    query_data = session.run(query).data()
+    df = pd.json_normalize(query_data)
+    logger.info(df)
+    return df
+
+
 def process():
     data = os.path.join(dataDir, FILE)
     # not sure why double quotes weren't being handled properly, added engine param
     df = pd.read_csv(data, sep=",", engine="python")
     logger.info(df.shape)
     logger.info("\n {}", df.head())
+
+    #get disease data 
+    disease_df = get_disease_data()
+    disease_df['mondo_efo_id'] = 'http://www.ebi.ac.uk/efo/EFO_'+disease_df['mondo_efo_id'].astype(str)
+    logger.info(disease_df)
+
     keep_cols = [
         "molecule_name",
         "efo_id",
     ]
     df = df[keep_cols]
-    df["efo_id"] = df["efo_id"].str.split("_", expand=True)[1]
-    logger.info(df.shape)
-    logger.info("\n {}", df.head())
+
+    mondo_match = pd.merge(df,disease_df,left_on='efo_id',right_on='disease_id')[['molecule_name','disease_id']]
+    #logger.info(mondo_match)
+
+    efo_match = pd.merge(df,disease_df,left_on='efo_id',right_on='mondo_efo_id')[['molecule_name','disease_id']]
+    #logger.info(efo_match)
+
+    cat_df = pd.concat([mondo_match,efo_match])
+    logger.info(cat_df.shape)
+
+    cat_df.drop_duplicates(inplace=True)
+    logger.info(cat_df.shape)
+
     col_names = ["source", "target"]
-    df.columns = col_names
-    df["source"] = df["source"].str.upper()
-    df.drop_duplicates(inplace=True)
-    logger.info(df.shape)
-    logger.info("\n {}", df.head())
-    create_import(df=df, meta_id=meta_id, import_type="load")
+    cat_df.columns = col_names
+    cat_df["source"] = cat_df["source"].str.upper()
 
-    # because this is mapping to a parameter that is not a node index, needs to be done manually
-    load_text = f"""
-    USING PERIODIC COMMIT 10000 
-		LOAD CSV FROM "file:///rels/{meta_id}/{meta_id}.csv.gz" AS row FIELDTERMINATOR "," 
-    WITH row
-    MATCH
-      (drug:Drug {{label: row[0]}}),
-      (disease:Disease) where row[1] in disease.efo
-    MERGE
-      (drug)-
-      [o:OPENTARGETS_DRUG_TO_DISEASE]
-      ->(disease)
-    RETURN
-       count(o);
+    create_import(df=cat_df, meta_id=meta_id)
+
+def test():
+    driver = neo4j_connect()
+    session = driver.session()
+    query="""
+        match (source:Gene)-[r:GENE_TO_DISEASE]-(target:Disease) return properties(source),target._name limit 2
     """
-    load_text = load_text.replace("\n", " ").replace("\t", " ")
-    load_text = " ".join(load_text.split())
-
-    create_constraints([load_text], meta_id)
-
+    query_data = session.run(query).data()
+    logger.info(query_data)
+    df = pd.json_normalize(query_data)
+    #logger.info(df)
 
 if __name__ == "__main__":
-    process()
+    #process()
+    test()

@@ -56,8 +56,8 @@ def process():
 		USING periodic commit 10000 
 		load CSV from "file:///rels/{meta_id}/{meta_id}.csv.gz" as row FIELDTERMINATOR "," 
 		WITH row, coalesce(row[2],"NA") as guideline_data, coalesce(row[3],"NA") as level_data, coalesce(row[4],"NA") as pharmgkb_data, coalesce(row[5],"NA") as pgx_data 
-		match  (g:Gene{{name:row[0]}}) match (d:Drug{{name:row[1]}})
-		merge (g)<-[c:CPIC{{guideline:guideline_data, cpic_level:level_data, pharmgkb_level_of_evidence:pharmgkb_data, pgx_on_fda_label:pgx_data}}]-(d)
+		match  (g:Gene{{name:row[0]}}) match (d:Drug{{label:row[1]}})
+		merge (g)<-[c:CPIC{{guideline:guideline_data, cpic_level:level_data, pharmgkb_level_of_evidence:pharmgkb_data, pgx_on_fda_label:pgx_data,_source:["CPIC"]}}]-(d)
         return count(g);
 		"""
     load_text = load_text.replace("\n", " ").replace("\t", " ")

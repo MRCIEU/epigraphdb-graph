@@ -235,11 +235,6 @@ meta_nodes:
         doc: >-
           Suitability of GWAS for Mendelian randomization.
         type: string
-      name:
-        doc: >-
-          TODO Ben
-          ???
-        type: string
       ncase:
         doc: >-
           Number of cases.
@@ -343,11 +338,10 @@ meta_nodes:
         type: integer
     required:
       - id
-      - title
     index: id
     meta:
       _id: id
-      _name: title
+      _name: id
   LiteratureTerm:
     doc: >-
       Biomedical term from [SemMedDB](https://skr3.nlm.nih.gov/SemMedDB/).

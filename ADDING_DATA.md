@@ -1,6 +1,7 @@
 ## Example
 
 - Adding Opentargets DRUG-TARGET data to the test data
+- Note, in production **do not** use the `test/` directory, use `workflow/`
 - For this example we are using the config files in `test/config/` e.g. `test/config/data_integration.yml` and `test/config/db_schema.yml`. In practice you would create new versios of these and put them in `config/`
 
 #### 1. Create new branch
