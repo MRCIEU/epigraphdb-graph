@@ -124,7 +124,7 @@ def link():
 		LOAD CSV FROM "file:///nodes/{args.name}/efo.csv" AS row FIELDTERMINATOR "," 
 		WITH row 
 		MATCH (e:Efo) where e.id = "http://www.ebi.ac.uk/efo/EFO_"+row[0] MATCH (d:Disease) where d.id = row[1] 
-		MERGE (e)<-[:MONDO_MAP_EFO{{'_source':'Mondo'}}]-(d) return count(e) as efo_count
+		MERGE (e)<-[:MONDO_MAP_EFO{{_source:"Mondo"}}]-(d) return count(e) as efo_count
         """
     )
     # umls
@@ -134,7 +134,7 @@ def link():
 		LOAD CSV FROM "file:///nodes/{args.name}/umls.csv" AS row FIELDTERMINATOR "," 
 		WITH row 
 		MATCH (s:LiteratureTerm) where s.id = row[0] MATCH (d:Disease) where d.id = row[1] 
-		MERGE (s)<-[:MONDO_MAP_UMLS{{'_source':'Mondo'}}]-(d) return count(s) as umls_count
+		MERGE (s)<-[:MONDO_MAP_UMLS{{_source:"Mondo"}}]-(d) return count(s) as umls_count
         """
     )
 
@@ -148,9 +148,9 @@ def link():
         WHERE 
             toLower(l.name) = toLower(d.label) 
         MERGE 
-            (l)<-[:MONDO_MAP_UMLS{{'_source':'Mondo'}}]-(d)
+            (l)<-[:MONDO_MAP_UMLS{{_source:"Mondo"}}]-(d)
         RETURN
-            count(d);
+            count(d)
         """
     )
 

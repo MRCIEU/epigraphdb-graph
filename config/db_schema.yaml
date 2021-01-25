@@ -203,7 +203,7 @@ meta_nodes:
     index: id
     meta:
       _id: id
-      _name: name 
+      _name: id 
   LiteratureTriple:
     properties:
       id:
