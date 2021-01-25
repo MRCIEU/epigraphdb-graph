@@ -126,8 +126,6 @@ meta_nodes:
         type: string
       mr:
         type: string
-      name:
-        type: string
       ncase:
         type: string
       ncontrol:
