@@ -28,10 +28,16 @@ config_path = env_configs["config_path"]
 def neo4j_connect():
     from neo4j import GraphDatabase, basic_auth
 
-    auth_token = basic_auth(graph_user, graph_password)
-    driver = GraphDatabase.driver(
-        "bolt://" + graph_host + ":" + graph_bolt_port, auth=auth_token, encrypted=False
-    )
+    # When user and password are blank, use a no-auth driver
+    if graph_user == "" and graph_password == "":
+        driver = GraphDatabase.driver(
+            "bolt://" + graph_host + ":" + graph_bolt_port, encrypted=False
+        )
+    else:
+        auth_token = basic_auth(graph_user, graph_password)
+        driver = GraphDatabase.driver(
+            "bolt://" + graph_host + ":" + graph_bolt_port, auth=auth_token, encrypted=False
+        )
     return driver
 
 
