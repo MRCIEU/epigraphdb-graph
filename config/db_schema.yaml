@@ -310,7 +310,7 @@ meta_nodes:
     properties:
       doi:
         doc: >-
-          TODO Ben
+          DOI of publication
         type: string
       dp:
         doc: >-
@@ -326,11 +326,11 @@ meta_nodes:
         type: string
       id:
         doc: >-
-          TODO Ben
+          Unique identifier, e.g. PubMed ID or DOI
         type: string
       title:
         doc: >-
-          TODO Ben
+          Title of publication if available
         type: string
       year:
         doc: >-

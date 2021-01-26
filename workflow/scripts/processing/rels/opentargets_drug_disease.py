@@ -70,17 +70,5 @@ def process():
 
     create_import(df=cat_df, meta_id=meta_id)
 
-def test():
-    driver = neo4j_connect()
-    session = driver.session()
-    query="""
-        match (source:Gene)-[r:GENE_TO_DISEASE]-(target:Disease) return properties(source),target._name limit 2
-    """
-    query_data = session.run(query).data()
-    logger.info(query_data)
-    df = pd.json_normalize(query_data)
-    #logger.info(df)
-
 if __name__ == "__main__":
-    #process()
-    test()
+    process()
