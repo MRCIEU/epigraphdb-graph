@@ -1,11 +1,20 @@
 meta_nodes:
   # Drug:
+  #  doc: >-
+  #    Drug data from the following sources:
+  #    - [Open Targets](https://www.opentargets.org/).
   #   properties:
   #     id:
+  #       doc: >-
+  #         Label of the drug
   #       type: string
   #     label:
+  #       doc: >-
+  #         Type of the molecule, e.g. Antibody, Protein, Enzyme, etc.
   #       type: string
   #     molecule_type:
+  #       doc: >-
+  #         Type of the molecule, e.g. Antibody, Protein, Enzyme, etc.
   #       type: string
   #   required:
   #     - label
@@ -15,32 +24,40 @@ meta_nodes:
   #     _id: id
   #     _name: label  
   Gene:
+    doc: >-
+      Gene data from [BioMart (build 37)](http://www.biomart.org/).
     properties:
-      adme_gene:
-        type: string
       biomart_source:
-        type: string
-      bio_druggable:
+        doc: >-
+          TODO
         type: string
       chr:
+        doc: >-
+          Chromosome.
         type: string
       description:
-        type: string
-      druggability_tier:
+        doc: >-
+          Description of gene.
         type: string
       end:
+        doc: >-
+          End position on chromosome.
         type: integer
       ensembl_id:
+        doc: >-
+          Ensembl identifier of the gene.
         type: string
       name:
-        type: string
-      reactome_id:
-        type: string
-      small_mol_druggable:
+        doc: >-
+          HGNC name of the gene.
         type: string
       start:
+        doc: >-
+          Start position on chromosome.
         type: integer
       type:
+        doc: >-
+          Gene type, e.g. protein_coding, pseudogene.
         type: string
     required:
       - ensembl_id
@@ -50,60 +67,113 @@ meta_nodes:
       _id: ensembl_id
       _name: name  
   Gwas:
+    doc: >-
+      Genome Wide Association Studies metadata from [IEU OpenGWAS Database](https://gwas.mrcieu.ac.uk).
     properties:
       author:
+        doc: >-
+          First author of GWAS.
         type: string
       build:
+        doc: >-
+          TODO 
         type: string
       category:
+        doc: >-
+          Binary disease phenotype or a non-disease phenotype.
         type: string
       consortium:
+        doc: >-
+          GWAS consortium name, if applicable.
         type: string
       covariates:
+        doc: >-
+          TODO
         type: string
       coverage:
+        doc: >-
+          TODO
         type: string
       doi:
+        doc: >-
+          DOI of publication
         type: string
       group_name:
+        doc: >-
+          TODO
         type: string
       id:
+        doc: >-
+          IEU OpenGWAS identifier.
         type: string
       imputation_panel:
+        doc: >-
+          TODO 
         type: string
       mr:
-        type: string
-      name:
+        doc: >-
+          Suitability of GWAS for Mendelian randomization.
         type: string
       ncase:
+        doc: >-
+          Number of cases.
         type: string
       ncontrol:
+        doc: >-
+          Number of controls.
         type: string
       note:
+        doc: >-
+          Extra information.
         type: string
       nsnp:
+        doc: >-
+          Number of variants in results file.
         type: string
       ontology:
+        doc: >-
+          TODO 
         type: string
       pmid:
+        doc: >-
+          PubMed identifier, where available.
         type: string
       population:
+        doc: >-
+          Geographical origins of the samples included in the study.
         type: string
       sample_size:
+        doc: >-
+          Sample size of GWAS.
         type: string
       sd:
+        doc: >-
+          Standard deviation of the phenotype analysed.
         type: string
       sex:
+        doc: >-
+          Males/Females.
         type: string
       study_design:
+        doc: >-
+          TODO 
         type: string
       subcategory:
+        doc: >-
+          Further categorisation.
         type: string
       trait:
+        doc: >-
+          Description of measured trait.
         type: string
       unit:
+        doc: >-
+          How to interpret a 1-unit change in the phenotype,
+          e.g. log odds ratio, mmol/L, SD units.
         type: string
       year:
+        doc: >-
+          Year of publication/creation.
         type: string
     required:
       - nsnp
@@ -114,12 +184,20 @@ meta_nodes:
       _id: id
       _name: trait 
   Pathway:
+    doc: >-
+      Biological pathway data from Reactome.
     properties:
       url:
+        doc: >-
+          Reactome URL
         type: string
       name:
+        doc: >-
+          Name of the pathway.
         type: string
       id:
+        doc: >-
+          Reactome ID
         type: string
     required:
       - name
@@ -129,10 +207,16 @@ meta_nodes:
       _id: id
       _name: name 
   Protein:
+    doc: >-
+      Protein data from [BioMart (build 37)](http://www.biomart.org/).
     properties:
       uniprot_id:
+        doc: >-
+          UniProt Identifier.
         type: string
       name:
+        doc: >-
+          Protein name
         type: string
     required:
       - uniprot_id
@@ -142,142 +226,170 @@ meta_nodes:
       _id: uniprot_id
       _name: name
   Variant:
+    doc: >-
+      Genetic variant, e.g. SNPs.
     properties:
-      id:
-        type: string
       name:
+        doc: >-
+          rsID of the SNP.
         type: string
       pos:
+        doc: >-
+          Position on chromosome.
         type: integer
       chr:
+        doc: >-
+          Chromosome
         type: string
       ref:
+        doc: >-
+          Reference allele.
         type: string
       alt:
+        doc: >-
+          Alternative allele. 
         type: string
       build:
+        doc: >-
+          Genome build.
         type: string    
     required:
-      - id
       - name
     index: name
     meta:
-      _id: id
+      _id: name
       _name: name
 
 meta_rels:
   GENE_TO_PROTEIN:
+    doc: >-
+      Mapping between `(Gene)` and `(Protein)`.
     properties:
       source:
+        doc: >-
+          'Gene ID'
         type: Gene
       target:
+        doc: >-
+          'Protein ID'
         type: Protein
     required:
       - source
       - target
-  GWAS_TO_VARIANT:
+  OPENGWAS_TOPHITS:
+    doc: >-
+      The tophits for each GWAS, obtained from the MRC IEU OpenGWAS platform (https://gwas.mrcieu.ac.uk/).
     properties:
       source:
+        doc: >-
+          Gwas ID
         type: Gwas
       target:
+        doc: >-
+          Variant ID
         type: Variant
       beta:
+        doc: >-
+          Effect size.
         type: float
-      eaf:
-        type: float
-      ncase:
-        type: integer
-      ncontrol:
-        type: integer
       pval:
-        type: float
-      samplesize:
-        type: integer
-      se:
+        doc: >-
+          P-Value.
         type: float
     required:
       - source
-      - target
+      - target 
       - beta
       - pval
-      - samplesize
   PATHWAY_CHILD_OF:
+    doc: >-
+      Pathway Parent/Child relationship 
     properties:
       source:
+        doc: >-
+          Pathway ID
         type: Pathway
       target:
+        doc: >-
+          Pathway ID
         type: Pathway
     required:
       - source
       - target 
   PROTEIN_IN_PATHWAY:
+    doc: >-
+      A protein is part of the pathway.
     properties: 
       source:
+        doc: >-
+          Protein ID
         type: Protein
       target:
+        doc: >-
+          Pathway ID
         type: Pathway
     required:
       - source
       - target 
-  OPENGWAS_TOPHITS:
-    properties:
-      source:
-        type: Gwas
-      target:
-        type: Variant
-      beta:
-        type: float
-      pval:
-        type: float
-    required:
-      - source
-      - target 
-      - beta
-      - pval
-  # OPENTARGETS_DRUG_TO_TARGET:
-  #   properties:
-  #     source:
-  #       type: Drug
-  #     target:
-  #       type: Gene
-  #     action_type:
-  #       type: string
-  #     phase:
-  #       type: string
-  #   required:
-  #     - source
-  #     - target 
-  #     - phase
-  #     - action_type
   VARIANT_TO_GENE:
+    doc: >-
+      Relationships between `(Variant)` and `(Gene)`, obtained via Ensembl VEP v37.
     properties:
       source:
+        doc: >-
+          Variant ID
         type: Variant
       target:
+        doc: >-
+          Gene ID
         type: Gene
       allele:
+        doc: >-
+          The variant allele used to calculate the consequence.
         type: string
       amino_acids:
+        doc: >-
+          Only given if the variant affects the protein-coding sequence.
         type: string
       cdna_position:
+        doc: >-
+          Relative position of base pair in cDNA sequence.
         type: string
       cds_position:
+        doc: >-
+          Relative position of base pair in coding sequence.
         type: string
       codons:
+        doc: >-
+          The alternative codons with the variant base in upper case.
         type: string
       consequence:
+        doc: >-
+          Consequence type of this variant (see https://www.ensembl.org/info/genome/variation/prediction/predicted_data.html#consequences).
         type: string
       existing_variation:
+        doc: >-
+          Known identifier of existing variant.
         type: string
       extra:
+        doc: >-
+          This column contains extra information as key=value pairs separated by ";" (see https://www.ensembl.org/info/docs/tools/vep/vep_formats.html#other_fields).
         type: string
       feature:
+        doc: >-
+          Ensembl stable ID of feature.
         type: string
       feature_type:
+        doc: >-
+          Type of feature. Currently one of Transcript, RegulatoryFeature, MotifFeature.
         type: string
       location:
+        doc: >-
+          In standard coordinate format (chr:start or chr:start-end).
         type: string
       protein_position:
+        doc: >-
+          Relative position of amino acid in protein.
         type: string
     required:
       - source
