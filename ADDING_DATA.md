@@ -3,6 +3,7 @@
 - Adding Opentargets DRUG-TARGET data to the test data
 - Note, in production **do not** use the `test/` directory, use `workflow/`
 - For this example we are using the config files in `test/config/` e.g. `test/config/data_integration.yml` and `test/config/db_schema.yml`. In practice you would create new versios of these and put them in `config/`
+- In production, changes should not be made to the `test` directory.
 
 #### 1. Create new branch
 
@@ -18,6 +19,9 @@ Copy `example.env` to `.env` and edit
 #### 3. If necessary, create the source data
 
 - this can be done on a remote server, just need to add `SERVER_NAME` name to `.env`
+- need to copy the created data to the specified `DATA_DIR` using the function `copy_source_data()`
+
+Example:
 
 ```
 python -m test.scripts.source.get_opentargets
@@ -92,6 +96,7 @@ For example, uncomment the following sections in `test/config/data_integration.y
 Note, if just testing out the demo data, this step can be skipped.
 
 - if new node type make a new directory, e.g. `mkdir workflow/scripts/nodes/drug`
+- all property values for both nodes and relationships should have no spaces
 
 To access source files specified in `data_integration.yml` use the key/value pairs, e.g.
 
