@@ -53,7 +53,7 @@ def process():
     logger.info(df.shape)
     df.drop_duplicates(inplace=True)
     logger.info(df.shape)
-    df.columns = ["target", "predicate", "source", "count"]
+    df.columns = ["source", "predicate", "target", "count"]
     logger.info("\n {}", df)
     create_import(df=df, meta_id=meta_id)
 

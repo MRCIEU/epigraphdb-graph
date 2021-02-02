@@ -360,11 +360,11 @@ meta_nodes:
         type: string
       name:
         doc: >-
-          TODO Ben
+          Unique identifier made from subject ID, predicate name and object ID
         type: string
       object_id:
         doc: >-
-          TODO Ben
+          The CUI of the object of the predication
         type: string
       predicate:
         doc: >-
@@ -372,7 +372,7 @@ meta_nodes:
         type: string
       subject_id:
         doc: >-
-          TODO Ben
+          The CUI of the subject of the predication
         type: string
     required:
       - id
@@ -390,7 +390,7 @@ meta_nodes:
     properties:
       url:
         doc: >-
-          TODO Ben
+          Reactome pathway URL
         type: string
       name:
         doc: >-
@@ -398,7 +398,7 @@ meta_nodes:
         type: string
       id:
         doc: >-
-          TODO Ben
+          Reactome pathway ID
         type: string
     required:
       - name
@@ -417,7 +417,7 @@ meta_nodes:
         type: string
       name:
         doc: >-
-          TODO Ben
+          Protein name
         type: string
     required:
       - uniprot_id
