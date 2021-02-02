@@ -432,11 +432,11 @@ meta_nodes:
     properties:
       id:
         doc: >-
-          TODO Ben
+          Tissue name
         type: string
       name:
         doc: >-
-          TODO Ben
+          Tissue name
         type: string
     required:
       - id
@@ -455,23 +455,23 @@ meta_nodes:
         type: string
       pos:
         doc: >-
-          TODO Ben
+          Chromosome position
         type: integer
       chr:
         doc: >-
-          TODO Ben
+          Chromosome
         type: string
       ref:
         doc: >-
-          TODO Ben
+          Reference allele
         type: string
       alt:
         doc: >-
-          TODO Ben
+          Alternative allele
         type: string
       build:
         doc: >-
-          TODO Ben
+          Genome build
         type: string
     required:
       - name
