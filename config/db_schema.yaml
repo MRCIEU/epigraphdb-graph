@@ -128,7 +128,7 @@ meta_nodes:
         type: string
       biomart_source:
         doc: >-
-          TODO Ben
+          The origin of the info, e.g. miRBase, RFAM, HGNC
         type: string
       bio_druggable:
         doc: >-
@@ -215,21 +215,9 @@ meta_nodes:
         doc: >-
           TODO Ben
         type: string
-      doi:
-        doc: >-
-          TODO Ben
-        type: string
-      group_name:
-        doc: >-
-          TODO Ben
-        type: string
       id:
         doc: >-
           IEU OpenGWAS identifier.
-        type: string
-      imputation_panel:
-        doc: >-
-          TODO Ben
         type: string
       mr:
         doc: >-
@@ -251,10 +239,6 @@ meta_nodes:
         doc: >-
           Number of variants in results file.
         type: string
-      ontology:
-        doc: >-
-          TODO Ben
-        type: string
       pmid:
         doc: >-
           PubMed identifier, where available.
@@ -274,10 +258,6 @@ meta_nodes:
       sex:
         doc: >-
           Males/Females.
-        type: string
-      study_design:
-        doc: >-
-          TODO Ben
         type: string
       subcategory:
         doc: >-
