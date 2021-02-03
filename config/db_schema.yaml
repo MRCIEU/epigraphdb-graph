@@ -356,11 +356,11 @@ meta_nodes:
     properties:
       id:
         doc: >-
-          The complete semantic triplet `{subject}:{PREDICATE}:{object}`.
+          Unique identifier made from subject ID, predicate name and object ID
         type: string
       name:
         doc: >-
-          Unique identifier made from subject ID, predicate name and object ID
+          The complete semantic triplet `{subject}:{PREDICATE}:{object}`.
         type: string
       object_id:
         doc: >-
