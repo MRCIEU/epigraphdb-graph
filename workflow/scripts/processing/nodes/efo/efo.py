@@ -27,21 +27,10 @@ FILE = get_source(meta_id,1)
 
 def process():
     logger.info("Loading efo...")
-    nodeDic = {}
-    with gzip.open(os.path.join(dataDir, FILE)) as json_file:
-        data = json.load(json_file)
-        for d in data:
-            nodeDic[d["child"]["value"]] = {
-                "label": d["childLabel"]["value"],
-                "type": d["childLabel"]["type"],
-            }
-            nodeDic[d["parent"]["value"]] = {
-                "label": d["parentLabel"]["value"],
-                "type": d["parentLabel"]["type"],
-            }
-    df = pd.DataFrame(nodeDic).T.reset_index()
+    data = os.path.join(dataDir, FILE)
+    df = pd.read_csv(data)
     df.drop_duplicates(inplace=True)
-    df.rename(columns={"index": "id", "label": "value"}, inplace=True)
+    df.rename(columns={"efo.type": "type", "efo.value": "value","efo.id":"id"}, inplace=True)
     logger.info("\n{}", df.head())
     create_import(df=df, meta_id=meta_id)
 
