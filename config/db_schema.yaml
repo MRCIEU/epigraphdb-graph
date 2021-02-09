@@ -201,7 +201,7 @@ meta_nodes:
         type: string
       build:
         doc: >-
-          TODO Ben
+          Genome build used for harmonisation
         type: string
       category:
         doc: >-
@@ -210,10 +210,6 @@ meta_nodes:
       consortium:
         doc: >-
           GWAS consortium name, if applicable.
-        type: string
-      covariates:
-        doc: >-
-          TODO Ben
         type: string
       id:
         doc: >-
@@ -483,7 +479,7 @@ meta_nodes:
 meta_rels:
   BIORXIV_OBJ:
     doc: >-
-      TODO Ben
+      Link between `(LiteratureTriple)` object and `(LiteratureTerm)` for BioRxiv SemRep triples.
     properties:
       source:
         doc: ''
@@ -496,7 +492,7 @@ meta_rels:
       - target
   BIORXIV_PREDICATE:
     doc: >-
-      TODO Ben
+      Link between `(LiteratureTerm)` and `(LiteratureTerm)` for BioRxiv SemRep triples.
     properties:
       source:
         doc: ''
@@ -506,7 +502,7 @@ meta_rels:
         type: LiteratureTerm
       count:
         doc: >-
-          TODO Ben
+          Number of triples.
         type: integer
       predicate:
         doc: >-
@@ -519,7 +515,7 @@ meta_rels:
       - count
   BIORXIV_SUB:
     doc: >-
-      TODO Ben
+      Link between `(LiteratureTriple)` subject and `(LiteratureTerm)` for BioRxiv SemRep triples.
     properties:
       source:
         doc: ''
@@ -532,7 +528,7 @@ meta_rels:
       - target
   BIORXIV_TO_LIT:
     doc: >-
-      TODO Ben
+      Link between `(LiteratureTriple)` object and `(Literature)` for BioRxiv SemRep triples.
     properties:
       source:
         doc: ''
@@ -841,7 +837,7 @@ meta_rels:
       - samplesize
   MEDRXIV_OBJ:
     doc: >-
-      TODO Ben
+      Link between `(LiteratureTriple)` object and `(LiteratureTerm)` for MedRxiv SemRep triples.
     properties:
       source:
         doc: ''
@@ -854,7 +850,7 @@ meta_rels:
       - target
   MEDRXIV_PREDICATE:
     doc: >-
-      TODO Ben
+      Link between `(LiteratureTerm)` object and `(LiteratureTerm)` for MedRxiv SemRep triples.
     properties:
       source:
         doc: ''
@@ -864,7 +860,7 @@ meta_rels:
         type: LiteratureTerm
       count:
         doc: >-
-          TODO Ben
+          Number of triples that have this link.
         type: integer
       predicate:
         doc: >-
@@ -877,7 +873,7 @@ meta_rels:
       - count
   MEDRXIV_SUB:
     doc: >-
-      TODO Ben
+      Link between `(LiteratureTriple)` subject and `(LiteratureTerm)` for MedRxiv SemRep triples.
     properties:
       source:
         doc: ''
@@ -890,7 +886,7 @@ meta_rels:
       - target
   MEDRXIV_TO_LIT:
     doc: >-
-      TODO Ben
+      Link between `(LiteratureTriple)` object and `(Literature)` for MedRxiv SemRep triples.
     properties:
       source:
         doc: ''
@@ -913,7 +909,7 @@ meta_rels:
         type: LiteratureTerm
       mesh:
         doc: >-
-          TODO Ben
+          MeSH tree ID
         type: string
       mmi_score:
         doc: >-
@@ -1073,7 +1069,7 @@ meta_rels:
       - action_type
   PATHWAY_CHILD_OF:
     doc: >-
-      TODO Ben
+      Parent/child relationship of pathways. 
     properties:
       source:
         doc: ''
@@ -1164,7 +1160,7 @@ meta_rels:
       - target
   SEMMEDDB_OBJ:
     doc: >-
-      Link between `(LiteratureTriple)` subject and `(LiteratureTerm)`.
+      Link between `(LiteratureTriple)` object and `(LiteratureTerm)` for SemMedDB.
     properties:
       source:
         doc: ''
@@ -1187,7 +1183,7 @@ meta_rels:
         type: LiteratureTerm
       count:
         doc: >-
-          The total predicate count.
+          Number of triples.
         type: integer
       predicate:
         doc: >-
@@ -1200,7 +1196,7 @@ meta_rels:
       - count
   SEMMEDDB_SUB:
     doc: >-
-      Link between `(LiteratureTriple)` object and `(LiteratureTerm)`.
+      Link between `(LiteratureTriple)` suject and `(LiteratureTerm)` for SemMedDB.
     properties:
       source:
         doc: ''
