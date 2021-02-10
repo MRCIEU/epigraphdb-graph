@@ -506,7 +506,7 @@ meta_rels:
         type: integer
       predicate:
         doc: >-
-          TODO Ben
+          The string representation of each predicate (for example TREATS, PROCESS_OF).
         type: string
     required:
       - source
@@ -553,47 +553,47 @@ meta_rels:
         type: Gwas
       h2:
         doc: >-
-          TODO Ben
+          SNP heritability.
         type: float
       h2_SE:
         doc: >-
-          TODO Ben
+          Standard error of SNP heritability.
         type: float
       h2_intercept:
         doc: >-
-          LD score regression intercept for single trait.
+          Intercept term of the SNP heritability model.
         type: float
       h2_intercept_SE:
         doc: >-
-          Standard error of h2_int.
+          Standard error of the intercept term of the SNP heritability.
         type: float
       rpheno:
         doc: >-
-          TODO Ben
+          Phenotypic correlation.
         type: float
       rg:
         doc: >-
-          Genetic correlation (r_g).
+          Genetic correlation.
         type: float
       rg_SE:
         doc: >-
-          TODO Ben
+          Standard error of the genetic correlation
         type: float
       Z:
         doc: >-
-          z statistic for test of null hypothesis rg = 0.
+          Z score of the genetic correlation.
         type: float
       p:
         doc: >-
-          Genetic correlation (r_g).
+          P value of the genetic correlation.
         type: float
       rg_intercept:
         doc: >-
-          TODO Ben
+          Intercept term of the genetic correlation model.
         type: float
       rg_intercept_SE:
         doc: >-
-          TODO Ben
+          Standard error of the intercept term of the genetic correlation model
         type: float
     required:
       - source
@@ -679,7 +679,7 @@ meta_rels:
       - target
   GWAS_EFO_EBI:
     doc: >-
-      TODO Ben
+      Vectology mapping between GWAS traits and EFO terms
     properties:
       source:
         doc: ''
@@ -864,7 +864,7 @@ meta_rels:
         type: integer
       predicate:
         doc: >-
-          TODO Ben
+          The string representation of each predicate (for example TREATS, PROCESS_OF).
         type: string
     required:
       - source
