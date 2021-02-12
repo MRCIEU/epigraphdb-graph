@@ -1432,7 +1432,7 @@ meta_rels:
 
   GENE_TO_DISEASE:
     doc: >-
-      TODO Ben
+      Gene-disease relationships from ClinVar database (https://ftp.ncbi.nlm.nih.gov/pub/clinvar/gene_condition_source_id). The sources of information for the gene-disease relationship include OMIM, GeneReviews, and a limited amount of curation by NCBI staff.
     properties:
       source:
         doc: ''
@@ -1442,11 +1442,11 @@ meta_rels:
         type: Disease
       gene_relationship_type:
         doc: >-
-          TODO Ben
+          Associated gene / Related gene - as classified by ClinVar
         type: string
       last_updated:
         doc: >-
-          TODO Ben
+          Last time this record was modified by NCBI staff in the ClinVar database (prior to the date it was imported into EpiGraphDB)
         type: string # this is a date
     required:
       - source
