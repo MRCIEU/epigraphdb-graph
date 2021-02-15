@@ -1442,7 +1442,7 @@ meta_rels:
         type: Disease
       gene_relationship_type:
         doc: >-
-          Associated gene / Related gene - as classified by ClinVar
+          'Associated gene': gene reported to be causative for this disorder. Includes monogenic disorders. 'Related gene': any gene that may contribute to a disorder. Includes broader concepts, for example, ABCA4 is reported as an associated gene for Retinitis pigmentosa 19, but as a related gene for Retinitis pigmentosa.
         type: string
       last_updated:
         doc: >-
