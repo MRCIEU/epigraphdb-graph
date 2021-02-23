@@ -61,7 +61,7 @@ def process():
     logger.info(sem_df.shape)
     sem_df.drop_duplicates(inplace=True)
     logger.info(sem_df.shape)
-    sem_df.columns = ["target", "predicate", "source", "count"]
+    sem_df.columns = ["source", "predicate", "target", "count"]
     logger.info("\n {}", sem_df)
     create_import(df=sem_df, meta_id=meta_id)
 

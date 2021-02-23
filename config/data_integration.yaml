@@ -123,9 +123,9 @@ nodes:
   ontology-efo:
     name: Efo
     files:
-      1: EFO/efo_data.txt.gz
+      1: EFO/epigraphdb_0.3_efo_nodes.csv
     script: nodes.efo.efo
-    source: EFO-2020-01-24  
+    source: EpiGraphDB v0.3  
   
   literature-semrep-biorxiv:
     name: Literature
@@ -366,16 +366,16 @@ rels:
   efo-parent-child:
     name: EFO_CHILD_OF
     files:
-      1: EFO/efo_data.txt.gz
+      1: EFO/epigraphdb_0.3_efo_rels.csv
     script: rels.efo-parent-child
-    source: EFO-2020-01-24
+    source: EpiGraphDB v0.3
 
   efo-gwas-nlp:
     name: GWAS_NLP_EFO
     files:
       1: EFO/gwas-vec-efo-ids-01-09-20.tsv
     script: rels.efo-gwas-nlp
-    source: EFO-2020-01-24
+    source: Vectology
     
   gwas-efo-ebi:
     name: GWAS_EFO_EBI

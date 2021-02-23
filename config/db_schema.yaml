@@ -128,7 +128,7 @@ meta_nodes:
         type: string
       biomart_source:
         doc: >-
-          TODO Ben
+          The origin of the info, e.g. miRBase, RFAM, HGNC
         type: string
       bio_druggable:
         doc: >-
@@ -201,7 +201,7 @@ meta_nodes:
         type: string
       build:
         doc: >-
-          TODO Ben
+          Genome build used for harmonisation
         type: string
       category:
         doc: >-
@@ -211,25 +211,9 @@ meta_nodes:
         doc: >-
           GWAS consortium name, if applicable.
         type: string
-      covariates:
-        doc: >-
-          TODO Ben
-        type: string
-      doi:
-        doc: >-
-          TODO Ben
-        type: string
-      group_name:
-        doc: >-
-          TODO Ben
-        type: string
       id:
         doc: >-
           IEU OpenGWAS identifier.
-        type: string
-      imputation_panel:
-        doc: >-
-          TODO Ben
         type: string
       mr:
         doc: >-
@@ -251,10 +235,6 @@ meta_nodes:
         doc: >-
           Number of variants in results file.
         type: string
-      ontology:
-        doc: >-
-          TODO Ben
-        type: string
       pmid:
         doc: >-
           PubMed identifier, where available.
@@ -274,10 +254,6 @@ meta_nodes:
       sex:
         doc: >-
           Males/Females.
-        type: string
-      study_design:
-        doc: >-
-          TODO Ben
         type: string
       subcategory:
         doc: >-
@@ -376,15 +352,15 @@ meta_nodes:
     properties:
       id:
         doc: >-
-          The complete semantic triplet `{subject}:{PREDICATE}:{object}`.
+          Unique identifier made from subject ID, predicate name and object ID
         type: string
       name:
         doc: >-
-          TODO Ben
+          The complete semantic triplet `{subject}:{PREDICATE}:{object}`.
         type: string
       object_id:
         doc: >-
-          TODO Ben
+          The CUI of the object of the predication
         type: string
       predicate:
         doc: >-
@@ -392,7 +368,7 @@ meta_nodes:
         type: string
       subject_id:
         doc: >-
-          TODO Ben
+          The CUI of the subject of the predication
         type: string
     required:
       - id
@@ -410,7 +386,7 @@ meta_nodes:
     properties:
       url:
         doc: >-
-          TODO Ben
+          Reactome pathway URL
         type: string
       name:
         doc: >-
@@ -418,7 +394,7 @@ meta_nodes:
         type: string
       id:
         doc: >-
-          TODO Ben
+          Reactome pathway ID
         type: string
     required:
       - name
@@ -437,7 +413,7 @@ meta_nodes:
         type: string
       name:
         doc: >-
-          TODO Ben
+          Protein name
         type: string
     required:
       - uniprot_id
@@ -452,11 +428,11 @@ meta_nodes:
     properties:
       id:
         doc: >-
-          TODO Ben
+          Tissue name
         type: string
       name:
         doc: >-
-          TODO Ben
+          Tissue name
         type: string
     required:
       - id
@@ -475,23 +451,23 @@ meta_nodes:
         type: string
       pos:
         doc: >-
-          TODO Ben
+          Chromosome position
         type: integer
       chr:
         doc: >-
-          TODO Ben
+          Chromosome
         type: string
       ref:
         doc: >-
-          TODO Ben
+          Reference allele
         type: string
       alt:
         doc: >-
-          TODO Ben
+          Alternative allele
         type: string
       build:
         doc: >-
-          TODO Ben
+          Genome build
         type: string
     required:
       - name
@@ -503,7 +479,7 @@ meta_nodes:
 meta_rels:
   BIORXIV_OBJ:
     doc: >-
-      TODO Ben
+      Link between `(LiteratureTriple)` object and `(LiteratureTerm)` for BioRxiv SemRep triples.
     properties:
       source:
         doc: ''
@@ -516,7 +492,7 @@ meta_rels:
       - target
   BIORXIV_PREDICATE:
     doc: >-
-      TODO Ben
+      Link between `(LiteratureTerm)` and `(LiteratureTerm)` for BioRxiv SemRep triples.
     properties:
       source:
         doc: ''
@@ -526,11 +502,11 @@ meta_rels:
         type: LiteratureTerm
       count:
         doc: >-
-          TODO Ben
+          Number of triples.
         type: integer
       predicate:
         doc: >-
-          TODO Ben
+          The string representation of each predicate (for example TREATS, PROCESS_OF).
         type: string
     required:
       - source
@@ -539,7 +515,7 @@ meta_rels:
       - count
   BIORXIV_SUB:
     doc: >-
-      TODO Ben
+      Link between `(LiteratureTriple)` subject and `(LiteratureTerm)` for BioRxiv SemRep triples.
     properties:
       source:
         doc: ''
@@ -552,7 +528,7 @@ meta_rels:
       - target
   BIORXIV_TO_LIT:
     doc: >-
-      TODO Ben
+      Link between `(LiteratureTriple)` object and `(Literature)` for BioRxiv SemRep triples.
     properties:
       source:
         doc: ''
@@ -577,47 +553,47 @@ meta_rels:
         type: Gwas
       h2:
         doc: >-
-          TODO Ben
+          SNP heritability.
         type: float
       h2_SE:
         doc: >-
-          TODO Ben
+          Standard error of SNP heritability.
         type: float
       h2_intercept:
         doc: >-
-          LD score regression intercept for single trait.
+          Intercept term of the SNP heritability model.
         type: float
       h2_intercept_SE:
         doc: >-
-          Standard error of h2_int.
+          Standard error of the intercept term of the SNP heritability.
         type: float
       rpheno:
         doc: >-
-          TODO Ben
+          Phenotypic correlation.
         type: float
       rg:
         doc: >-
-          Genetic correlation (r_g).
+          Genetic correlation.
         type: float
       rg_SE:
         doc: >-
-          TODO Ben
+          Standard error of the genetic correlation
         type: float
       Z:
         doc: >-
-          z statistic for test of null hypothesis rg = 0.
+          Z score of the genetic correlation.
         type: float
       p:
         doc: >-
-          Genetic correlation (r_g).
+          P value of the genetic correlation.
         type: float
       rg_intercept:
         doc: >-
-          TODO Ben
+          Intercept term of the genetic correlation model.
         type: float
       rg_intercept_SE:
         doc: >-
-          TODO Ben
+          Standard error of the intercept term of the genetic correlation model
         type: float
     required:
       - source
@@ -703,7 +679,7 @@ meta_rels:
       - target
   GWAS_EFO_EBI:
     doc: >-
-      TODO Ben
+      Vectology mapping between GWAS traits and EFO terms
     properties:
       source:
         doc: ''
@@ -861,7 +837,7 @@ meta_rels:
       - samplesize
   MEDRXIV_OBJ:
     doc: >-
-      TODO Ben
+      Link between `(LiteratureTriple)` object and `(LiteratureTerm)` for MedRxiv SemRep triples.
     properties:
       source:
         doc: ''
@@ -874,7 +850,7 @@ meta_rels:
       - target
   MEDRXIV_PREDICATE:
     doc: >-
-      TODO Ben
+      Link between `(LiteratureTerm)` object and `(LiteratureTerm)` for MedRxiv SemRep triples.
     properties:
       source:
         doc: ''
@@ -884,11 +860,11 @@ meta_rels:
         type: LiteratureTerm
       count:
         doc: >-
-          TODO Ben
+          Number of triples that have this link.
         type: integer
       predicate:
         doc: >-
-          TODO Ben
+          The string representation of each predicate (for example TREATS, PROCESS_OF).
         type: string
     required:
       - source
@@ -897,7 +873,7 @@ meta_rels:
       - count
   MEDRXIV_SUB:
     doc: >-
-      TODO Ben
+      Link between `(LiteratureTriple)` subject and `(LiteratureTerm)` for MedRxiv SemRep triples.
     properties:
       source:
         doc: ''
@@ -910,7 +886,7 @@ meta_rels:
       - target
   MEDRXIV_TO_LIT:
     doc: >-
-      TODO Ben
+      Link between `(LiteratureTriple)` object and `(Literature)` for MedRxiv SemRep triples.
     properties:
       source:
         doc: ''
@@ -933,7 +909,7 @@ meta_rels:
         type: LiteratureTerm
       mesh:
         doc: >-
-          TODO Ben
+          MeSH tree ID
         type: string
       mmi_score:
         doc: >-
@@ -1093,7 +1069,7 @@ meta_rels:
       - action_type
   PATHWAY_CHILD_OF:
     doc: >-
-      TODO Ben
+      Parent/child relationship of pathways. 
     properties:
       source:
         doc: ''
@@ -1184,7 +1160,7 @@ meta_rels:
       - target
   SEMMEDDB_OBJ:
     doc: >-
-      Link between `(LiteratureTriple)` subject and `(LiteratureTerm)`.
+      Link between `(LiteratureTriple)` object and `(LiteratureTerm)` for SemMedDB.
     properties:
       source:
         doc: ''
@@ -1207,7 +1183,7 @@ meta_rels:
         type: LiteratureTerm
       count:
         doc: >-
-          The total predicate count.
+          Number of triples.
         type: integer
       predicate:
         doc: >-
@@ -1220,7 +1196,7 @@ meta_rels:
       - count
   SEMMEDDB_SUB:
     doc: >-
-      Link between `(LiteratureTriple)` object and `(LiteratureTerm)`.
+      Link between `(LiteratureTriple)` suject and `(LiteratureTerm)` for SemMedDB.
     properties:
       source:
         doc: ''
@@ -1456,7 +1432,7 @@ meta_rels:
 
   GENE_TO_DISEASE:
     doc: >-
-      TODO Ben
+      Gene-disease relationships from ClinVar database (https://ftp.ncbi.nlm.nih.gov/pub/clinvar/gene_condition_source_id). The sources of information for the gene-disease relationship include OMIM, GeneReviews, and a limited amount of curation by NCBI staff.
     properties:
       source:
         doc: ''
@@ -1466,11 +1442,11 @@ meta_rels:
         type: Disease
       gene_relationship_type:
         doc: >-
-          TODO Ben
+          'Associated gene': gene reported to be causative for this disorder. Includes monogenic disorders. 'Related gene': any gene that may contribute to a disorder. Includes broader concepts, for example, ABCA4 is reported as an associated gene for Retinitis pigmentosa 19, but as a related gene for Retinitis pigmentosa.
         type: string
       last_updated:
         doc: >-
-          TODO Ben
+          Last time this record was modified by NCBI staff in the ClinVar database (prior to the date it was imported into EpiGraphDB)
         type: string # this is a date
     required:
       - source

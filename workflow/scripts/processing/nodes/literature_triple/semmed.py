@@ -32,10 +32,6 @@ def process():
     )
     logger.info(df.shape)
 
-    # group
-    # keep_cols = ["predicate","subject_name","object_name","subject_type","object_type","subject_id","object_id","id"]
-    keep_cols = ["predicate", "subject_id", "object_id", "id", "name"]
-
     # need to split subject and object ids by |
     df = (
         df.assign(subject_id=df.subject_id.str.split("|"))
@@ -52,11 +48,14 @@ def process():
     logger.info("\n {}", df)
 
     df["id"] = df["subject_id"] + ":" + df["predicate"] + ":" + df["object_id"]
-    df["name"] = df["subject_id"] + " " + df["predicate"] + " " + df["object_id"]
+    df["name"] = df["subject_name"] + " " + df["predicate"] + " " + df["object_name"]
+
+    # keep_cols = ["predicate","subject_name","object_name","subject_type","object_type","subject_id","object_id","id"]
+    keep_cols = ["predicate", "subject_id", "object_id", "id", "name"]
 
     #df = pd.DataFrame({"count": df.groupby(keep_cols).size()}).reset_index()
     df = df[keep_cols]
-    df.drop_duplicates(inplace=True)
+    df.drop_duplicates(subset=['id'],inplace=True)
     logger.info(df.shape)
     logger.info("\n {}", df.head())
 
@@ -69,6 +68,7 @@ def process():
     # create constraints
     constraintCommands = [
         "CREATE CONSTRAINT ON (s:LiteratureTriple) ASSERT s.id IS UNIQUE",
+        "CREATE INDEX ON :LiteratureTriple(name);",
         "CREATE INDEX ON :LiteratureTriple(subject_id);",
         "CREATE INDEX ON :LiteratureTriple(object_id);",
         "CREATE INDEX ON :LiteratureTriple(predicate);",

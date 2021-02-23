@@ -28,16 +28,10 @@ FILE = get_source(meta_id,1)
 
 def process():
     logger.info("Loading efo...")
-    csv_data = []
-    with gzip.open(os.path.join(dataDir, FILE)) as json_file:
-        data = json.load(json_file)
-        for d in data:
-            data = [d["child"]["value"], d["parent"]["value"]]
-            csv_data.append(data)
-
-    df = pd.DataFrame(csv_data)
+    data = os.path.join(dataDir, FILE)
+    df = pd.read_csv(data)
     df.drop_duplicates(inplace=True)
-    df.rename(columns={0: "source", 1: "target"}, inplace=True)
+    df.rename(columns={'efo.id': "target", 'parent_efo.id': "source"}, inplace=True)
     logger.info("\n{}", df.head())
     create_import(df=df, meta_id=meta_id)
 
