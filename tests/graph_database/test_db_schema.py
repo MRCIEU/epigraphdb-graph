@@ -54,11 +54,7 @@ def test_meta_node_index():
     driver = neo4j_connect()
     with driver.session() as session:
         data = session.run(query).data()
-    actual_node_indexes = {
-        (_["labelsOrTypes"][0], _["properties"][0])
-        for _ in data
-        if _["uniqueness"] == "UNIQUE"
-    }
+    actual_node_indexes = {(_["labelsOrTypes"][0], _["properties"][0]) for _ in data}
     expected_node_indexes = {
         (key, value["index"]) for key, value in meta_node_dict.items()
     }
