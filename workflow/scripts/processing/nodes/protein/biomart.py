@@ -34,6 +34,7 @@ def protein():
 
     constraintCommands = [
         "CREATE CONSTRAINT ON (p:Protein) ASSERT p.uniprot_id IS UNIQUE",
+        "CREATE index on :Protein(name);",
     ]
     create_constraints(constraintCommands, meta_id)
 

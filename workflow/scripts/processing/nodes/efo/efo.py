@@ -37,6 +37,7 @@ def process():
     # constraints
     constraintCommands = [
         "CREATE CONSTRAINT ON (e:Efo) ASSERT e.id IS UNIQUE;",
+        "CREATE index on :Efo(value);",
     ]
     create_constraints(constraintCommands, meta_id)
 

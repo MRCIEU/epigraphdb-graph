@@ -40,6 +40,7 @@ def process():
     # create constraints
     constraintCommands = [
         "CREATE CONSTRAINT ON (p:Pathway) ASSERT p.id IS UNIQUE",
+        "CREATE index on :Pathway(name);",
     ]
     create_constraints(constraintCommands, meta_id)
 
