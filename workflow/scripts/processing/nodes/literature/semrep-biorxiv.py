@@ -76,5 +76,11 @@ def process():
     create_import(df=merge, meta_id=args.name)
 
 
+    # create constraints
+    constraintCommands = [
+        "CREATE index on :Literature(id);",
+    ]
+    create_constraints(constraintCommands, meta_id)
+
 if __name__ == "__main__":
     process()

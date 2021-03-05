@@ -85,8 +85,12 @@ def process():
 
     create_import(df=df, meta_id=meta_id)
 
+    # create constraints
     constraintCommands = [
         "CREATE INDEX ON :Gene(druggability_tier);",
+        "CREATE CONSTRAINT ON (g:Gene) ASSERT g.ensembl_id IS UNIQUE",
+        "CREATE INDEX ON :Gene(name)",
+        "CREATE INDEX ON :Gene(chr)",
     ]
     create_constraints(constraintCommands, meta_id)
 

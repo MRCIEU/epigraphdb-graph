@@ -97,5 +97,15 @@ def process():
 
     create_import(df=sem_df, meta_id=args.name)
 
+    # create constraints
+    constraintCommands = [
+        "CREATE CONSTRAINT ON (s:LiteratureTriple) ASSERT s.id IS UNIQUE",
+        "CREATE INDEX ON :LiteratureTriple(name);",
+        "CREATE INDEX ON :LiteratureTriple(subject_id);",
+        "CREATE INDEX ON :LiteratureTriple(object_id);",
+        "CREATE INDEX ON :LiteratureTriple(predicate);",
+    ]
+    create_constraints(constraintCommands, meta_id)
+
 if __name__ == "__main__":
     process()

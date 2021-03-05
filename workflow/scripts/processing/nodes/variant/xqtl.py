@@ -38,6 +38,8 @@ def variant():
     # create constraints
     constraintCommands = [
         "CREATE CONSTRAINT ON (v:Variant) ASSERT v.name IS UNIQUE;",
+        "CREATE index on :Variant(chr);",
+        "CREATE index on :Variant(pos);",
     ]
     create_constraints(constraintCommands, meta_id)
 
