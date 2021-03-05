@@ -39,7 +39,7 @@ def process():
 
     # create constraints
     constraintCommands = [
-        "CREATE index on :Drug(label);"
+        "CREATE CONSTRAINT ON (s:Drug) ASSERT s.label IS UNIQUE;"
         ]
     create_constraints(constraintCommands, meta_id)
 

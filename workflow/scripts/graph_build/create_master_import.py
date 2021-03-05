@@ -55,9 +55,9 @@ for i in source_data["rels"]:
                             + graph_bolt_port
                             + " -u "
                             + graph_user
-                            + " -p "
+                            + " -p '"
                             + graph_password
-                            + " '"
+                            + "' '"
                             + line.rstrip()
                             + "'"
                         )

@@ -40,6 +40,7 @@ def process():
 
     constraintCommands = [
         "CREATE CONSTRAINT ON (t:Tissue) ASSERT t.id IS UNIQUE",
+        "CREATE CONSTRAINT ON (t:Tissue) ASSERT t.name IS UNIQUE",
     ]
     create_constraints(constraintCommands, meta_id)
 

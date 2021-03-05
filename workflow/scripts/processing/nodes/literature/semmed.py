@@ -54,7 +54,7 @@ def process():
 
     # create constraints
     constraintCommands = [
-        "CREATE index on :Literature(id);",
+        "CREATE CONSTRAINT ON (s:Literature) ASSERT s.id IS UNIQUE;",
     ]
     create_constraints(constraintCommands, meta_id)
 

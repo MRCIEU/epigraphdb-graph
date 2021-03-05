@@ -102,6 +102,8 @@ def process():
     # create constraints
     constraintCommands = [
         "CREATE CONSTRAINT ON (s:LiteratureTerm) ASSERT s.id IS UNIQUE",
+        "CREATE index on :LiteratureTerm(type);",
+        "CREATE index on :LiteratureTerm(name);",
         "match (l:LiteratureTerm ) match (g:Gene) where toLower(g.name) = toLower(l.name) merge (l)-[:TERM_TO_GENE{_source:\"LiteratureTerm\"}]->(g) return count(g);",
     ]
     create_constraints(constraintCommands, meta_id)
