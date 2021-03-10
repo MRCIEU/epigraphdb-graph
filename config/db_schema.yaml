@@ -973,10 +973,6 @@ meta_rels:
         doc: >-
           Upper bound of the confidence interval.
         type: float
-      log10pval:
-        doc: >-
-          log10 transformed P-Value.
-        type: float
       method:
         doc: >-
           MR method, e.g. FE IVW etc.

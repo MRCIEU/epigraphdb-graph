@@ -54,10 +54,11 @@ def process_data():
     create_import(df=df, meta_id=meta_id)
 
     # constraints
-    constraintCommands = [
-        "match (g:Gwas)-[mr:MR_EVE_MR]->(g2:Gwas) set mr.log10pval = round(-log10(mr.pval));"
-    ]
-    create_constraints(constraintCommands, meta_id)
+    # do we need this ?
+    #constraintCommands = [
+    #    "match (g:Gwas)-[mr:MR_EVE_MR]->(g2:Gwas) set mr.log10pval = round(-log10(mr.pval));"
+    #]
+    #create_constraints(constraintCommands, meta_id)
 
 
 if __name__ == "__main__":
