@@ -5,6 +5,7 @@ import json
 import sys
 import csv
 import pandas as pd
+from loguru import logger
 
 #################### leave me heare please :) ########################
 
@@ -27,7 +28,7 @@ meta_id = args.name
 FILE = get_source(meta_id,1)
 
 def process_data():
-    print("Processing mr data...")
+    logger.info("Processing mr data...")
     col_names = [
         "source",
         "target",
@@ -41,58 +42,15 @@ def process_data():
         "selection",
         "moescore",
     ]
-    csv_data = []
-    for filename in os.listdir(dataDir):
-        if filename.startswith("mrmoe") and filename.endswith(".csv.gz"):
-            print(filename)
-            fShort = os.path.splitext(os.path.basename(filename))[0]
-            with gzip.open(os.path.join(dataDir, filename), "rt") as f:
-                next(f)
-                filereader = csv.reader(f, delimiter=",")
-                for line in filereader:
-                    (
-                        id1,
-                        id2,
-                        method,
-                        nsnp,
-                        b,
-                        se,
-                        ci_low,
-                        ci_upp,
-                        pval,
-                        selection,
-                        moescore,
-                    ) = line
-                    # skip rows with missing pval or se
-                    try:
-                        float(pval)
-                        float(se)
-                    except ValueError:
-                        continue
-                    if not id1.startswith("UKB"):
-                        id1 = "IEU-a-" + id1
-                    if not id2.startswith("UKB"):
-                        id2 = "IEU-a-" + id2
-                    new_line = [
-                        id1.replace(":", "-").lower(),
-                        id2.replace(":", "-").lower(),
-                        method,
-                        nsnp,
-                        b,
-                        se,
-                        ci_low,
-                        ci_upp,
-                        pval,
-                        selection,
-                        moescore,
-                    ]
-                    csv_data.append(new_line)
+    data = os.path.join(dataDir, FILE)
+    df = pd.read_csv(data,header=None)
 
-    # create csv file
-    df = pd.DataFrame(csv_data)
     df.columns = col_names
+    logger.info(df.shape)
+    df.dropna(subset=['pval','se'])
     df.drop_duplicates(inplace=True)
-    print(df.head())
+    logger.info(df.shape)
+    logger.info(df.head())
     create_import(df=df, meta_id=meta_id)
 
     # constraints

@@ -984,7 +984,7 @@ meta_rels:
       moescore:
         doc: >-
           Mix of Experts score.
-        type: string
+        type: float
       nsnp:
         doc: >-
           Number of SNPs.
