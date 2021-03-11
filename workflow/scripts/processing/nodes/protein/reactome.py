@@ -36,7 +36,11 @@ def process():
     logger.info(df.head())
 
     create_import(df=df, meta_id=meta_id)
-
+    constraintCommands = [
+        "CREATE CONSTRAINT ON (p:Protein) ASSERT p.uniprot_id IS UNIQUE",
+        "CREATE index on :Protein(name);",
+    ]
+    create_constraints(constraintCommands, meta_id)
 
 if __name__ == "__main__":
     process()

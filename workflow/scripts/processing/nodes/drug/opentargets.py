@@ -39,7 +39,9 @@ def process():
     create_import(df=df, meta_id=meta_id)
 
     # create constraints
-    constraintCommands = ["CREATE index on :Drug(label);"]
+    constraintCommands = [
+        "CREATE index on :Drug(label);"
+        ]
     create_constraints(constraintCommands, meta_id)
 
 

@@ -110,6 +110,8 @@ def process():
     # create the constraints and indexes
     constraintCommands = [
         "CREATE CONSTRAINT ON (d:Disease) ASSERT d.id IS UNIQUE",
+        "CREATE index on :Disease(label);",
+        "CREATE index on :Disease(doid);",
     ]
     create_constraints(constraintCommands, meta_id)
 

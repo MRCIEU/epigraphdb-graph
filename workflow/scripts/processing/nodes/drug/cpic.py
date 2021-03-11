@@ -37,6 +37,11 @@ def process():
     logger.info("\n {}", df.head())
     create_import(df=df, meta_id=meta_id)
 
+    # create constraints
+    constraintCommands = [
+        "CREATE CONSTRAINT ON (s:Drug) ASSERT s.label IS UNIQUE;"
+        ]
+    create_constraints(constraintCommands, meta_id)
 
 if __name__ == "__main__":
     process()

@@ -75,6 +75,11 @@ def process():
     logger.info(merge.shape)
     create_import(df=merge, meta_id=args.name)
 
+    # create constraints
+    constraintCommands = [
+        "CREATE CONSTRAINT ON (s:Literature) ASSERT s.id IS UNIQUE;",
+    ]
+    create_constraints(constraintCommands, meta_id)
 
 if __name__ == "__main__":
     process()

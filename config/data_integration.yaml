@@ -224,16 +224,9 @@ rels:
   mr-eve-mr:
     name: MR_EVE_MR
     files:
-      1: mr-eve/19_02_21/mrmoe1.csv.gz
-      2: mr-eve/19_02_21/mrmoe2.csv.gz
-      3: mr-eve/19_02_21/mrmoe3.csv.gz
-      4: mr-eve/19_02_21/mrmoe4.csv.gz
-      5: mr-eve/19_02_21/mrmoe5.csv.gz
-      6: mr-eve/19_02_21/mrmoe6.csv.gz
-      7: mr-eve/19_02_21/mrmoe7.csv.gz
-      8: mr-eve/19_02_21/mrmoe8.csv.gz
+      1: mr-eve/21_03_10/all_moe.csv.gz
     script: rels.mr_eve_mr
-    source: MR-EvE-2019-02-21
+    source: MR-EvE-2021-03-10
   
   mr-eve-gwas-variant:
     name: GWAS_TO_VARIANT
