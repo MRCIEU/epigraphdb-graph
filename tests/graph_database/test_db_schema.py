@@ -59,4 +59,4 @@ def test_meta_node_index():
         (key, value["index"]) for key, value in meta_node_dict.items()
     }
     # We would expect expected_indexes to be a subset of current_indexes
-    assert expected_node_indexes.difference(actual_node_indexes) == {}
+    assert len(expected_node_indexes.difference(actual_node_indexes)) == 0
