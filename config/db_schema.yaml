@@ -995,7 +995,12 @@ meta_rels:
         type: float
       selection:
         doc: >-
-          TODO Ben
+          Instrument selection.
+
+          - DF: directionality filtering
+          - HF: heterogeneity filtering
+          - Tophits: no filtering
+          - DF + HF: both types of filtering
         type: string
     required:
       - source
@@ -1065,7 +1070,7 @@ meta_rels:
       - action_type
   PATHWAY_CHILD_OF:
     doc: >-
-      Parent/child relationship of pathways. 
+      Parent/child relationship of pathways.
     properties:
       source:
         doc: ''
