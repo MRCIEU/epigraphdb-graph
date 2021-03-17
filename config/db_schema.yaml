@@ -679,7 +679,7 @@ meta_rels:
       - target
   GWAS_EFO_EBI:
     doc: >-
-      Vectology mapping between GWAS traits and EFO terms
+      Mapping between EBI GWAS Catalog GWAS traits and EFO terms.
     properties:
       source:
         doc: ''
