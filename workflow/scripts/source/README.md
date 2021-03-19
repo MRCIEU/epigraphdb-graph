@@ -45,14 +45,7 @@ mondo/mondo.json
 
 #### MR-EvE
 ```
-mr-eve/19_02_21/instruments.csv.gz
-mr-eve/19_02_21/mrmoe1.csv.gz
-mr-eve/19_02_21/mrmoe2.csv.gz
-mr-eve/19_02_21/mrmoe3.csv.gz
-mr-eve/19_02_21/mrmoe4.csv.gz
-mr-eve/19_02_21/mrmoe5.csv.gz
-mr-eve/19_02_21/mrmoe6.csv.gz
-mr-eve/19_02_21/variants.csv.gz
+mr-eve/21_03_10/all_moe.csv.gz
 ```
 
 #### OpenGWAS
