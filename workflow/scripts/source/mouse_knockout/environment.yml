@@ -11,5 +11,6 @@ dependencies:
   - loguru
   - black
   - jupyterlab=2.2
+  - nodejs
   - pip:
     - nb_black
