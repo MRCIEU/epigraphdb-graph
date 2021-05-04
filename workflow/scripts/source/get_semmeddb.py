@@ -1,10 +1,16 @@
 import os
 import sys
 import pandas as pd
+import wget
 from loguru import logger
 
 #load semmemd tab separated predication to filter and create smaller version
 PREDICATION_FILE = sys.argv[1]
+
+# data are downloaded from here https://ii.nlm.nih.gov/SemRep_SemMedDB_SKR/SemMedDB/SemMedDB_download.shtml
+# due to the license requirements, there doesn't seem to be a way to download the data easily
+# need to download the PREDICATION and CITATION CSV files
+
 
 def process():
     #applying same filters as MELODI Presto

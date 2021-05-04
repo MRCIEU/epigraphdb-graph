@@ -61,7 +61,7 @@ Download from websit
 - https://api.cpicpgx.org/data/
 
 ```
-wget -O cpicPairs-`date +"%d-%m-%y"`.csv https://api.cpicpgx.org/data/cpicPairs.csv
+python -m workflow.scripts.source.get_cpic
 ```
 
 ### Druggable Genes
@@ -81,11 +81,8 @@ python -m workflow.scripts.source.get_ebigwas
 
 ### EFO
 
-Todo:
-- Easy enough to get EFO data but harder to find parent/child relationships
-
 ```
-wget -O efo-v3.24.0.json https://github.com/EBISPOT/efo/releases/download/v3.24.0/efo.json
+python -m workflow.scripts.source.get_efo
 ```
 
 ### GWAS NLP

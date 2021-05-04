@@ -69,6 +69,8 @@ def enrich(gwasInfo, full):
     headers = {"content-type": "application/x-www-form-urlencoded"}
     for i in gwasInfo:
         logger.info(i)
+        if i.startswith('eqtl'):
+            continue
         iTrait = gwasInfo[i]
         for regex in filter_list:
             r = re.compile(regex)
