@@ -10,6 +10,7 @@ from workflow.scripts.utils import settings
 from workflow.scripts.utils.general import copy_source_data
 from workflow.scripts.utils.general import neo4j_connect
 from biomart import BiomartServer
+from loguru import logger
 
 data_name = "clinvar"
 
@@ -114,10 +115,17 @@ def make_gene_to_mondo_map(df):
     df = df[df["source_name"] == "MONDO"]
 
     # make tidy mondo ids
-    for ind in df.index:
-        mondo_id = str(df['source_id'][ind].split(":")[1])
-        mondo_url = "http://purl.obolibrary.org/obo/MONDO_" + mondo_id
-        df['source_id'][ind] = mondo_url
+    for ind, row in df.iterrows():
+        #logger.info(df['source_id'][ind])
+        # catch issue with malformed mondo rows
+        try:
+            mondo_id = str(df['source_id'][ind].split(":")[1])
+            mondo_url = "http://purl.obolibrary.org/obo/MONDO_" + mondo_id
+            df['source_id'][ind] = mondo_url
+        except Exception as e:
+            logger.warning(f"{e}: row {df[ind]} is not good, deleting it")
+            df.drop([ind],inplace=True)
+
 
     #  and select only required columns
     df = df[['ensembl_id', 'source_id', 'clinvar_gene_type', 'last_updated']]
