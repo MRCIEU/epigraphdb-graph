@@ -47,6 +47,14 @@ Uses the biomart python package to download gene and protein data
 python -m workflow.scripts.source.get_biomart
 ```
 
+### ClinVar
+
+Download data from clinvar and process
+
+```
+python -m workflow.scripts.source.get_clinvar
+```
+
 ### CPIC
 
 Download from websit
