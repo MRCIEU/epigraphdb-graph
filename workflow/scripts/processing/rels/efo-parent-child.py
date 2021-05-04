@@ -31,7 +31,7 @@ def process():
     data = os.path.join(dataDir, FILE)
     df = pd.read_csv(data)
     df.drop_duplicates(inplace=True)
-    df.rename(columns={'efo.id': "target", 'parent_efo.id': "source"}, inplace=True)
+    df.rename(columns={'sub': "target", 'obj': "source"}, inplace=True)
     logger.info("\n{}", df.head())
     create_import(df=df, meta_id=meta_id)
 

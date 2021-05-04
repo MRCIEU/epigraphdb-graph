@@ -95,9 +95,9 @@ meta_nodes:
         doc: >-
           EFO URL and identifier.
         type: string
-      type:
+      definition:
         doc: >-
-          EFO type.
+          Extended definition (EFO term).
         type: string
       value:
         doc: >-
@@ -643,6 +643,10 @@ meta_rels:
       target:
         doc: ''
         type: Efo
+      pred:
+        doc: >-
+          The predicate describing the connection, e.g. is_a
+        type: string
     required:
       - source
       - target
