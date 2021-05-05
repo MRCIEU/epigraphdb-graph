@@ -45,7 +45,9 @@ def process():
     df = df[(df['subject_novelty']==1) & (df['object_novelty']==1)]
     logger.info(df.shape)
     logger.info(f'\n{df.head()}')
-    filename = f'/tmp/{PREDICATION_FILE}.filter.gz'
+    sem_name = os.path.basename(PREDICATION_FILE).split(".")[0]
+    logger.info(sem_name)
+    filename = f'/tmp/{sem_name}_filter.csv.gz'
     df.to_csv(filename,index=False)
     copy_source_data(data_name=data_name,filename=filename)
 
