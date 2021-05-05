@@ -74,8 +74,11 @@ def process():
 
     df.to_csv(PREDICATION_FILE+'.filter',compression='gzip',index=False)
 
-
+def filter():
+    df = pd.read_csv(PREDICATION_FILE,nrows=1000)
+    logger.info(f'\n{df.head()}')
 
 if __name__ == "__main__":
-    process()
+    #process()
+    filter()
     

@@ -141,16 +141,9 @@ https://www.biorxiv.org/content/10.1101/173682v2
 
 Requires a UTS license - https://uts.nlm.nih.gov/uts/signup-login
 
-Download PREDICATION and CITATIONS SQL files from here - https://ii.nlm.nih.gov/SemRep_SemMedDB_SKR/SemMedDB/SemMedDB_download.shtml
+Download PREDICATION and CITATIONS CSV files from here - https://ii.nlm.nih.gov/SemRep_SemMedDB_SKR/SemMedDB/SemMedDB_download.shtml
 - semmedVERXXXXX_PREDICATION.sql.gz
 - semmedVERXXXXX_CITATIONS.sql.gz
-
-Convert to TSV
-
-```
-python worklow/scripts/source/mysql_to_csv.py <(gunzip -c semmedXXXXX_PREDICATION.sql.gz) | gzip > semmedXXXXX_PREDICATION.tsv.gz
-python worklow/scripts/source/mysql_to_csv.py <(gunzip -c semmedXXXXX_CITATIONS.sql.gz) | gzip > semmedXXXXX_CITATIONS.tsv.gz
-```
 
 Create filtered version:
 
