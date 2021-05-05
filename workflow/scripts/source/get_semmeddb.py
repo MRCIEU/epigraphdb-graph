@@ -14,11 +14,22 @@ PREDICATION_FILE = sys.argv[1]
 # due to the license requirements, there doesn't seem to be a way to download the data easily
 # need to download the PREDICATION and CITATION CSV files
 
+predIgnore = [
+        "PART_OF",
+        "ISA",
+        "LOCATION_OF",
+        "PROCESS_OF",
+        "ADMINISTERED_TO",
+        "METHOD_OF",
+        "USES",
+        "compared_with",
+    ]
+
 def process():
     df = pd.read_csv(PREDICATION_FILE)
     col_names=[
-        'predication_ID',
-        'sentence_ID',
+        'predication_id',
+        'sentence_id',
         'PMID',
         'predicate',
         'subject_id',
@@ -35,11 +46,19 @@ def process():
     ]
     df.columns=col_names
     logger.info(f'\n{df.head()}')
+    logger.info(df.shape)
+
+    # filter on predicates
+    df = df[~df.predicate.isin(predIgnore)]
+    logger.info(df.shape)
+
+    # filter on novelty
     logger.info(f"\n{df['subject_novelty'].value_counts()}")
     logger.info(f"\n{df['object_novelty'].value_counts()}")
-    sub_nov = df[df.subject_novelty==0]['subject_name'].value_counts()
-    logger.info(sub_nov)
-    logger.info(df.shape)
+    subject_nov = df[df.subject_novelty==0]['subject_name'].value_counts()
+    object_nov = df[df.subject_novelty==0]['subject_name'].value_counts()
+    logger.info(subject_nov)
+    logger.info(object_nov)
 
     # filter to only keep rows with both subject and object novelty of 1
     df = df[(df['subject_novelty']==1) & (df['object_novelty']==1)]
@@ -49,7 +68,7 @@ def process():
     logger.info(sem_name)
     filename = f'/tmp/{sem_name}_filter.csv.gz'
     df.to_csv(filename,index=False)
-    copy_source_data(data_name=data_name,filename=filename)
+    #copy_source_data(data_name=data_name,filename=filename)
 
 if __name__ == "__main__":
     process()
