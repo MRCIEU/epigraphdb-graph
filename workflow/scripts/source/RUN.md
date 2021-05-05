@@ -141,9 +141,10 @@ https://www.biorxiv.org/content/10.1101/173682v2
 
 Requires a UTS license - https://uts.nlm.nih.gov/uts/signup-login
 
-Download PREDICATION and CITATIONS CSV files from here - https://ii.nlm.nih.gov/SemRep_SemMedDB_SKR/SemMedDB/SemMedDB_download.shtml
-- semmedVERXXXXX_PREDICATION.sql.gz
-- semmedVERXXXXX_CITATIONS.sql.gz
+Download PREDICATION, CITATIONS and GENERIC_CONCEPT CSV files from here - https://ii.nlm.nih.gov/SemRep_SemMedDB_SKR/SemMedDB/SemMedDB_download.shtml
+- semmedVERXXXXX_PREDICATION.csv.gz
+- semmedVERXXXXX_CITATIONS.csv.gz
+- semmedVERXXXXX_GENERIC_CONCEPT.csv.gz
 
 Create filtered version:
 
@@ -153,7 +154,9 @@ python workflow/scripts/source/semmed_filter.py semmedXXXXX_PREDICATION.tsv.gz
 
 ### SemRep Arxiv
 
-Todo
+- Download bioRxiv and medRxiv data
+- Run SemRep
+- Parse results
 
 ### StringDB
 
