@@ -121,7 +121,7 @@ Used to create link between GWAS trait names and UMLS Literature Terms
 
 ```
 python -m workflow.scripts.source.get_metamap create
-find ./data/metamap/sep-traits/ -name "*.txt" | parallel -j 20 /data/software/metamap-lite/public_mm_lite/metamaplite.sh  --segment_lines {}
+find ./data/metamap/sep-traits/ -name "*.txt" | while read line; do if [[ ! -f "${line%.txt}.mmi" ]]; then echo $line; fi; done | parallel -j 20 /data/software/metamap-lite/public_mm_lite/metamaplite.sh  --segment_lines {};
 python -m workflow.scripts.source.get_metamap process
 ```
 
@@ -157,6 +157,7 @@ python workflow/scripts/source/semmed_filter.py semmedXXXXX_PREDICATION.tsv.gz
 - Download bioRxiv and medRxiv data
 - Run SemRep
 - Parse results
+- Copy to server
 
 ### StringDB
 

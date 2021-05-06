@@ -2,16 +2,23 @@ import subprocess
 import pandas as pd
 import os
 import datetime
+import requests
 
 from workflow.scripts.utils import settings
 from loguru import logger
 
 env_configs = settings.env_configs
 
-data_dir = os.path.join(env_configs["data_dir"], "vep")
+data_dir = "/tmp/vep"
 os.makedirs(data_dir,exist_ok=True)
 
 today = datetime.date.today()
+
+opengwas_data =  {
+        'name':'opengwas',
+        'file':os.path.join(env_configs['data_dir'],'opengwas','opengwas-tophits-2020-10-13.csv'),
+        'snp_col':'rsid'
+        }
 
 # setup
 # vep docker image needs setting up - note volumes need to be same for setup and run
@@ -19,13 +26,25 @@ today = datetime.date.today()
 
 vep_data_dir='/data/vep_data'
 
-def process_variants(variant_file):
-    df = pd.read_csv(variant_file,low_memory=False)
-    df = df['rsid']
-    df.drop_duplicates(inplace=True)
-    logger.info(df.head())
-    #in this example, only run 100 variants as can be quite slow
-    df.head(n=100).to_csv(f'{vep_data_dir}/variants-{today}.txt',index=False,header=False)
+def get_existing():
+    url = 'https://api.epigraphdb.org/cypher'
+    data = {'query': 'MATCH (v:Variant)-[r:VARIANT_TO_GENE]-(g:Gene) RETURN distinct v._id as variant_id'}
+    r = requests.post(url, json=data)
+    r.raise_for_status()
+    res = r.json()['results']
+    logger.info(len(res))
+    df = pd.DataFrame(res)
+    return df
+
+def process_variants(variant_data):
+    for i in variant_data:
+        logger.info(i)
+        logger.info(f"processing {i['name']}")
+        df = pd.read_csv(i['file'],low_memory=False)
+        df = df[i['snp_col']]
+        df.drop_duplicates(inplace=True)
+        logger.info(df.head())
+    #df.head.to_csv(f'{vep_data_dir}/variants-{today}.txt',index=False,header=False)
 
 def run_vep(variant_dir,variant_file):
     com="""
@@ -44,5 +63,14 @@ def run_vep(variant_dir,variant_file):
     subprocess.call(com, shell=True)
 
 if __name__ == "__main__":
-    process_variants(os.path.join(env_configs['data_dir'],'opengwas','opengwas-tophits-2020-10-13.csv'))
-    run_vep('/tmp',f'variants-{today}.txt')
+    variant_data = [
+        {
+        'name':'opengwas',
+        'file':os.path.join(env_configs['data_dir'],'opengwas','opengwas-tophits-2020-10-13.csv'),
+        'snp_col':'rsid'
+        }
+    ]
+    existing_df = get_existing()
+    logger.info(existing_df.head())
+    #process_variants(variant_data)
+    #run_vep('/tmp',f'variants-{today}.txt')
