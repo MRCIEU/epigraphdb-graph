@@ -5,20 +5,29 @@ import datetime
 import requests
 
 from workflow.scripts.utils import settings
+from workflow.scripts.utils.general import get_data_from_server
 from loguru import logger
 
 env_configs = settings.env_configs
 
-data_dir = "/tmp/vep"
+data_dir = "/tmp/epigraph-build/vep"
 os.makedirs(data_dir,exist_ok=True)
 
 today = datetime.date.today()
 
-opengwas_data =  {
+variant_data = [
+    {
         'name':'opengwas',
-        'file':os.path.join(env_configs['data_dir'],'opengwas','opengwas-tophits-2020-10-13.csv'),
+        'file':'opengwas/opengwas-tophits-2020-10-13.csv',
         'snp_col':'rsid'
-        }
+    },
+    {
+        'name':'mr-eve',
+        'file':'opengwas/opengwas-tophits-2020-10-13.csv',
+        'snp_col':'rsid'
+    },
+    #{}
+]
 
 # setup
 # vep docker image needs setting up - note volumes need to be same for setup and run
@@ -34,7 +43,12 @@ def get_existing():
     res = r.json()['results']
     logger.info(len(res))
     df = pd.DataFrame(res)
+    logger.info(df.head())
     return df
+
+def get_data():
+    for i in variant_data:
+        get_data_from_server(dataName=i['file'],outDir=data_dir)
 
 def process_variants(variant_data):
     for i in variant_data:
@@ -70,7 +84,7 @@ if __name__ == "__main__":
         'snp_col':'rsid'
         }
     ]
-    existing_df = get_existing()
-    logger.info(existing_df.head())
+    #existing_df = get_existing()
     #process_variants(variant_data)
     #run_vep('/tmp',f'variants-{today}.txt')
+    get_data()
