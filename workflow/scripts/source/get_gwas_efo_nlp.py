@@ -15,7 +15,7 @@ import gzip
 # create distance data by comparing all to all
 # takes about 15 minutes to run on 30,000 traits
 
-data_name = "trait-nlp"
+data_name = "EFO"
 EFO_data = "efo_nodes_2021-05-04.csv"
 tmp_dir = "/tmp/epigraph-build/EFO"
 timestr = time.strftime("%Y%m%d")
@@ -126,30 +126,32 @@ def get_efo_embeddings():
 def create_distances(gwas_df,efo_df):
     logger.info("Creating distances...")
 
-    score_cutoff = 0
-    filename = f'/tmp/gwas-efo-cosine-{timestr}-{score_cutoff}.tsv.gz'
-    o = gzip.open(filename, "wt")
+    score_cutoff = 0.5
+    filename = f'{tmp_dir}/gwas-efo-cosine-{timestr}-{score_cutoff}.tsv.gz'
+    if os.path.exists(filename):
+        logger.info(f'{filename} done')
+    else:
+        o = gzip.open(filename, "wt")
 
-    gwas_vectors = np.array(list(gwas_df['embedding']))
-    gwas_ids = gwas_df.index.tolist()
-    
-    efo_vectors = np.array(list(efo_df['embedding']))
-    efo_ids = list(efo_df['id'])
+        gwas_vectors = np.array(list(gwas_df['embedding']))
+        gwas_ids = gwas_df.index.tolist()
+        
+        efo_vectors = np.array(list(efo_df['embedding']))
+        efo_ids = list(efo_df['id'])
 
-    pws = distance.cdist(gwas_vectors,efo_vectors, metric="cosine")
-    logger.info(len(pws))
+        pws = distance.cdist(gwas_vectors,efo_vectors, metric="cosine")
+        logger.info(len(pws))
 
-    logger.info("Writing to file...")
-    for i in range(0, len(gwas_ids)):
-        for j in range(i, len(efo_ids)):
-            if i != j:
-                logger.info(f'{gwas_ids[i]} {efo_ids[j]} {pws[i][j]}')
-                score = 1 - pws[i][j]
-                if score > score_cutoff:
-                    t = f"{gwas_ids[i]}\t{efo_ids[j]}\t{str(score)}\n"
-                    o.write(t)
-    o.close()
-    logger.info(mCount)
+        logger.info("Writing to file...")
+        for i in range(0, len(gwas_ids)):
+            for j in range(i, len(efo_ids)):
+                if i != j:
+                    #logger.info(f'{gwas_ids[i]} {efo_ids[j]} {pws[i][j]}')
+                    score = 1 - pws[i][j]
+                    if score > score_cutoff:
+                        t = f"{gwas_ids[i]}\t{efo_ids[j]}\t{str(score)}\n"
+                        o.write(t)
+        o.close()
     copy_source_data(data_name, filename)
 
 if __name__ == "__main__":
