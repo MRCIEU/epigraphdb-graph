@@ -22,17 +22,13 @@ meta_id = args.name
 
 #######################################################################
 
-PREDICATION_FILE = get_source(meta_id, 1)
-
+PREDICATION_FILE = get_source(meta_id,1)
 
 def process():
     # load predicate data
     logger.info("loading data...")
     df = pd.read_csv(
-        os.path.join(dataDir, PREDICATION_FILE),
-        sep=",",
-        compression="gzip",
-        low_memory=False,
+        os.path.join(dataDir, PREDICATION_FILE), sep=",", compression="gzip", low_memory=False
     )
     logger.info(df.shape)
 
@@ -54,26 +50,17 @@ def process():
     df["id"] = df["subject_id"] + ":" + df["predicate"] + ":" + df["object_id"]
     df["name"] = df["subject_name"] + " " + df["predicate"] + " " + df["object_name"]
 
-    keep_cols = [
-        "predicate",
-        "subject_name",
-        "object_name",
-        "subject_type",
-        "object_type",
-        "subject_id",
-        "object_id",
-        "id",
-    ]
-    # keep_cols = ["predicate", "subject_id", "object_id", "id", "name"]
+    #keep_cols = ["predicate","subject_name","object_name","subject_type","object_type","subject_id","object_id","id"]
+    keep_cols = ["predicate", "subject_id", "object_id", "id", "name"]
 
-    # df = pd.DataFrame({"count": df.groupby(keep_cols).size()}).reset_index()
+    #df = pd.DataFrame({"count": df.groupby(keep_cols).size()}).reset_index()
     df = df[keep_cols]
-    df.drop_duplicates(subset=["id"], inplace=True)
+    df.drop_duplicates(subset=['id'],inplace=True)
     logger.info(df.shape)
     logger.info("\n {}", df.head())
 
-    # drop nas/rows with empty string
-    df.replace("", np.nan, inplace=True)
+    #drop nas/rows with empty string 
+    df.replace('', np.nan, inplace=True)
     df.dropna(inplace=True)
 
     create_import(df=df, meta_id=meta_id)

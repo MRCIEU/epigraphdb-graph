@@ -37,7 +37,7 @@ FILE = get_source(meta_id, 1)
 def process():
     # load predicate data
     logger.info("loading data {}", FILE)
-    df = pd.read_csv(os.path.join(dataDir, FILE), sep=",", compression="gzip")
+    df = pd.read_csv(os.path.join(dataDir, FILE), sep=",", compression="gzip",low_memory=False)
     logger.info(df.shape)
     logger.info(df.head())
 

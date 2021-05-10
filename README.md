@@ -212,6 +212,12 @@ You should then be able to explore the graph via Neo4j browser by visiting the U
 - Username = `GRAPH_USER from .env`
 - Password = `GRAPH_PASSWORD from .env` 
 
+## Adding users
+
+By default there will be an admin user with name and password as set in `.env`. To create users with different roles, e.g. read only, just run a cypher command such as 
+
+`CREATE USER new_user SET PASSWORD 'changeme' CHANGE REQUIRED SET STATUS SUSPENDED;`
+
 ## Potential problems
 
 #### docker-compose version
@@ -361,7 +367,8 @@ docker-compose -f docker-compose-public.yml up -d
 Stop neo4j but keep container open
 ```
 public_container=db-public
-docker exec -it $public_container cypher-shell -a neo4j://localhost:1234 -d system "stop database neo4j;"
+bolt_port=1234
+docker exec -it $public_container cypher-shell -a neo4j://localhost:$bolt_port -d system "stop database neo4j;"
 ```
 
 Restore the backup
@@ -371,7 +378,7 @@ docker exec -it $public_container bin/neo4j-admin restore --from data/neo4j --ve
 
 Restart the database
 ```
-docker exec -it $public_container cypher-shell -a neo4j://localhost:1234 -d system "start database neo4j;"
+docker exec -it $public_container cypher-shell -a neo4j://localhost:$bolt_port -d system "start database neo4j;"
 ```
 
 ## Merging upstream changes

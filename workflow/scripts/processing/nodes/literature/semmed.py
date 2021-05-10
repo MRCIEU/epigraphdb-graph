@@ -29,14 +29,14 @@ def process():
     # load predicate data
     logger.info("loading predication data...")
     pred_df = pd.read_csv(
-        os.path.join(dataDir, PREDICATION_FILE), sep=",", compression="gzip"
+        os.path.join(dataDir, PREDICATION_FILE), sep=",", compression="gzip",low_memory=False
     )
     pred_df["PMID"] = pred_df["PMID"].astype(str)
 
     logger.info("loading citation data...")
-    df = pd.read_csv(os.path.join(dataDir, PUB_FILE), sep="\t", compression="gzip")
+    df = pd.read_csv(os.path.join(dataDir, PUB_FILE), sep=",", compression="gzip")
     df.columns = ["id", "issn", "dp", "edat", "year"]
-    df["id"] = df["id"].str.replace("'", "")
+    #df["id"] = df["id"].str.replace("'", "")
     logger.info(df.shape)
 
     # merge with predication data

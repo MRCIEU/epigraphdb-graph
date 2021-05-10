@@ -362,10 +362,10 @@ meta_nodes:
         doc: >-
           The CUI of the object of the predication
         type: string
-      object_name:
-        doc: >-
-          The name of the object of the predication
-        type: string
+      #object_name:
+      #  doc: >-
+      #    The name of the object of the predication
+      #  type: string
       predicate:
         doc: >-
           The string representation of each predicate (for example TREATS, PROCESS_OF).
@@ -374,10 +374,10 @@ meta_nodes:
         doc: >-
           The CUI of the subject of the predication
         type: string
-      subject_name:
-        doc: >-
-          The name of the subject of the predication
-        type: string
+      #subject_name:
+      #  doc: >-
+      #    The name of the subject of the predication
+      #  type: string
     required:
       - id
       - name
