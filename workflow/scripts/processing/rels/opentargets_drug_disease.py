@@ -2,14 +2,12 @@ import os
 import sys
 import pandas as pd
 from loguru import logger
+
 #################### leave me heare please :) ########################
 
 from workflow.scripts.utils.general import setup, get_source, neo4j_connect
 
-from workflow.scripts.utils.writers import (
-    create_constraints,
-    create_import
-)
+from workflow.scripts.utils.writers import create_constraints, create_import
 
 # setup
 args, dataDir = setup()
@@ -20,9 +18,10 @@ meta_id = args.name
 
 #######################################################################
 
-FILE = get_source(meta_id,1)
+FILE = get_source(meta_id, 1)
 
-def get_disease_data():    
+
+def get_disease_data():
     driver = neo4j_connect()
     session = driver.session()
     query = """
@@ -41,9 +40,11 @@ def process():
     logger.info(df.shape)
     logger.info("\n {}", df.head())
 
-    #get disease data 
+    # get disease data
     disease_df = get_disease_data()
-    disease_df['mondo_efo_id'] = 'http://www.ebi.ac.uk/efo/EFO_'+disease_df['mondo_efo_id'].astype(str)
+    disease_df["mondo_efo_id"] = "http://www.ebi.ac.uk/efo/EFO_" + disease_df[
+        "mondo_efo_id"
+    ].astype(str)
     logger.info(disease_df)
 
     keep_cols = [
@@ -52,13 +53,17 @@ def process():
     ]
     df = df[keep_cols]
 
-    mondo_match = pd.merge(df,disease_df,left_on='efo_id',right_on='disease_id')[['molecule_name','disease_id']]
-    #logger.info(mondo_match)
+    mondo_match = pd.merge(df, disease_df, left_on="efo_id", right_on="disease_id")[
+        ["molecule_name", "disease_id"]
+    ]
+    # logger.info(mondo_match)
 
-    efo_match = pd.merge(df,disease_df,left_on='efo_id',right_on='mondo_efo_id')[['molecule_name','disease_id']]
-    #logger.info(efo_match)
+    efo_match = pd.merge(df, disease_df, left_on="efo_id", right_on="mondo_efo_id")[
+        ["molecule_name", "disease_id"]
+    ]
+    # logger.info(efo_match)
 
-    cat_df = pd.concat([mondo_match,efo_match])
+    cat_df = pd.concat([mondo_match, efo_match])
     logger.info(cat_df.shape)
 
     cat_df.drop_duplicates(inplace=True)
@@ -69,6 +74,7 @@ def process():
     cat_df["source"] = cat_df["source"].str.upper()
 
     create_import(df=cat_df, meta_id=meta_id)
+
 
 if __name__ == "__main__":
     process()

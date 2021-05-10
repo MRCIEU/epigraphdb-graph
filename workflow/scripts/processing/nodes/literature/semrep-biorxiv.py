@@ -21,8 +21,9 @@ meta_id = args.name
 
 #######################################################################
 
-BIO_DATA = get_source(meta_id,1)
-BIO_SEM = get_source(meta_id,2)
+BIO_DATA = get_source(meta_id, 1)
+BIO_SEM = get_source(meta_id, 2)
+
 
 def merge_data(lit_data, sem_data):
     # load predicate data
@@ -70,17 +71,18 @@ def merge_data(lit_data, sem_data):
     logger.info("\n{}", merge_df)
     return merge_df
 
+
 def process():
     merge = merge_data(BIO_DATA, BIO_SEM)
     logger.info(merge.shape)
     create_import(df=merge, meta_id=args.name)
-
 
     # create constraints
     constraintCommands = [
         "CREATE CONSTRAINT ON (s:Literature) ASSERT s.id IS UNIQUE;",
     ]
     create_constraints(constraintCommands, meta_id)
+
 
 if __name__ == "__main__":
     process()

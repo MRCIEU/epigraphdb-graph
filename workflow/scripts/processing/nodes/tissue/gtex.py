@@ -21,7 +21,8 @@ meta_id = args.name
 
 #######################################################################
 
-FILE = get_source(meta_id,1)
+FILE = get_source(meta_id, 1)
+
 
 def process():
     data = os.path.join(dataDir, FILE)
@@ -31,7 +32,7 @@ def process():
     tissue_names = list(gtex_df.columns)[2:]
     df = pd.DataFrame(tissue_names)
     df.columns = ["id"]
-    df['name']=df['id']
+    df["name"] = df["id"]
 
     logger.info(df.shape)
     logger.info("\n {}", df.head())

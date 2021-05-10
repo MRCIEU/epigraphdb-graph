@@ -21,24 +21,26 @@ meta_id = args.name
 
 #######################################################################
 
-FILE = get_source(meta_id,1)
+FILE = get_source(meta_id, 1)
 
-def make_id(row,sub_type):
-    id_val = row[sub_type+'_id']
-    if pd.isna(row[sub_type+'_id']):
-        id_val = row[sub_type+'_gene_id']
+
+def make_id(row, sub_type):
+    id_val = row[sub_type + "_id"]
+    if pd.isna(row[sub_type + "_id"]):
+        id_val = row[sub_type + "_gene_id"]
     return id_val
 
+
 def process():
-    logger.info("loading semrep data...{}",FILE)
+    logger.info("loading semrep data...{}", FILE)
     sem_df = pd.read_csv(os.path.join(dataDir, FILE), sep=",", compression="gzip")
     logger.info(sem_df)
-    #create new ids 
-    logger.info('Dealing with IDs')
-    sub_id = sem_df.apply(lambda row : make_id(row,'sub'), axis = 1)
-    obj_id = sem_df.apply(lambda row : make_id(row,'obj'), axis = 1)
-    sem_df['sub_id_all']=sub_id
-    sem_df['obj_id_all']=obj_id
+    # create new ids
+    logger.info("Dealing with IDs")
+    sub_id = sem_df.apply(lambda row: make_id(row, "sub"), axis=1)
+    obj_id = sem_df.apply(lambda row: make_id(row, "obj"), axis=1)
+    sem_df["sub_id_all"] = sub_id
+    sem_df["obj_id_all"] = obj_id
 
     # need to split subject and object ids by ,
     logger.info(sem_df.shape)
@@ -55,13 +57,13 @@ def process():
     )
     logger.info(sem_df.shape)
 
-    sem_id = sem_df['sub_id_all']+':'+sem_df['pred']+':'+sem_df['obj_id_all']
+    sem_id = sem_df["sub_id_all"] + ":" + sem_df["pred"] + ":" + sem_df["obj_id_all"]
     logger.debug(sem_id)
-    sem_df['id']=sem_id
+    sem_df["id"] = sem_id
     logger.info("\n{}", sem_df)
     logger.info(sem_df.shape)
 
-    sem_df.rename(columns={'obj_id_all':'object_id'},inplace=True)
+    sem_df.rename(columns={"obj_id_all": "object_id"}, inplace=True)
 
     keep_cols = ["object_id", "id"]
     sem_df = sem_df[keep_cols]
@@ -72,6 +74,7 @@ def process():
     logger.info("\n {}", sem_df.head())
 
     create_import(df=sem_df, meta_id=meta_id)
+
 
 if __name__ == "__main__":
     process()

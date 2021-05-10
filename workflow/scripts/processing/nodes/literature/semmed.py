@@ -21,8 +21,9 @@ meta_id = args.name
 
 #######################################################################
 
-PREDICATION_FILE = get_source(meta_id,1)
-PUB_FILE = get_source(meta_id,2)
+PREDICATION_FILE = get_source(meta_id, 1)
+PUB_FILE = get_source(meta_id, 2)
+
 
 def process():
     # load predicate data

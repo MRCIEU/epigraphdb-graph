@@ -21,36 +21,35 @@ meta_id = args.name
 
 #######################################################################
 
-SEM = get_source(meta_id,1)
+SEM = get_source(meta_id, 1)
 
-def make_id(row,sub_type):
-    id_val = row[sub_type+'_id']
-    if pd.isna(row[sub_type+'_id']):
-        id_val = row[sub_type+'_gene_id']
+
+def make_id(row, sub_type):
+    id_val = row[sub_type + "_id"]
+    if pd.isna(row[sub_type + "_id"]):
+        id_val = row[sub_type + "_gene_id"]
     return id_val
 
+
 def process():
-    logger.info("loading semrep data...{}",SEM)
+    logger.info("loading semrep data...{}", SEM)
     sem_df = pd.read_csv(os.path.join(dataDir, SEM), sep=",", compression="gzip")
 
-    #need to deal with cases where there is no id and only a gene_id
-    logger.info('Dealing with IDs')
-    sub_id = sem_df.apply(lambda row : make_id(row,'sub'), axis = 1)
-    obj_id = sem_df.apply(lambda row : make_id(row,'obj'), axis = 1)
-    sem_df['sub_id_all']=sub_id
-    sem_df['obj_id_all']=obj_id
+    # need to deal with cases where there is no id and only a gene_id
+    logger.info("Dealing with IDs")
+    sub_id = sem_df.apply(lambda row: make_id(row, "sub"), axis=1)
+    obj_id = sem_df.apply(lambda row: make_id(row, "obj"), axis=1)
+    sem_df["sub_id_all"] = sub_id
+    sem_df["obj_id_all"] = obj_id
 
     logger.info("\n{}", sem_df)
     logger.info(sem_df.shape)
 
     # merge
-    keep_cols=[
-        'sub_name'
-        'sub_type'
-        'sub_id_all',
-        'obj_id_all',
-        'obj_name'
-        'obj_type'
+    keep_cols = [
+        "sub_name" "sub_type" "sub_id_all",
+        "obj_id_all",
+        "obj_name" "obj_type",
     ]
 
     # need to split subject and object ids by ,
@@ -82,7 +81,7 @@ def process():
     logger.info("\n{}", term_df)
     logger.info(term_df.shape)
 
-    #some ids are badly formatted, e.g. ",123" and the split creates bad rows. Need to drop these
+    # some ids are badly formatted, e.g. ",123" and the split creates bad rows. Need to drop these
     term_df.dropna(inplace=True)
 
     # some ids have multiple types - need to create a list of types for each ID
@@ -104,9 +103,10 @@ def process():
         "CREATE CONSTRAINT ON (s:LiteratureTerm) ASSERT s.id IS UNIQUE",
         "CREATE index on :LiteratureTerm(type);",
         "CREATE index on :LiteratureTerm(name);",
-        "match (l:LiteratureTerm ) match (g:Gene) where toLower(g.name) = toLower(l.name) merge (l)-[:TERM_TO_GENE{_source:\"LiteratureTerm\"}]->(g) return count(g);",
+        'match (l:LiteratureTerm ) match (g:Gene) where toLower(g.name) = toLower(l.name) merge (l)-[:TERM_TO_GENE{_source:"LiteratureTerm"}]->(g) return count(g);',
     ]
     create_constraints(constraintCommands, meta_id)
+
 
 if __name__ == "__main__":
     process()

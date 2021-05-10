@@ -21,8 +21,9 @@ meta_id = args.name
 
 #######################################################################
 
-FILE1 = get_source(meta_id,1)
-FILE2 = get_source(meta_id,2)
+FILE1 = get_source(meta_id, 1)
+FILE2 = get_source(meta_id, 2)
+
 
 def process():
     df1 = pd.read_csv(os.path.join(dataDir, FILE1), sep=" ")

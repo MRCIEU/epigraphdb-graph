@@ -23,7 +23,8 @@ meta_id = args.name
 
 #######################################################################
 
-FILE = get_source(meta_id,1)
+FILE = get_source(meta_id, 1)
+
 
 def variant():
     mr_eve_data = "variants.csv.gz"
@@ -31,7 +32,9 @@ def variant():
     df = pd.read_csv(os.path.join(dataDir, FILE))
     print("Writing...")
     # df = df[["variantId:ID(variant)"]].drop_duplicates()
-    df.rename(columns={"pos:INT": "pos", "variantId:ID(variant)": "name"}, inplace=True)
+    df.rename(
+        columns={"pos:FLOAT": "pos", "variantId:ID(variant)": "name"}, inplace=True
+    )
     create_import(df=df, meta_id=meta_id)
 
     # create constraints

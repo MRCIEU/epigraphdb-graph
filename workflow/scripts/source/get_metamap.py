@@ -9,6 +9,7 @@ import glob
 import sys
 
 from workflow.scripts.utils.general import copy_source_data
+
 data_name = "metamap"
 today = datetime.date.today()
 
@@ -60,7 +61,7 @@ def filter_text(textList):
 def create_sep_files_for_metamap(df):
     for i, row in df.iterrows():
         gwas_id = row["id"]
-        o = open(os.path.join(meta_dir,gwas_id + ".txt"), "w")
+        o = open(os.path.join(meta_dir, gwas_id + ".txt"), "w")
         trait = row["filter"].replace("'", "").lower().rstrip()
         o.write(trait)
         o.close()
@@ -92,7 +93,7 @@ def create_metamap_data(dir):
     filename = os.path.join(dir, f"metamap-data-{today}.tsv")
     o2 = open(filename, "w")
     # os.chdir(dir)
-    for file in glob.glob(os.path.join(dir,"sep-traits", "*.mmi")):
+    for file in glob.glob(os.path.join(dir, "sep-traits", "*.mmi")):
         trait_id = file.split(".")[0]
         # get trait text
         t = open(os.path.join(trait_id + ".txt"), "r").read().rstrip()
@@ -118,16 +119,16 @@ def create_metamap_data(dir):
                         + "\n"
                     )
     o2.close()
-    copy_source_data(data_name=data_name,filename=filename)
+    copy_source_data(data_name=data_name, filename=filename)
 
 
 if __name__ == "__main__":
-    if sys.argv[1]=='create':
+    if sys.argv[1] == "create":
         gwas_info = get_gwas_data()
         gwas_df = create_data_set(gwas_info)
         create_sep_files_for_metamap(gwas_df)
-    elif sys.argv[1]=='process':
-        create_metamap_data('data/metamap')
+    elif sys.argv[1] == "process":
+        create_metamap_data("data/metamap")
     else:
-        print('create or process')
+        print("create or process")
         exit()

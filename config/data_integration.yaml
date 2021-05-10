@@ -72,9 +72,9 @@ nodes:
   lit-triple-semmed:
     name: LiteratureTriple
     files:
-      1: semmeddb/semmedVER42_2020_R_PREDICATION.tsv.gz.filter
+      1: semmeddb/semmedVER43_2021_R_PREDICATION_filter.csv.gz
     script: nodes.literature_triple.semmed
-    source: SemMedDB_VER42_2020_R
+    source: SemMedDB_VER43_2021_R
 
   lit-term-semmed:
     name: LiteratureTerm
@@ -238,9 +238,9 @@ rels:
   semmed-subject-term:
     name: SEMMEDDB_SUB
     files:
-      1: semmeddb/semmedVER42_2020_R_PREDICATION.tsv.gz.filter
+      1: semmeddb/semmedVER43_2021_R_PREDICATION_filter.csv.gz
     script: rels.semmed_subject_to_term
-    source: SemMedDB_VER42_2020_R
+    source: SemMedDB_VER43_2021_R
 
   semmed-object-term:
     name: SEMMEDDB_OBJ

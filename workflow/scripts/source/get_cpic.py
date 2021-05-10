@@ -20,9 +20,10 @@ cpic_data_file = os.path.join(data_dir, f"cpicPairs-{today}.csv")
 
 
 def download_data():
-    link = 'https://api.cpicpgx.org/data/cpicPairs.csv'
+    link = "https://api.cpicpgx.org/data/cpicPairs.csv"
     wget.download(link, cpic_data_file)
     copy_source_data(data_name=data_name, filename=cpic_data_file)
+
 
 if __name__ == "__main__":
     download_data()

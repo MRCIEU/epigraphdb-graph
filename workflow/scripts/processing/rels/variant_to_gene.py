@@ -24,10 +24,11 @@ meta_id = args.name
 
 #######################################################################
 
-FILE = get_source(meta_id,1)
+FILE = get_source(meta_id, 1)
+
 
 def process_data():
-    logger.info("Processing vep data {}",FILE)
+    logger.info("Processing vep data {}", FILE)
     col_names = [
         "source",
         "location",

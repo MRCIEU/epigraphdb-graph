@@ -12,6 +12,7 @@ data_name = "biomart"
 
 today = datetime.date.today()
 
+
 def biomart_to_file(atts, filename, type):
     logger.info("attributes: {} filename: {}", atts, filename)
 

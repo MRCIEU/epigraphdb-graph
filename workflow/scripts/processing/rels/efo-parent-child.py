@@ -23,7 +23,7 @@ meta_id = args.name
 
 #######################################################################
 
-FILE = get_source(meta_id,1)
+FILE = get_source(meta_id, 1)
 
 
 def process():
@@ -31,7 +31,7 @@ def process():
     data = os.path.join(dataDir, FILE)
     df = pd.read_csv(data)
     df.drop_duplicates(inplace=True)
-    df.rename(columns={'sub': "target", 'obj': "source"}, inplace=True)
+    df.rename(columns={"sub": "target", "obj": "source"}, inplace=True)
     logger.info("\n{}", df.head())
     create_import(df=df, meta_id=meta_id)
 

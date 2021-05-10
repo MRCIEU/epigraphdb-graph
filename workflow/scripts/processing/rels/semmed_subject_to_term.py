@@ -21,15 +21,13 @@ meta_id = args.name
 
 #######################################################################
 
-FILE = get_source(meta_id,1)
+FILE = get_source(meta_id, 1)
 
 
 def process():
     # load predicate data
     logger.info("loading data...")
-    df = pd.read_csv(
-        os.path.join(dataDir, FILE), sep=",", compression="gzip"
-    )
+    df = pd.read_csv(os.path.join(dataDir, FILE), sep=",", compression="gzip")
     logger.info(df.shape)
 
     # group

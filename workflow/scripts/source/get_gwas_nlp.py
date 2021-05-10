@@ -16,6 +16,7 @@ import gzip
 
 data_name = "trait-nlp"
 
+
 def get_gwas_traits():
     logger.info("Getting gwas data")
     gwas_api_url = "http://gwasapi.mrcieu.ac.uk/gwasinfo"
@@ -24,7 +25,7 @@ def get_gwas_traits():
     gwasInfo = {}
     for g in gwas_res:
         gwasInfo[gwas_res[g]["id"]] = gwas_res[g]["trait"]
-    logger.info("gwasinfo len {}",len(gwasInfo))
+    logger.info("gwasinfo len {}", len(gwasInfo))
     gwas_df = pd.DataFrame.from_dict(gwasInfo, orient="index", columns=["value"])
     logger.info(gwas_df.head())
     return gwas_df
@@ -70,7 +71,7 @@ def get_embedding(gwas_df):
             # if np.count_nonzero(embeddings[i])>0:
             embeddingList.append(embeddings[i])
             # vectorDic[k]={'text':textList[i],'embedding':embeddings[i]}
-    logger.info("{} embeddings done",len(embeddingList))
+    logger.info("{} embeddings done", len(embeddingList))
     gwas_df["embedding"] = embeddingList
     # add filtertext
     gwas_df["filter"] = filterList
@@ -96,7 +97,7 @@ def create_distances(gwas_df):
 
     timestr = time.strftime("%Y%m%d")
     score_cutoff = 0
-    filename = f'/tmp/ieu-gwas-cosine-{timestr}-{score_cutoff}.tsv.gz'
+    filename = f"/tmp/ieu-gwas-cosine-{timestr}-{score_cutoff}.tsv.gz"
     o = gzip.open(filename, "wt")
 
     logger.info(len(vectors))
@@ -119,6 +120,7 @@ def create_distances(gwas_df):
     o.close()
     logger.info(mCount)
     copy_source_data(data_name, filename)
+
 
 if __name__ == "__main__":
     gwas_info = get_gwas_traits()

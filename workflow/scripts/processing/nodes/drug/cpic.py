@@ -21,7 +21,8 @@ meta_id = args.name
 
 #######################################################################
 
-FILE = get_source(meta_id,1)
+FILE = get_source(meta_id, 1)
+
 
 def process():
     data = os.path.join(dataDir, FILE)
@@ -38,10 +39,9 @@ def process():
     create_import(df=df, meta_id=meta_id)
 
     # create constraints
-    constraintCommands = [
-        "CREATE CONSTRAINT ON (s:Drug) ASSERT s.label IS UNIQUE;"
-        ]
+    constraintCommands = ["CREATE CONSTRAINT ON (s:Drug) ASSERT s.label IS UNIQUE;"]
     create_constraints(constraintCommands, meta_id)
+
 
 if __name__ == "__main__":
     process()

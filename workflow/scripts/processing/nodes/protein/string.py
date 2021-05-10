@@ -21,8 +21,9 @@ meta_id = args.name
 
 #######################################################################
 
-FILE1 = get_source(meta_id,1)
-FILE2 = get_source(meta_id,2)
+FILE1 = get_source(meta_id, 1)
+FILE2 = get_source(meta_id, 2)
+
 
 def process():
     df1 = pd.read_csv(os.path.join(dataDir, FILE1), sep=" ")
@@ -49,7 +50,7 @@ def process():
     df_merge = dfp.merge(df2, left_on="protein", right_on="protein")
     df_merge = pd.DataFrame(df_merge["uniprot"])
     df_merge.columns = ["uniprot_id"]
-    df_merge['name'] = df_merge["uniprot_id"]
+    df_merge["name"] = df_merge["uniprot_id"]
     df_merge.drop_duplicates(inplace=True)
     logger.info(df_merge.shape)
     logger.info("\n {}", df_merge.head())
@@ -60,6 +61,7 @@ def process():
         "CREATE index on :Protein(name);",
     ]
     create_constraints(constraintCommands, meta_id)
+
 
 if __name__ == "__main__":
     process()

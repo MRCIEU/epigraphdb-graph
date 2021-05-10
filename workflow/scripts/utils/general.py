@@ -36,7 +36,9 @@ def neo4j_connect():
     else:
         auth_token = basic_auth(graph_user, graph_password)
         driver = GraphDatabase.driver(
-            "bolt://" + graph_host + ":" + graph_bolt_port, auth=auth_token, encrypted=False
+            "bolt://" + graph_host + ":" + graph_bolt_port,
+            auth=auth_token,
+            encrypted=False,
         )
     return driver
 
@@ -143,7 +145,7 @@ def get_schema_data(meta_name="all"):
             elif meta_name in schema_data["meta_rels"]:
                 schema_data = schema_data["meta_rels"][meta_name]
         except:
-            logger.error('Something is wrong with db_schema.yaml')
+            logger.error("Something is wrong with db_schema.yaml")
             exit()
     return schema_data
 
@@ -261,12 +263,13 @@ def create_df(data_dir, name, nrows=None):
     )
     return df
 
-def copy_source_data(data_name,filename):
+
+def copy_source_data(data_name, filename):
     # make sure graph directory exists
     server = env_configs["server_name"]
-    data_dir  = os.path.join(env_configs["data_dir"],data_name)
+    data_dir = os.path.join(env_configs["data_dir"], data_name)
 
-    #make directory
+    # make directory
     if server == None:
         com = f"mkdir -p {data_dir}"
     else:
@@ -274,7 +277,7 @@ def copy_source_data(data_name,filename):
     logger.info(com)
     subprocess.call(com, shell=True)
 
-    #copy new files to data directory
+    # copy new files to data directory
     logger.info("Syncing {}", filename)
     if server == None:
         com = f"rsync -avz {filename} {data_dir}"

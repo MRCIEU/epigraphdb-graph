@@ -21,7 +21,8 @@ meta_id = args.name
 
 #######################################################################
 
-FILE = get_source(meta_id,1)
+FILE = get_source(meta_id, 1)
+
 
 def process():
     # select the file
@@ -32,7 +33,21 @@ def process():
 
     # drop some columns
     df.drop(
-        ["access", "priority", "coverage", "doi", "group_name", "imputation_panel", "ontology", "study_design", "covariates",""], axis=1, inplace=True, errors="ignore"
+        [
+            "access",
+            "priority",
+            "coverage",
+            "doi",
+            "group_name",
+            "imputation_panel",
+            "ontology",
+            "study_design",
+            "covariates",
+            "",
+        ],
+        axis=1,
+        inplace=True,
+        errors="ignore",
     )
     logger.info(df.shape)
 

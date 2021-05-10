@@ -21,7 +21,7 @@ meta_id = args.name
 
 #######################################################################
 
-FILE = get_source(meta_id,1)
+FILE = get_source(meta_id, 1)
 
 # todo
 # deal with name case issues, e.g.
@@ -37,9 +37,7 @@ FILE = get_source(meta_id,1)
 def process():
     # load predicate data
     logger.info("loading data {}", FILE)
-    df = pd.read_csv(
-        os.path.join(dataDir, FILE), sep=",", compression="gzip"
-    )
+    df = pd.read_csv(os.path.join(dataDir, FILE), sep=",", compression="gzip")
     logger.info(df.shape)
     logger.info(df.head())
 
@@ -89,8 +87,8 @@ def process():
     #    id_name_dic[i]=l
 
     # create counts by id
-    #term_df = pd.DataFrame({"count": term_df.groupby(["id"]).size()}).reset_index()
-    
+    # term_df = pd.DataFrame({"count": term_df.groupby(["id"]).size()}).reset_index()
+
     # add type lists back as ; separated array
     term_df["type"] = term_df["id"].map(id_type_dic)
     logger.info("\n {}", term_df)
@@ -105,7 +103,7 @@ def process():
         "CREATE CONSTRAINT ON (s:LiteratureTerm) ASSERT s.id IS UNIQUE",
         "CREATE index on :LiteratureTerm(type);",
         "CREATE index on :LiteratureTerm(name);",
-        "match (l:LiteratureTerm ) match (g:Gene) where toLower(g.name) = toLower(l.name) merge (l)-[:TERM_TO_GENE{_source:\"LiteratureTerm\"}]->(g) return count(g);",
+        'match (l:LiteratureTerm ) match (g:Gene) where toLower(g.name) = toLower(l.name) merge (l)-[:TERM_TO_GENE{_source:"LiteratureTerm"}]->(g) return count(g);',
     ]
     create_constraints(constraintCommands, meta_id)
 

@@ -25,7 +25,8 @@ meta_id = args.name
 
 #######################################################################
 
-FILE = get_source(meta_id,1)
+FILE = get_source(meta_id, 1)
+
 
 def process_data():
     logger.info("Processing mr data...")
@@ -43,11 +44,11 @@ def process_data():
         "moescore",
     ]
     data = os.path.join(dataDir, FILE)
-    df = pd.read_csv(data,header=None)
+    df = pd.read_csv(data, header=None)
 
     df.columns = col_names
     logger.info(df.shape)
-    df.dropna(subset=['pval','se'])
+    df.dropna(subset=["pval", "se"])
     df.drop_duplicates(inplace=True)
     logger.info(df.shape)
     logger.info(df.head())
@@ -55,10 +56,10 @@ def process_data():
 
     # constraints
     # do we need this ?
-    #constraintCommands = [
+    # constraintCommands = [
     #    "match (g:Gwas)-[mr:MR_EVE_MR]->(g2:Gwas) set mr.log10pval = round(-log10(mr.pval));"
-    #]
-    #create_constraints(constraintCommands, meta_id)
+    # ]
+    # create_constraints(constraintCommands, meta_id)
 
 
 if __name__ == "__main__":

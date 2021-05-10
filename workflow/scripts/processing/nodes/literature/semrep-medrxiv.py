@@ -21,8 +21,9 @@ meta_id = args.name
 
 #######################################################################
 
-MED_DATA = get_source(meta_id,1)
-MED_SEM = get_source(meta_id,2)
+MED_DATA = get_source(meta_id, 1)
+MED_SEM = get_source(meta_id, 2)
+
 
 def merge_data(lit_data, sem_data):
     # load predicate data
@@ -32,7 +33,7 @@ def merge_data(lit_data, sem_data):
 
     logger.info("loading semrep data...")
     sem_df = pd.read_csv(os.path.join(dataDir, sem_data), sep=",", compression="gzip")
-    
+
     logger.info("\n{}", sem_df)
     logger.info(sem_df.shape)
 
@@ -70,6 +71,7 @@ def merge_data(lit_data, sem_data):
     logger.info("\n{}", merge_df)
     return merge_df
 
+
 def process():
     merge = merge_data(MED_DATA, MED_SEM)
     logger.info(merge.shape)
@@ -80,6 +82,7 @@ def process():
         "CREATE CONSTRAINT ON (s:Literature) ASSERT s.id IS UNIQUE;",
     ]
     create_constraints(constraintCommands, meta_id)
+
 
 if __name__ == "__main__":
     process()

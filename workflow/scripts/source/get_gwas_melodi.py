@@ -13,10 +13,10 @@ import gzip
 from loguru import logger
 from workflow.scripts.utils.general import copy_source_data
 
-api_url = 'https://melodi-presto.mrcieu.ac.uk/api/'
-os.makedirs('melodi',exist_ok=True)
+api_url = "https://melodi-presto.mrcieu.ac.uk/api/"
+os.makedirs("melodi", exist_ok=True)
 today = datetime.date.today()
-data_name = 'melodi'
+data_name = "melodi"
 
 filter_list = [
     "^Blood clot, DVT, bronchitis, emphysema, asthma, rhinitis, eczema, allergy diagnosed by doctor: (.*)",
@@ -41,6 +41,7 @@ filter_list = [
     "(.*?)\(.*?\)$",
 ]
 
+
 def get_gwas_filter():
     filterList = []
     filterFile = "data/ukb_id_keep.txt"
@@ -49,6 +50,7 @@ def get_gwas_filter():
             filterList.append(line.rstrip())
     return filterList
 
+
 def get_gwas_data():
     gwas_api_url = "http://gwasapi.mrcieu.ac.uk/gwasinfo"
     gwas_res = requests.get(gwas_api_url).json()
@@ -56,11 +58,12 @@ def get_gwas_data():
     gwasInfo = {}
     for g in gwas_res:
         gwasInfo[gwas_res[g]["id"]] = gwas_res[g]["trait"]
-        #if gwas_res[g]["id"] == "ieu-a-1137":
-            #gwasInfo[gwas_res[g]["id"]] = gwas_res[g]["trait"]
+        # if gwas_res[g]["id"] == "ieu-a-1137":
+        # gwasInfo[gwas_res[g]["id"]] = gwas_res[g]["trait"]
         #    gwasInfo[gwas_res[g]["id"]] = 'PCSK9'
-    logger.info("gwasinfo {}",len(gwasInfo))
+    logger.info("gwasinfo {}", len(gwasInfo))
     return gwasInfo
+
 
 def enrich(gwasInfo, full):
     # get enriched triples for all GWAS
@@ -69,7 +72,7 @@ def enrich(gwasInfo, full):
     headers = {"content-type": "application/x-www-form-urlencoded"}
     for i in gwasInfo:
         logger.info(i)
-        if i.startswith('eqtl'):
+        if i.startswith("eqtl"):
             continue
         iTrait = gwasInfo[i]
         for regex in filter_list:
@@ -78,11 +81,11 @@ def enrich(gwasInfo, full):
             if mi:
                 iTrait = mi.group(1)
         params = {"query": iTrait}
-        logger.info("{} {}",url, params)
+        logger.info("{} {}", url, params)
         r = requests.post(url, data=json.dumps(params), headers=headers)
         # df = pd.(json.dumps(r.text))
         try:
-            #data_only = list(json.loads(r.text).values())[0]
+            # data_only = list(json.loads(r.text).values())[0]
             data_only = json.loads(r.text)
             # df = list()
             df = pd.DataFrame.from_dict(data_only)
@@ -94,10 +97,12 @@ def enrich(gwasInfo, full):
         except:
             logger.warning("no data")
 
+
 def chunks(data, SIZE=100):
     it = iter(data)
     for i in range(0, len(data), SIZE):
         yield {k: data[k] for k in islice(it, SIZE)}
+
 
 def melodi_gwas():
     # gwasInfo={'1':'leptin','2':'adiponectin'}
@@ -113,22 +118,23 @@ def melodi_gwas():
     # create test set
     gwasInfoTest = {k: gwasInfo[k] for k in list(gwasInfo)[:10]}
     logger.info(len(gwasInfoTest))
-    #gwasInfo = gwasInfoTest 
+    # gwasInfo = gwasInfoTest
 
     # enrich in parallel
-    gwasChunks = chunks(gwasInfo,10)
+    gwasChunks = chunks(gwasInfo, 10)
     pool = mp.Pool(processes=10)
-    results = pool.starmap(enrich, [(gwasData,gwasInfo) for gwasData in gwasChunks])
+    results = pool.starmap(enrich, [(gwasData, gwasInfo) for gwasData in gwasChunks])
     pool.close()
 
-    #create single file
+    # create single file
     filename = f"gwas-melodi-enrich-{today}.tsv.gz"
     com = f"for i in melodi/*; do tail -n +2 $i; done | gzip > {filename}"
     subprocess.call(com, shell=True)
-    copy_source_data(data_name=data_name,filename=filename)
+    copy_source_data(data_name=data_name, filename=filename)
 
     # takes 34 minutes for 11k GWAS and 4.5k output
     # takes 167 minutes for 31k GWAS and 2.1GB output
+
 
 if __name__ == "__main__":
     melodi_gwas()

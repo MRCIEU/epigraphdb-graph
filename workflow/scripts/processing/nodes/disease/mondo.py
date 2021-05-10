@@ -23,7 +23,8 @@ meta_id = args.name
 
 #######################################################################
 
-FILE = get_source(meta_id,1)
+FILE = get_source(meta_id, 1)
+
 
 def create_ontoDic():
     ontoDic = {"doid": [], "umls": [], "efo": [], "icd9": [], "icd10": [], "mesh": []}
@@ -39,7 +40,7 @@ def create_ontology_properties(ontoList):
                 ontoDic[ont.lower()].append(val)
     for i in ontoDic:
         if len(ontoDic[i]) == 0:
-            #set to empty to remove property from Neo4j
+            # set to empty to remove property from Neo4j
             ontoDic[i] = ""
     return ontoDic
 
@@ -61,7 +62,7 @@ def process():
                 if "deprecated" in d["meta"]:
                     if d["meta"]["deprecated"] == True:
                         continue
-            #logger.debug(d)
+            # logger.debug(d)
             if "lbl" not in d:
                 continue
             mondo_id = d["id"]
@@ -71,7 +72,11 @@ def process():
             ontoDic = create_ontoDic()
             if "meta" in d:
                 if "definition" in d["meta"]:
-                    definition = d["meta"]["definition"]["val"].replace('"', "").replace('\n',' ')
+                    definition = (
+                        d["meta"]["definition"]["val"]
+                        .replace('"', "")
+                        .replace("\n", " ")
+                    )
                 if "xrefs" in d["meta"]:
                     for x in d["meta"]["xrefs"]:
                         xrefs.append(x["val"])
@@ -140,7 +145,7 @@ def link():
         """
     )
 
-    #umls using text
+    # umls using text
     load_text.append(
         f"""
         MATCH 

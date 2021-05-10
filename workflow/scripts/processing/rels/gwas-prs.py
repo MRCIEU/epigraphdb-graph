@@ -24,8 +24,9 @@ meta_id = args.name
 
 #######################################################################
 
-FILE1 = get_source(meta_id,1)
-FILE2 = get_source(meta_id,2)
+FILE1 = get_source(meta_id, 1)
+FILE2 = get_source(meta_id, 2)
+
 
 def get_prs_gwas_ids():
     idList = []
