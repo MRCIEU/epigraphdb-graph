@@ -218,6 +218,10 @@ By default there will be an admin user with name and password as set in `.env`. 
 
 `CREATE USER new_user SET PASSWORD 'changeme' CHANGE REQUIRED SET STATUS SUSPENDED;`
 
+Then add `reader` role
+
+`GRANT ROLE reader TO new_user;`
+
 ## Potential problems
 
 #### docker-compose version

@@ -31,7 +31,7 @@ def process():
     pred_df = pd.read_csv(
         os.path.join(dataDir, PREDICATION_FILE), sep=",", compression="gzip",low_memory=False
     )
-    pred_df["PMID"] = pred_df["PMID"].astype(str)
+    #pred_df["PMID"] = pred_df["PMID"].astype(str)
 
     logger.info("loading citation data...")
     df = pd.read_csv(os.path.join(dataDir, PUB_FILE), sep=",", compression="gzip")
