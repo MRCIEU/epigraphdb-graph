@@ -280,7 +280,7 @@ rels:
   gwas-nlp:
     name: GWAS_NLP
     files:
-      1: trait-nlp/iieu-gwas-cosine-20210504-0.tsv.gz
+      1: trait-nlp/ieu-gwas-cosine-20210504-0.tsv.gz
     script: rels.gwas-nlp
     source: Vectology-2021-05-04  
     

@@ -5,7 +5,7 @@ from loguru import logger
 
 #################### leave me heare please :) ########################
 
-from workflow.scripts.utils.general import setup, get_source, neo4j_connect
+from workflow.scripts.utils.general import setup, get_source
 
 from workflow.scripts.utils.writers import create_constraints, create_import
 
@@ -20,18 +20,27 @@ meta_id = args.name
 
 FILE = get_source(meta_id, 1)
 
+# removed this call to the graph as if graph hasn't been created this can't happen
+#def get_disease_data():
+#    driver = neo4j_connect()
+#    session = driver.session()
+#    query = """
+#        match (d:Disease) unwind(d.efo) as mondo_efo_id return d.id as disease_id, mondo_efo_id;
+#    """
+#    query_data = session.run(query).data()
+#    df = pd.json_normalize(query_data)
+#    logger.info(df)
+#    return df
 
-def get_disease_data():
-    driver = neo4j_connect()
-    session = driver.session()
-    query = """
-        match (d:Disease) unwind(d.efo) as mondo_efo_id return d.id as disease_id, mondo_efo_id;
-    """
-    query_data = session.run(query).data()
-    df = pd.json_normalize(query_data)
+def get_disease_data_from_file():
+    # get version number
+    from workflow.scripts.utils import settings
+    env_configs = settings.env_configs
+    graph_version = env_configs["graph_version"]
+
+    df = pd.read_csv(f'neo4j/{graph_version}/import/nodes/disease-mondo/efo.csv',names=['mondo_efo_id','disease_id'])
     logger.info(df)
     return df
-
 
 def process():
     data = os.path.join(dataDir, FILE)
@@ -41,7 +50,7 @@ def process():
     logger.info("\n {}", df.head())
 
     # get disease data
-    disease_df = get_disease_data()
+    disease_df = get_disease_data_from_file()
     disease_df["mondo_efo_id"] = "http://www.ebi.ac.uk/efo/EFO_" + disease_df[
         "mondo_efo_id"
     ].astype(str)

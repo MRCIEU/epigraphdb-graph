@@ -106,7 +106,6 @@ meta_nodes:
     required:
       - id
       - value
-      - type
     index: id
     meta:
       _id: id
