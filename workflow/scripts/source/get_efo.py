@@ -42,7 +42,7 @@ def create_nodes():
                     if "meta" in n:
                         if "definition" in n["meta"]:
                             if "val" in n["meta"]["definition"]:
-                                efo_def = n["meta"]["definition"]["val"].replace('\\n',' ').strip()
+                                efo_def = n["meta"]["definition"]["val"].replace('\\n',' ').replace('\n',' ').strip()
                     node_data.append(
                         {"id": efo_id, "lbl": efo_lbl, "definition": efo_def}
                     )

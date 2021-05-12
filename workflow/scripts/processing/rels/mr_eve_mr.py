@@ -44,10 +44,20 @@ def process_data():
         "moescore",
     ]
     data = os.path.join(dataDir, FILE)
-    df = pd.read_csv(data, header=None)
-
+    # add comment to catch stray headers
+    df = pd.read_csv(data, header=None, low_memory=False, comment=':')
     df.columns = col_names
     logger.info(df.shape)
+    # comment thing doesn't work
+    df = df[~df['source'].str.startswith(':START_ID')]
+    logger.info(df.shape)
+
+    # drop rows with 0 nsnp
+    #logger.info(df.dtypes)
+    #df["nsnp"] = pd.to_numeric(df["nsnp"])
+    #df = df[~df['nsnp']==0]
+    #logger.info(df.shape)
+
     df.dropna(subset=["pval", "se"])
     df.drop_duplicates(inplace=True)
     logger.info(df.shape)
