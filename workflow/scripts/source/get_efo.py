@@ -37,12 +37,12 @@ def create_nodes():
                 # logger.info(json.dumps(n, indent=4, sort_keys=True))
                 efo_id = n["id"]
                 if "lbl" in n:
-                    efo_lbl = n["lbl"]
+                    efo_lbl = n["lbl"].replace('\n',' ').strip()
                     efo_def = "NA"
                     if "meta" in n:
                         if "definition" in n["meta"]:
                             if "val" in n["meta"]["definition"]:
-                                efo_def = n["meta"]["definition"]["val"]
+                                efo_def = n["meta"]["definition"]["val"].replace('\\n',' ').strip()
                     node_data.append(
                         {"id": efo_id, "lbl": efo_lbl, "definition": efo_def}
                     )
