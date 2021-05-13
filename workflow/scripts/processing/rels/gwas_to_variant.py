@@ -52,9 +52,6 @@ def process_data():
                 float(eaf)
             except ValueError:
                 continue
-            if not gwas.startswith("UKB"):
-                gwas = "IEU-a-" + gwas
-            gwas = gwas.replace(":", "-")
             t = [
                 variant,
                 gwas.lower(),
