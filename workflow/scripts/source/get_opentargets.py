@@ -19,11 +19,14 @@ data_name = "opentargets"
 
 today = datetime.date.today()
 
+#ot_data_v = '19.11'
+ot_data_v = '21.04'
+
 # Params
 N_PER_CHUNK = 100
 N_PROCS = min(8, max(cpu_count() - 1, 1))
 OPENTARGETS_API_URL = "https://api.opentargets.io/v3"
-OPENTARGETS_TARGETS_URL = "https://storage.googleapis.com/open-targets-data-releases/19.11/output/19.11_target_list.csv.gz"
+OPENTARGETS_TARGETS_URL = f"https://storage.googleapis.com/open-targets-data-releases/{ot_data_v}/output/{ot_data_v}_target_list.csv.gz"
 DATA_DIR = Path("~/data/export").expanduser()
 OPENTARGETS_DIR = DATA_DIR / "opentargets"
 OUTPUT_FILE = OPENTARGETS_DIR / "opentargets.csv"
@@ -31,7 +34,8 @@ OUTPUT_FILE = OPENTARGETS_DIR / "opentargets.csv"
 
 def get_ensembl_id() -> List[str]:
     logger.info("get_ensembl_id")
-    file_path_gz = Path(f"/tmp/19.11_target_list_{today}.csv.gz")
+    file_path_gz = Path(f"/tmp/{ot_data_v}_target_list_{today}.csv.gz")
+    logger.info(file_path_gz)
     with requests.get(OPENTARGETS_TARGETS_URL, stream=True) as r:
         r.raise_for_status()
         with open(file_path_gz, "wb") as f:
