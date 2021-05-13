@@ -44,9 +44,9 @@ nodes:
   drug-ot:
     name: Drug
     files:
-      1: opentargets/open_targets_2020-10-19.csv
+      1: opentargets/open_targets_2021-05-13.csv
     script: nodes.drug.opentargets
-    source: Opentargets-2020-10-19
+    source: Opentargets-21.04
 
   variant-xqtl:
     name: Variant
@@ -210,9 +210,9 @@ rels:
   ot-drug-target:
     name: OPENTARGETS_DRUG_TO_TARGET
     files:
-      1: opentargets/open_targets_2020-10-19.csv
+      1: opentargets/open_targets_2021-05-13.csv
     script: rels.opentargets_drug_target
-    source: Opentargets-2020-10-19
+    source: Opentargets-21.04
 
   obs-cor:
     name: OBS_COR
@@ -287,9 +287,9 @@ rels:
   ot-drug-disease:
     name: OPENTARGETS_DRUG_TO_DISEASE
     files:
-      1: opentargets/open_targets_2020-10-19.csv
+      1: opentargets/open_targets_2021-05-13.csv
     script: rels.opentargets_drug_disease
-    source: Opentargets-2020-08-24
+    source: Opentargets-21.04
 
   cpic-drug-gene:
     name: CPIC
