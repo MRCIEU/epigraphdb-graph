@@ -218,6 +218,10 @@ By default there will be an admin user with name and password as set in `.env`. 
 
 `CREATE USER new_user SET PASSWORD 'changeme' CHANGE REQUIRED SET STATUS SUSPENDED;`
 
+or if no change of password required 
+
+`CREATE USER new_user SET PASSWORD 'changeme' CHANGE NOT REQUIRED;`
+
 Then add `reader` role
 
 `GRANT ROLE reader TO new_user;`
