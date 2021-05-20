@@ -36,6 +36,12 @@ def create_nodes():
             for n in g["nodes"]:
                 # logger.info(json.dumps(n, indent=4, sort_keys=True))
                 efo_id = n["id"]
+                umls="NA"
+                if 'meta' in n:
+                    if 'xrefs' in n['meta']:
+                        for i in n['meta']['xrefs']:
+                            if i['val'].startswith('UMLS'):
+                                umls = i['val'].split(':')[1]
                 if "lbl" in n:
                     efo_lbl = n["lbl"].replace('\n',' ').strip()
                     efo_def = "NA"
@@ -44,7 +50,7 @@ def create_nodes():
                             if "val" in n["meta"]["definition"]:
                                 efo_def = n["meta"]["definition"]["val"].replace('\\n',' ').replace('\n',' ').strip()
                     node_data.append(
-                        {"id": efo_id, "lbl": efo_lbl, "definition": efo_def}
+                        {"id": efo_id, "lbl": efo_lbl, "definition": efo_def, "umls":umls}
                     )
     logger.info(f"{len(node_data)} nodes created")
     node_df = pd.DataFrame(node_data)
@@ -72,6 +78,6 @@ def create_edges():
 
 
 if __name__ == "__main__":
-    download_data()
+    #download_data()
     create_nodes()
     create_edges()

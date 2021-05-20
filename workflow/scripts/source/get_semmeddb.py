@@ -26,6 +26,21 @@ predIgnore = [
     "compared_with",
 ]
 
+typeFilterList = [
+        "aapp",
+        "clnd",
+        "clna",
+        "dsyn",
+        "enzy",
+        "gngm",
+        "chem",
+        "clnd",
+        "horm",
+        "hops",
+        "inch",
+        "orch",
+        "phsu",
+    ]
 
 def process():
     df = pd.read_csv(PREDICATION_FILE, encoding="ISO-8859-1")
@@ -53,19 +68,6 @@ def process():
     # filter on predicates
     df = df[~df.predicate.isin(predIgnore)]
     logger.info(df.shape)
-
-    # filter on novelty columns
-    # logger.info(f"\n{df['subject_novelty'].value_counts()}")
-    # logger.info(f"\n{df['object_novelty'].value_counts()}")
-    # subject_nov = df[df.subject_novelty==0]['subject_name'].value_counts()
-    # object_nov = df[df.subject_novelty==0]['object_name'].value_counts()
-    # logger.info(subject_nov)
-    # logger.info(object_nov)
-
-    # filter to only keep rows with both subject and object novelty of 1
-    # df = df[(df['subject_novelty']==1) & (df['object_novelty']==1)]
-    # logger.info(df.shape)
-    # logger.info(f'\n{df.head()}')
 
     # use generic concept file instead of novelty columns
     gc_df = pd.read_csv(GENERIC_CONCEPT_FILE, names=["concept_id", "cui", "name"])
