@@ -123,7 +123,7 @@ nodes:
   ontology-efo:
     name: Efo
     files:
-      1: EFO/efo_nodes_2021-05-12.csv
+      1: EFO/efo_nodes_2021-05-24.csv
     script: nodes.efo.efo
     source: 2021-04-20 EFO 3.29.1
   
@@ -266,16 +266,16 @@ rels:
   melodi-triple:
     name: GWAS_TO_LITERATURE_TRIPLE
     files:
-      1: melodi/gwas-melodi-enrich-2021-05-04.tsv.gz
+      1: melodi/gwas-melodi-enrich-2021-05-21.tsv.gz
     script: rels.melodi-triple
-    source: MELODI-Presto-2021-05-04  
+    source: MELODI-Presto-2021-05-21  
 
   melodi-lit:
     name: GWAS_TO_LITERATURE
     files:
-      1: melodi/gwas-melodi-enrich-2021-05-04.tsv.gz
+      1: melodi/gwas-melodi-enrich-2021-05-21.tsv.gz
     script: rels.melodi-lit
-    source: MELODI-Presto-2021-05-04
+    source: MELODI-Presto-2021-05-21
 
   gwas-nlp:
     name: GWAS_NLP

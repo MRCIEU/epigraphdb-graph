@@ -26,21 +26,6 @@ predIgnore = [
     "compared_with",
 ]
 
-typeFilterList = [
-        "aapp",
-        "clnd",
-        "clna",
-        "dsyn",
-        "enzy",
-        "gngm",
-        "chem",
-        "clnd",
-        "horm",
-        "hops",
-        "inch",
-        "orch",
-        "phsu",
-    ]
 
 def process():
     df = pd.read_csv(PREDICATION_FILE, encoding="ISO-8859-1")
@@ -68,7 +53,7 @@ def process():
     # filter on predicates
     df = df[~df.predicate.isin(predIgnore)]
     logger.info(df.shape)
-
+    
     # use generic concept file instead of novelty columns
     gc_df = pd.read_csv(GENERIC_CONCEPT_FILE, names=["concept_id", "cui", "name"])
     gc_ids = list(gc_df["cui"])

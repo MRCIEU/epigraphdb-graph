@@ -36,7 +36,7 @@ def create_nodes():
             for n in g["nodes"]:
                 # logger.info(json.dumps(n, indent=4, sort_keys=True))
                 efo_id = n["id"]
-                umls="NA"
+                umls=""
                 if 'meta' in n:
                     if 'xrefs' in n['meta']:
                         for i in n['meta']['xrefs']:

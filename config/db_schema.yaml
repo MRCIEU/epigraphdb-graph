@@ -103,6 +103,10 @@ meta_nodes:
         doc: >-
           Text description (EFO term).
         type: string
+      umls:
+        doc: >-
+          UMLS ID.
+        type: string
     required:
       - id
       - value
