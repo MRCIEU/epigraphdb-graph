@@ -357,7 +357,7 @@ rels:
     source: xQTL
 
   efo-parent-child:
-    name: EFO_CHILD_OF
+    name: EFO_TO_EFO
     files:
       1: EFO/efo_edges_2021-05-04.csv
     script: rels.efo-parent-child
@@ -366,7 +366,7 @@ rels:
   efo-gwas-nlp:
     name: GWAS_NLP_EFO
     files:
-      1: EFO/gwas-vec-efo-ids-01-09-20.tsv
+      1: EFO/gwas-efo-cosine-20210526-0.7.tsv.gz
     script: rels.efo-gwas-nlp
     source: Vectology
     

@@ -9,6 +9,7 @@ from loguru import logger
 from workflow.scripts.utils.general import copy_source_data, get_data_from_server
 import json
 import gzip
+import re
 
 # get all trait data from GWAS API
 # process text and get text embedding using vectology API
@@ -29,7 +30,13 @@ def get_gwas_traits():
     gwasInfo = {}
     for g in gwas_res:
         if not gwas_res[g]["id"].startswith("eqtl"):
-            gwasInfo[gwas_res[g]["id"]] = gwas_res[g]["trait"]
+            # deal with parentheses
+            #regex = re.compile(r'\(.+\)')
+            #if re.search(r'\(.+\)',gwas_res[g]['trait']):
+            t = gwas_res[g]['trait']
+            t = re.sub(r'\([^)]*\)', '', t)
+            #logger.info(t)
+            gwasInfo[gwas_res[g]["id"]] = t
     logger.info("gwasinfo len {}", len(gwasInfo))
     gwas_df = pd.DataFrame.from_dict(gwasInfo, orient="index", columns=["value"])
     # gwas_df = gwas_df[gwas_df[]]
@@ -95,6 +102,7 @@ def get_gwas_embeddings():
 
 def get_efo_embeddings():
     f = "/tmp/efo-embeddings-" + str(timestr) + ".pkl"
+    f = "/tmp/efo-embeddings-20210510.pkl"
     if os.path.exists(f):
         logger.info(f"{f} already done")
         efo_df = pd.read_pickle(f)
@@ -128,7 +136,7 @@ def get_efo_embeddings():
 def create_distances(gwas_df, efo_df):
     logger.info("Creating distances...")
 
-    score_cutoff = 0.5
+    score_cutoff = 0.7
     filename = f"{tmp_dir}/gwas-efo-cosine-{timestr}-{score_cutoff}.tsv.gz"
     if os.path.exists(filename):
         logger.info(f"{filename} done")
@@ -158,6 +166,7 @@ def create_distances(gwas_df, efo_df):
 
 
 if __name__ == "__main__":
+    #get_gwas_traits()
     gwas_df = get_gwas_embeddings()
     efo_df = get_efo_embeddings()
     create_distances(gwas_df, efo_df)

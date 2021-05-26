@@ -31,9 +31,8 @@ def process():
     df = pd.read_csv(
         os.path.join(dataDir, FILE),
         sep="\t",
-        names=["target", "efo_value", "score", "gwas_value", "source"],
+        names=["source", "target", "score"],
     )
-    df = df.drop(["efo_value", "gwas_value"], axis=1)
     logger.info("\n{}", df.head())
     logger.info(df.shape)
     df.drop_duplicates(inplace=True)

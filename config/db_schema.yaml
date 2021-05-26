@@ -643,10 +643,10 @@ meta_rels:
       - cpic_level
       - guideline
       - pgx_on_fda_label
-  EFO_CHILD_OF:
+  EFO_TO_EFO:
     doc: >-
-      The source `(Efo)` term is a child node of the
-      parent target `(Efo)` term.
+      The source `(Efo)` term is a related to the
+      target `(Efo)` term via the pred property.
     properties:
       source:
         doc: ''
