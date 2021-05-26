@@ -22,6 +22,29 @@ tmp_dir = "/tmp/epigraph-build/EFO"
 timestr = time.strftime("%Y%m%d")
 
 
+filter_list = [
+    "^Blood clot, DVT, bronchitis, emphysema, asthma, rhinitis, eczema, allergy diagnosed by doctor: (.*)",
+    "^Cancer code.*?self-reported:\s(.*)",
+    "^Contributory (secondary) causes of death: ICD10:\s.*?\s(.*)",
+    "^Diagnoses - main ICD10:\s.*?\s(.*)",
+    "^Diagnoses - main ICD9:\s.*?\s(.*)",
+    "^Diagnoses - secondary ICD10:\s.*?\s(.*)",
+    "^Diagnoses - secondary ICD9:\s.*?\s(.*)",
+    "^External causes:\s.*?\s(.*)",
+    "^Eye problems/disorders: (.*)",
+    "^Medication for cholesterol.*?blood pressure.*?diabetes.*?or take exogenous hormones: (.*)",
+    "^Medication for cholesterol.*?blood pressure or diabetes: (.*)",
+    "^Medication for pain relief.*?constipation.*?heartburn.*?: (.*)",
+    "^Medication for smoking cessation, constipation, heartburn, allergies \(pilot\): (.*)",
+    "^Non-cancer illness code.*?self-reported:\s(.*)",
+    "^Operation code: (.*)",
+    "^Operative procedures - main OPCS:\s.*?\s(.*)",
+    "^Operative procedures - secondary OPCS:\s.*?\s(.*)",
+    "^Treatment/medication code: (.*)",
+    "^Type of cancer: ICD10:\s.*?\s(.*)",
+    "(.*?)\(.*?\)$",
+]
+
 def get_gwas_traits():
     logger.info("Getting gwas data")
     gwas_api_url = "http://gwasapi.mrcieu.ac.uk/gwasinfo"
@@ -30,10 +53,14 @@ def get_gwas_traits():
     gwasInfo = {}
     for g in gwas_res:
         if not gwas_res[g]["id"].startswith("eqtl"):
-            # deal with parentheses
-            #regex = re.compile(r'\(.+\)')
-            #if re.search(r'\(.+\)',gwas_res[g]['trait']):
             t = gwas_res[g]['trait']
+            # filter 
+            for regex in filter_list:
+                r = re.compile(regex)
+                mi = r.match(t)
+                if mi:
+                    t = mi.group(1)
+            # deal with general parentheses
             t = re.sub(r'\([^)]*\)', '', t)
             #logger.info(t)
             gwasInfo[gwas_res[g]["id"]] = t
