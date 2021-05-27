@@ -129,7 +129,6 @@ def get_gwas_embeddings():
 
 def get_efo_embeddings():
     f = "/tmp/efo-embeddings-" + str(timestr) + ".pkl"
-    f = "/tmp/efo-embeddings-20210510.pkl"
     if os.path.exists(f):
         logger.info(f"{f} already done")
         efo_df = pd.read_pickle(f)
