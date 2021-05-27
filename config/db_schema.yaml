@@ -661,6 +661,27 @@ meta_rels:
     required:
       - source
       - target
+  EFO_TO_LIT:
+    doc: >-
+      Semantic similarity mapping of `(Efo)` name to `(LiteratureTerm)` name.
+
+      Precomputed results from
+      [Vectology](http://vectology.mrcieu.ac.uk) (BioSentVec model).
+    properties:
+      source:
+        doc: ''
+        type: Efo
+      target:
+        doc: ''
+        type: LiteratureTerm
+      score:
+        doc: >-
+          Similarity score (cosine similarity).
+        type: float
+    required:
+      - source
+      - target
+      - score
   EXPRESSED_IN:
     doc: >-
       The source Gene is expressed in the target Tissue in GTEx (https://gtexportal.org).
