@@ -82,8 +82,9 @@ def get_lit_embeddings():
         lit_df = pd.concat([df1,df2,df3])
         logger.info(f'\n{lit_df.head()}')
         logger.info(lit_df.shape)
-        lit_df = lit_df['name']
+        lit_df = lit_df[['id','name']]
         lit_df.drop_duplicates(inplace=True)
+        logger.info(f'\n{lit_df.head()}')
         logger.info(lit_df.shape)
 
         counter = 0
@@ -93,7 +94,7 @@ def get_lit_embeddings():
             if counter % 20 == 0:
                 logger.info(counter * 50)
             counter += 1
-            lit_list = list(g.values)
+            lit_list = list(g["name"].values)
             embeddings = embed_text(lit_list, "BioSentVec")
             # add to dictionary
             for i in range(0, len(lit_list)):
@@ -119,12 +120,15 @@ def create_distances(efo_df, lit_df):
         o = gzip.open(filename, "wt")
 
         lit_vectors = np.array(list(lit_df["embedding"]))
-        lit_ids = lit_df.index.tolist()
+        
+        lit_ids = list(lit_df['id'].values)
+        logger.info(lit_ids[:10])
 
         efo_vectors = np.array(list(efo_df["embedding"]))
         efo_ids = list(efo_df["id"])
+        logger.info(efo_ids[:10])
 
-        pws = distance.cdist(gwas_vectors, efo_vectors, metric="cosine")
+        pws = distance.cdist(lit_vectors, efo_vectors, metric="cosine")
         logger.info(len(pws))
 
         logger.info("Writing to file...")
@@ -142,5 +146,5 @@ def create_distances(efo_df, lit_df):
 
 if __name__ == "__main__":
     lit_df = get_lit_embeddings()
-    #efo_df = get_efo_embeddings()
-    #create_distances(efo_df,lit_df)
+    efo_df = get_efo_embeddings()
+    create_distances(efo_df,lit_df)
