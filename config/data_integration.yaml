@@ -455,7 +455,7 @@ rels:
     source: Clinvar-2021-05-04
 
   efo-lit-nlp:
-    name: EFO_NLP_LIT
+    name: EFO_TO_LIT
     files:
       1: EFO/efo-lit-cosine-20210527-0.7.tsv.gz
     script: rels.efo-lit-nlp
