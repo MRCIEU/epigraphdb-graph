@@ -20,7 +20,7 @@ data_name = "opentargets"
 today = datetime.date.today()
 
 #ot_data_v = '19.11'
-ot_data_v = '21.04'
+ot_data_v = '21.06'
 
 # Params
 N_PER_CHUNK = 100

@@ -137,12 +137,15 @@ def make_gene_to_mondo_map(df):
 
     # make tidy mondo ids
     for ind, row in df.iterrows():
-        # logger.info(df['source_id'][ind])
+        #logger.info(df['source_id'][ind])
         # catch issue with malformed mondo rows
         try:
-            mondo_id = str(df["source_id"][ind].split(":")[1])
-            mondo_url = "http://purl.obolibrary.org/obo/MONDO_" + mondo_id
-            df["source_id"][ind] = mondo_url
+            if ":" in df["source_id"][ind]:
+                mondo_id = str(df["source_id"][ind].split(":")[1])
+                mondo_url = "http://purl.obolibrary.org/obo/MONDO_" + mondo_id
+                df["source_id"][ind] = mondo_url
+            else:
+                df.drop([ind], inplace=True)
         except Exception as e:
             logger.warning(f"{e}: row {df[ind]} is not good, deleting it")
             df.drop([ind], inplace=True)
