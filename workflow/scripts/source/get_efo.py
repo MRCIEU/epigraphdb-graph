@@ -16,7 +16,7 @@ today = datetime.date.today()
 
 data_dir = os.path.join("/tmp", "efo")  # local test
 os.makedirs(data_dir, exist_ok=True)
-v = "v3.29.1"
+v = "v3.34.0"
 efo_data_file = os.path.join(data_dir, f"efo-{v}.json")
 
 
@@ -78,6 +78,6 @@ def create_edges():
 
 
 if __name__ == "__main__":
-    #download_data()
+    download_data()
     create_nodes()
     create_edges()
