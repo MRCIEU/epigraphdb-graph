@@ -19,7 +19,7 @@ today = datetime.date.today()
 variant_data = [
     {
         "name": "opengwas",
-        "file": "opengwas/opengwas-tophits-2020-10-13.csv",
+        "file": "opengwas/opengwas-tophits-2021-09-15.csv",
         "snp_col": "rsid",
     },
     {
@@ -100,7 +100,7 @@ if __name__ == "__main__":
     if os.path.exists(v_file):
         logger.info(f"{v_file} exists")
     else:
-        existing_df = get_existing()
+        #existing_df = get_existing()
         get_data()
         process_variants()
     run_vep(os.path.basename(v_file))
