@@ -39,9 +39,9 @@ def get_disease_data():
     mondo_w_efo = pd.json_normalize(query_data2)
     mondo_w_efo['efo_id'] = 'http://www.ebi.ac.uk/efo/EFO_' + mondo_w_efo['efo_id'].astype(str)
 
-    df = pd.merge(mondo_only, mondo_w_efo, how='outer', on='mondo_id')
-    df = df.drop_duplicates()
-    return df
+    disease_df = pd.merge(mondo_only, mondo_w_efo, how='outer', on='mondo_id')
+    disease_df = disease_df.drop_duplicates()
+    return disease_df
 
 
 def process():
@@ -57,16 +57,16 @@ def process():
     disease_df = get_disease_data()
     logger.info(disease_df)
 
-
     # join df (OT data) and disease_df (graph) on mondo_id
     mondo_match = pd.merge(df, disease_df, left_on='disease_id', right_on='mondo_id')[['molecule_name', 'disease_id']]
     mondo_match.drop_duplicates(inplace=True)
-    #logger.info(mondo_match)
+    # logger.info(mondo_match)
 
     # join on efo_id, but keep the corresponding mondo_id, as this is what used for mapping
     efo_match = pd.merge(df, disease_df, left_on='disease_id', right_on='efo_id')[['molecule_name', 'mondo_id']]
     efo_match = efo_match.rename(columns={"mondo_id": "disease_id"})
     efo_match.drop_duplicates(inplace=True)
+    # logger.info(efo_match)
 
     cat_df = pd.concat([mondo_match, efo_match])
     logger.info(cat_df.shape)
@@ -78,7 +78,7 @@ def process():
     cat_df.columns = col_names
     cat_df["source"] = cat_df["source"].str.upper()
 
-    create_import(df=cat_df, meta_id=meta_id)
+    create_import(df=cat_df, meta_id=args.name)
 
 if __name__ == "__main__":
     process()
