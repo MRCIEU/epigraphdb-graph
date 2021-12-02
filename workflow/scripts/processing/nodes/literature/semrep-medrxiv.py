@@ -63,6 +63,7 @@ def merge_data(lit_data, sem_data):
             "license",
             "category",
             "abstract",
+            'jatsxml',
         ],
         axis=1,
         inplace=True,
