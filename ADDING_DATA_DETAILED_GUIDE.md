@@ -56,7 +56,7 @@ There are 3 steps:
 ​
 #### Prep
 * The graph build has to happen on jojo (or other server)
-* (source bashrc) and conda activate neo4j_build
+* (`source ~/.bashrc`) and `conda activate neo4j_build`
 * Make a folder in `workflow/source_data/FOLDER`
 * Modify `DATA_DIR` in `.env` when running the source script to point at the local source_data folder
 ​
@@ -66,19 +66,20 @@ There are 3 steps:
 snakemake -r clean_all -j 1
 snakemake -r all -j 4
 ```
+If there are issues with missing data, you will need to run scripts that make those datasets manually, to determine the issue (e.g. new data version has extra columns) and fix it to produce the missing data.
 ​
 #### Step 2
 ​
-Assuming scripts and ymls are created and locally testes, run: 
+Assuming scripts and ymls are created and locally tested, run: 
 ​
 ```
 # run source script
 python -m workflow.scripts.source.SOURCE_SCRIPT
 ​
-# run processing script
-python -m workflow.scripts.processing.rels.PROCESSING_SCRIPT -n (rel name in data_integration.yml) -d workflow/source_data/
+# run processing script (-d is optional if DATA_DIR in .env is set to a local path)
+python -m workflow.scripts.processing.rels.PROCESSING_SCRIPT -n (name in data_integration.yml) -d workflow/source_data/
 ​
-# check new data
+# check new data (gives a short uninformative message as if nothing happened)
 snakemake -r check_new_data -j 10
 ```
 ​
